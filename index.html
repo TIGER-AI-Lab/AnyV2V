@@ -5,27 +5,27 @@
     <meta charset="utf-8">
     <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
     <!-- Replace the content tag with appropriate information -->
-    <meta name="description" content="We introduce UniV2V, A Unified Framework for Video-to-Video Generation Tasks.">
-    <meta property="og:title" content="UniV2V" />
+    <meta name="description" content="We introduce AnyV2V, A Unified Framework for Video-to-Video Generation Tasks.">
+    <meta property="og:title" content="AnyV2V" />
     <meta property="og:description" content="A Unified Framework for Video-to-Video Generation Tasks." />
-    <meta property="og:url" content="https://tiger-ai-lab.github.io/UniV2V/" />
+    <meta property="og:url" content="https://tiger-ai-lab.github.io/AnyV2V/" />
     <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
     <meta property="og:image" content="static/images/banner.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
 
-    <meta name="twitter:title" content="UniV2V">
+    <meta name="twitter:title" content="AnyV2V">
     <meta name="twitter:description" content="A Unified Framework for Video-to-Video Generation Tasks.">
     <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
     <meta name="twitter:image" content="static/images/banner.png">
     <meta name="twitter:card" content="summary_large_image">
     <!-- Keywords for your paper to be indexed by-->
-    <meta name="keywords" content="univ2v">
+    <meta name="keywords" content="AnyV2V">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <title>UniV2V</title>
+    <title>AnyV2V</title>
     <link rel="icon" type="image/x-icon" href="static/images/uni_icon.png">
     <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
@@ -56,7 +56,7 @@
             <div class="container is-max-desktop">
                 <div class="columns is-centered">
                     <div class="column has-text-centered">
-                        <h1 class="title is-1 publication-title"> UniV2V: A Unified Framework for Video-to-Video Generation Tasks</h1>
+                        <h1 class="title is-1 publication-title"> AnyV2V: A Unified Framework for Zero-shot Video-to-Video Generation Tasks</h1>
                         <div class="is-size-5 publication-authors">
                             <!-- Paper authors -->
                             <span class="author-block">
@@ -91,7 +91,7 @@
 
                                 <!-- Github link -->
                                 <span class="link-block">
-                      <a href="https://github.com/TIGER-AI-Lab/UniV2V" target="_blank"
+                      <a href="https://github.com/TIGER-AI-Lab/AnyV2V" target="_blank"
                       class="external-link button is-normal is-rounded is-dark">
                       <span class="icon">
                         <i class="fab fa-github"></i>
@@ -127,9 +127,9 @@
                     <div class="column is-full">
                         <div class="item">
                             <!-- Your image here -->
-                            <img src="static/images/banner.png" width="100%" alt="UniV2V" />
+                            <img src="static/images/banner.png" width="100%" alt="AnyV2V" />
                             <h2 class="subtitle">
-                                UniV2V disentangles the video editing process into two stages: (1) first-frame image editing and (2) image-to-video reconstruction. The first phase benefits from the extensive range of existing image editing models, enabling (1) detailed and precise modification and (2) flexibility for any editing tasks.
+                                AnyV2V disentangles the video editing process into two stages: (1) first-frame image editing and (2) image-to-video reconstruction. The first phase benefits from the extensive range of existing image editing models, enabling (1) detailed and precise modification and (2) flexibility for any editing tasks.
                             </h2>
                         </div>
                     </div>
@@ -141,14 +141,12 @@
     <section class="hero is-light is-small">
         <div class="hero-body">
           <div class="container">
-            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 20px; z-index: 2;">
-                Source Video↑, Edited Video↓<br>
-            </div>
+            
             <video style="display: block; margin: auto; max-height: 50vh;" poster="" id="" autoplay controls muted loop playsinline height="100%">
                 <source src="./static/videos/old_man/src.mp4"
                         type="video/mp4">
             </video>
-
+            Edited with AnyV2V:
             <div id="results-carousel" class="carousel results-carousel">
               <div class="item">
                 <video poster="" id="" autoplay controls muted loop playsinline height="100%">
@@ -176,7 +174,7 @@
                         <h2 class="title is-3">Abstract</h2>
                         <div class="content has-text-justified">
                             <p>
-                                Video editing is the task of conditioning on a source video plus additional guidance (text prompt, subject, style, etc) to synthesize a new video consistent with both the source video and the provided guidance. The existing approaches are limited to performing specific types of editing, which restricts their potential to cater to the diverse needs of the users. In this paper, we propose UniV2V, a new framework to decompose video editing into two stages: (1) one-frame image editing and (2) image-to-video reconstruction with source video DDIM trajectory. The first stage can benefit from the myriad of existing image editing models like InstructPix2Pix, InstantID, WISE. Our method is highly compatible, as it works with any Image-to-Video (I2V) model and covers several editing tasks, including prompt-based editing, style transfer, and identity manipulation. We conduct a comprehensive human evaluation and show that UniV2V is able to outperform the other baselines by a significant margin across the three different tasks. Due to its simplicity and compatibility, we believe our method can be easily deployed in real-world applications to fit the diverse needs of the users.
+                                Video editing is the task of conditioning on a source video plus additional guidance (text prompt, subject, style, etc) to synthesize a new video consistent with both the source video and the provided guidance. The existing approaches are limited to performing specific types of editing, which restricts their potential to cater to the diverse needs of the users. In this paper, we propose AnyV2V, a new framework to decompose video editing into two stages: (1) one-frame image editing and (2) image-to-video reconstruction with source video DDIM trajectory. The first stage can benefit from the myriad of existing image editing models like InstructPix2Pix, InstantID, WISE. Our method is highly compatible, as it works with any Image-to-Video (I2V) model and covers several editing tasks, including prompt-based editing, style transfer, and identity manipulation. We conduct a comprehensive human evaluation and show that AnyV2V is able to outperform the other baselines by a significant margin across the three different tasks. Due to its simplicity and compatibility, we believe our method can be easily deployed in real-world applications to fit the diverse needs of the users.
                             </p>
                         </div>
                     </div>
@@ -196,7 +194,7 @@
                 <div class="content">
                   <h2 class="title is-3">Prompt based Editing</h2>
                   <p>
-                    UniV2V is robust in a wide range of localized editing tasks while maintaining the background. The generated result aligns the most with the text prompt and also maintains high motion consistency.
+                    AnyV2V is robust in a wide range of localized editing tasks while maintaining the background. The generated result aligns the most with the text prompt and also maintains high motion consistency.
                   </p>
                   <!-- Text above Video 1 -->
                   <div style="text-align: center; margin-bottom: 2px;">"..., snowing"</div>
@@ -224,7 +222,7 @@
               <div class="columns is-centered">
                 <div class="column content">
                   <p>
-                    UniV2V works well in subject-driven editing tasks, where the user can specify the subject to be edited. The model can generate high-quality results with the subject being edited while maintaining the background.
+                    AnyV2V works well in subject-driven editing tasks, where the user can specify the subject to be edited. The model can generate high-quality results with the subject being edited while maintaining the background.
                   </p>
                   Subject refernce (only 1 image):
                   <img src="./static//videos/subject_driven/v-car.png" width="33%" alt="style_1" />
@@ -251,7 +249,7 @@
                 <div class="content">
                 <h2 class="title is-3">Style Transfer</h2>
                 <p>
-                    UniV2V can perform style transfer tasks on styles that is never learned in a text encoder. The existing models lack such capability.
+                    AnyV2V can perform style transfer tasks on styles that is never learned in a text encoder. The existing models lack such capability.
                 </p>
                 <img src="./static//videos/style_transfer/Vassily_Kandinsky.jpg" width="100%" alt="style_1" />
                 <video id="" autoplay controls muted loop playsinline height="100%">
@@ -266,7 +264,7 @@
                 <div class="columns is-centered">
                 <div class="column content">
                     <p>
-                        UniV2V can perform identity manipulation tasks based on InstantID, while such applications are not possible for existing methods.
+                        AnyV2V can perform identity manipulation tasks based on InstantID, while such applications are not possible for existing methods.
                     </p>
                     <img src="./static//videos/id/wenhu.jpg" width="50%" alt="" /><img src="./static//videos/id/instantid_wenhu.png" width="50%" alt="" />
                     <video id="" autoplay controls muted loop playsinline height="100%">
@@ -290,7 +288,7 @@
                         <div class="item">
                             <img src="static/images/method.png" width="100%" alt="method" />
                             <h2 class="subtitle">
-                                UniV2V framework. Our framework takes a source video as input.
+                                AnyV2V framework. Our framework takes a source video as input.
                                 In the first stage, we apply a block-box image editing method on the first frame according to the editing task.
                                 In the second stage, the source video is inverted to initial noise, which is then denoised using DDIM sampling.
                                 During the sampling process, we extract spatial features, spatial attention and temporal attention from the image-to-video' decoder layers. To generate our edited video, we perform a DDIM sampling by fixing the latent and use the edited first frame as the conditional signal. During the sampling, we inject the features and attention into corresponding layers of the model.
