@@ -139,41 +139,33 @@
     </section>
 
     <section class="hero is-light is-small">
-        <div class="container">
-            <video style="display: block; margin: auto; max-height: 35vh;" poster="" id="" autoplay controls muted loop playsinline height="100%">
+        <div class="hero-body">
+          <div class="container">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 20px; z-index: 2;">
+                Source Video↑, Edited Video↓<br>
+            </div>
+            <video style="display: block; margin: auto; max-height: 50vh;" poster="" id="" autoplay controls muted loop playsinline height="100%">
                 <source src="./static/videos/old_man/src.mp4"
                         type="video/mp4">
             </video>
-            <video poster="" id="" autoplay controls muted loop playsinline height="100%">
-              <source src="./static/videos/old_man/row1.mp4"
-                      type="video/mp4">
-            </video>
-        </div>
-    </section>
 
-    
-    <!--
-    <section class="hero is-light is-small">
-        <div class="hero-body">
-          <div class="container">
             <div id="results-carousel" class="carousel results-carousel">
               <div class="item">
                 <video poster="" id="" autoplay controls muted loop playsinline height="100%">
-                  <source src="./static/videos/old_man/row1.mp4"
+                  <source src="./static/videos/old_man/row_sub1.mp4"
                           type="video/mp4">
                 </video>
               </div>
               <div class="item">
                 <video poster="" id="" autoplay controls muted loop playsinline height="100%">
-                  <source src="./static/videos/old_man/row1.mp4"
+                  <source src="./static/videos/old_man/row_sub2.mp4"
                           type="video/mp4">
                 </video>
               </div>
             </div>
           </div>
         </div>
-      </section>
-    -->
+    </section>
 
     <!-- Paper abstract -->
     <section class="hero">
@@ -201,25 +193,31 @@
           <div class="columns is-centered">
       
             <div class="column">
-              <div class="content">
-                <h2 class="title is-3">Prompt based Editing</h2>
-                <p>
+                <div class="content">
+                  <h2 class="title is-3">Prompt based Editing</h2>
+                  <p>
                     UniV2V is robust in a wide range of localized editing tasks while maintaining the background. The generated result aligns the most with the text prompt and also maintains high motion consistency.
-                </p>
-                <video id="" autoplay controls muted loop playsinline height="100%">
-                  <source src="./static/videos/prompt_based/row1.mp4"
-                          type="video/mp4">
-                </video>
-                <video id="" autoplay controls muted loop playsinline height="100%">
-                    <source src="./static/videos/prompt_based/row2.mp4"
-                            type="video/mp4">
-                </video>
-                <video id="" autoplay controls muted loop playsinline height="100%">
-                    <source src="./static/videos/prompt_based/row3.mp4"
-                            type="video/mp4">
-                </video>
+                  </p>
+                  <!-- Text above Video 1 -->
+                  <div style="text-align: center; margin-bottom: 2px;">"..., snowing"</div>
+                  <video id="" autoplay controls muted loop playsinline height="100%">
+                    <source src="./static/videos/prompt_based/row1.mp4" type="video/mp4">
+                  </video>
+              
+                  <!-- Text above Video 2 -->
+                  <div style="text-align: center; margin-top: 2px; margin-bottom: 2px;">"turn the man into darth vader"</div>
+                  <video id="" autoplay controls muted loop playsinline height="100%">
+                      <source src="./static/videos/prompt_based/row2.mp4" type="video/mp4">
+                  </video>
+              
+                  <!-- Text above Video 3 -->
+                  <div style="text-align: center; margin-top: 2px; margin-bottom: 2px;">"turn the couple into robots"</div>
+                  <video id="" autoplay controls muted loop playsinline height="100%">
+                      <source src="./static/videos/prompt_based/row3.mp4" type="video/mp4">
+                  </video>
+                </div>
               </div>
-            </div>
+              
 
             <div class="column">
               <h2 class="title is-3">Subject Driven Editing</h2>
