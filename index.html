@@ -174,7 +174,8 @@
                         <h2 class="title is-3">Abstract</h2>
                         <div class="content has-text-justified">
                             <p>
-                                Video editing is the task of conditioning on a source video plus additional guidance (text prompt, subject, style, etc) to synthesize a new video consistent with both the source video and the provided guidance. The existing approaches are limited to performing specific types of editing, which restricts their potential to cater to the diverse needs of the users. In this paper, we propose AnyV2V, a new framework to decompose video editing into two stages: (1) one-frame image editing and (2) image-to-video reconstruction with source video DDIM trajectory. The first stage can benefit from the myriad of existing image editing models like InstructPix2Pix, InstantID, WISE. Our method is highly compatible, as it works with any Image-to-Video (I2V) model and covers several editing tasks, including prompt-based editing, style transfer, and identity manipulation. We conduct a comprehensive human evaluation and show that AnyV2V is able to outperform the other baselines by a significant margin across the three different tasks. Due to its simplicity and compatibility, we believe our method can be easily deployed in real-world applications to fit the diverse needs of the users.
+                                Video-to-video editing involves adapting a source video along with additional inputs (such as text prompts, subjects, or styles) to generate a new video that aligns with both the original content and the provided specifications. Traditional methods have been constrained to certain editing types, limiting their ability to meet the wide range of user demands. In this paper, we introduce AnyV2V, a novel training-free framework designed to simplify video editing into two primary steps: first, employing an off-the-shelf image editing model to modify the first frame, followed by utilizing an established image-to-video generation model for Direct Digital Image Manipulation (DDIM) trajectory and attention feature integration.
+AnyV2V's adaptability with various image editing models enables it to support an extensive array of video editing tasks, such as prompt-based editing, style transfer, identity manipulation, and subject swap, etc. Through extensive human evaluations, we demonstrate that AnyV2V significantly surpasses competing baselines in three distinct tasks. Its compatibility allows for easy incorporation of emerging image editing and image-to-video models, enhancing its performance further. Additionally, AnyV2V's versatility ensures it can effectively meet the varied requirements of users in practical scenarios.
                             </p>
                         </div>
                     </div>
@@ -278,7 +279,147 @@
 
         </div>
 
-    <!--
+
+        <div class="column">
+            <div class="column has-text-centered">
+                <h2 class="title is-3">Comparison</h2>
+                <p>
+                    AnyV2V can preserve the video fidelity while performing the correct amount of edit.
+                </p>
+                <table class="table is-fullwidth is-striped is-hoverable">
+                    <tbody>
+                        <tr>
+                            <td style="text-align: center;"><div style="margin-bottom: 2px;">Source</div></td>
+                            <td style="text-align: center;"><div style="margin-bottom: 2px;">AnyV2V(Ours)</div></td>
+                            <td style="text-align: center;"><div style="margin-bottom: 2px;">TokenFlow</div></td>
+                            <td style="text-align: center;"><div style="margin-bottom: 2px;">FLATTEN</div></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <video autoplay controls muted loop playsinline height="100%">
+                                    <source src="./static/videos/comparison/snow/src.mp4" type="video/mp4">
+                                </video>
+                            </td>
+                            <td style="text-align: center;">
+                                <video autoplay controls muted loop playsinline height="100%">
+                                    <source src="./static/videos/comparison/snow/v2v_i2vgenxl.mp4" type="video/mp4">
+                                </video>
+                            </td>
+                            <td style="text-align: center;">
+                                <video autoplay controls muted loop playsinline height="100%">
+                                    <source src="./static/videos/comparison/snow/tokenflow.mp4" type="video/mp4">
+                                </video>
+                            </td>
+                            <td style="text-align: center;">
+                                <video autoplay controls muted loop playsinline height="100%">
+                                    <source src="./static/videos/comparison/snow/flatten.mp4" type="video/mp4">
+                                </video>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                
+                                <video autoplay controls muted loop playsinline height="100%">
+                                    <source src="./static/videos/comparison/man_hat/src.mp4" type="video/mp4">
+                                </video>
+                            </td>
+                            <td style="text-align: center;">
+                                <video autoplay controls muted loop playsinline height="100%">
+                                    <source src="./static/videos/comparison/man_hat/v2v_i2vgenxl.mp4" type="video/mp4">
+                                </video>
+                            </td>
+                            <td style="text-align: center;">
+                                <video autoplay controls muted loop playsinline height="100%">
+                                    <source src="./static/videos/comparison/man_hat/tokenflow.mp4" type="video/mp4">
+                                </video>
+                            </td>
+                            <td style="text-align: center;">
+                                <video autoplay controls muted loop playsinline height="100%">
+                                    <source src="./static/videos/comparison/man_hat/flatten.mp4" type="video/mp4">
+                                </video>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                
+                                <video autoplay controls muted loop playsinline height="100%">
+                                    <source src="./static/videos/comparison/robot_couple/src.mp4" type="video/mp4">
+                                </video>
+                            </td>
+                            <td style="text-align: center;">
+                                <video autoplay controls muted loop playsinline height="100%">
+                                    <source src="./static/videos/comparison/robot_couple/v2v_i2vgenxl.mp4" type="video/mp4">
+                                </video>
+                            </td>
+                            <td style="text-align: center;">
+                                <video autoplay controls muted loop playsinline height="100%">
+                                    <source src="./static/videos/comparison/robot_couple/tokenflow.mp4" type="video/mp4">
+                                </video>
+                            </td>
+                            <td style="text-align: center;">
+                                <video autoplay controls muted loop playsinline height="100%">
+                                    <source src="./static/videos/comparison/robot_couple/flatten.mp4" type="video/mp4">
+                                </video>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <table class="table is-fullwidth is-striped is-hoverable">
+                    <tbody>
+                        <tr>
+                            <td style="text-align: center;"><div style="margin-bottom: 2px;">Source</div></td>
+                            <td style="text-align: center;"><div style="margin-bottom: 2px;">Reference</div></td>
+                            <td style="text-align: center;"><div style="margin-bottom: 2px;">AnyV2V(Ours)</div></td>
+                            <td style="text-align: center;"><div style="margin-bottom: 2px;">VideoSwap</div></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <video autoplay controls muted loop playsinline height="100%">
+                                    <source src="./static/videos/comparison/V_dog/src.mp4" type="video/mp4">
+                                </video>
+                            </td>
+                            <td style="text-align: center;">
+                                <img src="static/videos/subject_driven/v-dog.jpg" width="512" alt="AnyV2V" />
+                            </td>
+                            <td style="text-align: center;">
+                                <video autoplay controls muted loop playsinline height="100%">
+                                    <source src="./static/videos/comparison/V_dog/v2v_i2vgenxl.mp4" type="video/mp4">
+                                </video>
+                            </td>
+                            <td style="text-align: center;">
+                                <video autoplay controls muted loop playsinline height="100%">
+                                    <source src="./static/videos/comparison/V_dog/videoswap.mp4" type="video/mp4">
+                                </video>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <video autoplay controls muted loop playsinline height="100%">
+                                    <source src="./static/videos/comparison/V_dog2/src.mp4" type="video/mp4">
+                                </video>
+                            </td>
+                            <td style="text-align: center;">
+                                <img src="static/videos/comparison/V_dog2/v-dog-01.jpg" width="512" alt="AnyV2V" />
+                            </td>
+                            <td style="text-align: center;">
+                                <video autoplay controls muted loop playsinline height="100%">
+                                    <source src="./static/videos/comparison/V_dog2/v2v_i2vgenxl.mp4" type="video/mp4">
+                                </video>
+                            </td>
+                            <td style="text-align: center;">
+                                <video autoplay controls muted loop playsinline height="100%">
+                                    <source src="./static/videos/comparison/V_dog2/videoswap.mp4" type="video/mp4">
+                                </video>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     <section class="hero is-small">
         <div class="hero-body">
             <div class="container  is-max-desktop">
@@ -299,7 +440,7 @@
             </div>
         </div>
     </section>
-    -->
+
 
     <!-- BibTex citation -->
     <section class="section" id="BibTeX">
@@ -307,7 +448,14 @@
             <h2 class="title">Citation</h2>
             Please kindly cite our paper if you use our code, data, models or results:
             <br><br>
-            <pre><code>TBA</code></pre>
+    <pre><code>@article{
+        ku2024anyv2v,
+        title={AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks},
+        author={Max Ku and Cong Wei and Weiming Ren and Huan Yang and Wenhu Chen},
+        journal={arXiv preprint arXiv:_______},
+        year={2024}
+        }
+    </code></pre>
         </div>
     </section>
 
