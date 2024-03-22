@@ -10,6 +10,10 @@ AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks
 <img src="https://github.com/TIGER-AI-Lab/AnyV2V/blob/gh-pages/static/images/banner.png" width="70%">
 </div>
 
+AnyV2V is a tuning-free framework to achieve high appearance and temporal consistency in video editing.
+- can seamlessly build on top of advanced image editing methods to perform diverse types of editing
+- robust performance on the four tasks: prompt-based editing, reference-based style transfer, subject-driven editing, and identity manipulation.
+
 <div align="center">
  <a href = "https://tiger-ai-lab.github.io/AnyV2V/">[🌐 Project Page]</a> <a href = "https://arxiv.org/abs/2403.14468">[📄 Arxiv]</a> 
 </div>
