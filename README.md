@@ -76,6 +76,11 @@ pip install moviepy
 python edit_image.py --video_path "./demo/Man Walking.mp4" --input_dir "./demo" --output_dir "./demo/edited_first_frame" --prompt "turn the man into darth vader"
 ```
 
+You can use other image models for editing, here are some interesting online demo by other researchers:
+* [Idenity Manipulation model: InstantID](https://huggingface.co/spaces/InstantX/InstantID)
+* [Subject Driven Image editing model: AnyDoor](https://huggingface.co/spaces/xichenhku/AnyDoor-online)
+* [Style Transfer model: WISE](https://huggingface.co/spaces/MaxReimann/Whitebox-Style-Transfer-Editing)
+
 ### Inference
 Under ```i2vgen-xl/configs/group_ddim_inversion``` and ```i2vgen-xl/configs/group_pnp_edit``` 
 1. Modify the ```template.yaml``` files to specify the ``` device```.
