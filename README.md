@@ -106,7 +106,7 @@ python run_group_pnp_edit.py \
 ## 📋 TODO
 AnyV2V(i2vgen-xl)
 - [x] Release the code for AnyV2V(i2vgen-xl)
-- [] Release a notebook demo 
+- [x] Release a notebook demo 
 - [ ] Release a Gradio demo
 
 AnyV2V(SEINE)
