@@ -28,11 +28,6 @@ AnyV2V is a tuning-free framework to achieve high appearance and temporal consis
 * 2024 Mar 21: Our paper is featured on [Huggingface Daily Papers](https://huggingface.co/papers/2403.14468)!
 * 2024 Mar 21: Paper available on [Arxiv](https://arxiv.org/abs/2403.14468).
 
-## 📋 Tasks
-- [x] Release the code for AnyV2V(i2vgen-xl)
-- [ ] Release a notebook demo
-- [ ] Release a Gradio demo
-- [ ] Release the code for AnyV2V(SEINE) and AnyV2V(ConsistI2V)
 
 ## ▶️ Quick Start for AnyV2V(i2vgen-xl)
 ### Environment
@@ -53,10 +48,29 @@ You can set ```active: true``` to enable a example and ```active: false``` to di
 Then run the following commands to perform inference:
 ```bash
 cd i2vgen-xl/scripts
-bash run_group_ddim_inversion.sh
-bash run_group_pnp_edit.sh
+
+# First invert the latent of source video
+python run_group_ddim_inversion.py \
+--template_config "configs/group_ddim_inversion/template.yaml" \
+--configs_json "configs/group_ddim_inversion/group_config.json"
+
+# Then run Anyv2v pipeline with the source video latent
+python run_group_pnp_edit.py \
+--template_config "configs/group_pnp_edit/template.yaml" \
+--configs_json "configs/group_pnp_edit/group_config.json"
 ```
 
+## 📋 TODO
+AnyV2V(i2vgen-xl)
+- [x] Release the code for AnyV2V(i2vgen-xl)
+- [] Release a notebook demo 
+- [ ] Release a Gradio demo
+
+AnyV2V(SEINE)
+- [ ] Release the code for AnyV2V(SEINE) 
+
+AnyV2V(ConsistI2V)
+- [ ] Release the code for AnyV2V(ConsistI2V) 
 
 
 ## 🖊️ Citation
