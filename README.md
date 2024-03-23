@@ -40,6 +40,42 @@ cd i2vgen-xl
 conda env create -f environment.yml
 ```
 
+### First Frame Image Edit
+We provide instructpix2pix port for image editing with instruction prompt.
+```shell
+usage: edit_image.py [-h] [--model {magicbrush,instructpix2pix}]
+                     [--video_path VIDEO_PATH] [--input_dir INPUT_DIR]
+                     [--output_dir OUTPUT_DIR] [--prompt PROMPT] [--force_512]
+                     [--dict_file DICT_FILE] [--seed SEED]
+                     [--negative_prompt NEGATIVE_PROMPT]
+
+Process some images.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --model {magicbrush,instructpix2pix}
+                        Name of the image editing model
+  --video_path VIDEO_PATH
+                        Name of the video
+  --input_dir INPUT_DIR
+                        Directory containing the video
+  --output_dir OUTPUT_DIR
+                        Directory to save the processed images
+  --prompt PROMPT       Instruction prompt for editing
+  --force_512           Force resize to 512x512 when feeding into image model
+  --dict_file DICT_FILE
+                        JSON file containing files, instructions etc.
+  --seed SEED           Seed for random number generator
+  --negative_prompt NEGATIVE_PROMPT
+                        Negative prompt for editing
+```
+
+Example usage:
+```shell
+pip install moviepy
+python edit_image.py --video_path "./demo/Man Walking.mp4" --input_dir "./demo" --output_dir "./demo/edited_first_frame" --prompt "turn the man into darth vader"
+```
+
 ### Inference
 Under ```i2vgen-xl/configs/group_ddim_inversion``` and ```i2vgen-xl/configs/group_pnp_edit``` 
 1. Modify the ```template.yaml``` files to specify the ``` device```.
