@@ -108,6 +108,11 @@ python run_group_pnp_edit.py \
 --configs_json "configs/group_pnp_edit/group_config.json"
 ```
 
+#### 📜 Notebook Demo 
+We also provide a notebook demo ```i2vgen-xl/demo.ipynb``` for AnyV2V(i2vgen-xl).
+You can run the notebook to perform a Prompt-Based Editing on a single video.
+Make sure the environment is set up correctly before running the notebook.
+
 ## 📋 TODO
 AnyV2V(i2vgen-xl)
 - [x] Release the code for AnyV2V(i2vgen-xl)
