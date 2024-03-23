@@ -1,0 +1,18 @@
+name: anyv2v-i2vgen-xl
+channels:
+  - pytorch
+  - nvidia
+  - defaults
+dependencies:
+  - python=3.9
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pytorch-cuda=11.8
+  - pip
+  - pip:
+    - accelerate
+    - diffusers==0.26.3
+    - transformers
+    - omegaconf
+    - opencv-python

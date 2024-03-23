@@ -1,0 +1,42 @@
+[
+  {
+    "active": true,
+    "force_recompute_latents": false,
+    "video_name": "An Old Man Doing Exercises For The Body And Mind",
+    "recon_config":
+      {
+        "enable_recon": true
+      }
+  },
+  {
+    "active": false,
+    "force_recompute_latents": false,
+    "video_name": "A Couple In A Public Display Of Affection"
+  },
+  {
+    "active": false,
+    "force_recompute_latents": false,
+    "video_name": "Ballet"
+  },
+  {
+    "active": false,
+    "force_recompute_latents": false,
+    "video_name": "Man Walking"
+  },
+  {
+    "active": false,
+    "force_recompute_latents": false,
+    "video_name":"A kitten turning its head on a wooden floor",
+    "image_size": [512, 512]
+  },
+  {
+    "active": false,
+    "force_recompute_latents": false,
+    "video_name":"Your-Video-Name",
+    "image_size": [512, 512],
+    "recon_config":
+        {
+          "enable_recon": false
+        }
+  }
+]

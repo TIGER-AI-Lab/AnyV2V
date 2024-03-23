@@ -1,0 +1,49 @@
+# "ReplaceMe" will be overwritten by the values in group_config.json
+
+# General
+seed: 8888
+device: "cuda:7" # <-- change this to the GPU you want to use
+debug: True # For logging DEBUG level messages otherwise INFO
+
+# Dir
+data_dir: ".."  # <-- change this to the path of the data directory, if you cloned the repo, leave it as "..", the inversion latents will be saved in AnyV2V/
+model_name: "i2vgen-xl"
+exp_name: "${video_name}"
+output_dir: "${data_dir}/inversions/${model_name}/${exp_name}"
+
+# Data
+#image_size: [1280, 704]
+image_size: [512, 512]
+video_dir: "${data_dir}/demo"
+video_name: "ReplaceMe"
+video_path: "ReplaceMe"
+video_frames_path: "ReplaceMe"
+
+# DDIM settings
+n_frames: 16
+
+# DDIM inversion
+inverse_config:
+    image_size: ${image_size}
+    n_frames: ${n_frames}
+    cfg: 1.0
+    target_fps: 8
+    prompt: ""
+    negative_prompt: ""
+    n_steps: 500
+    output_dir: "${output_dir}/ddim_latents"
+    inverse_static_video: False
+    null_image_inversion: False
+
+# DDIM reconstruction
+recon_config:
+    enable_recon: False
+    image_size: ${image_size}
+    n_frames: ${n_frames}
+    cfg: 9.0
+    target_fps: 8
+    prompt: ""
+    negative_prompt: "Distorted, discontinuous, Ugly, blurry, low resolution, motionless, static, disfigured, disconnected limbs, Ugly faces, incomplete arms"
+    n_steps: 50
+    ddim_init_latents_t_idx: 3  # 0 for 981, 3 for 921, 9 for 801, 20 for 581 if n_steps=50
+    ddim_latents_path: "${inverse_config.output_dir}"

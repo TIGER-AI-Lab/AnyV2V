@@ -24,7 +24,38 @@ AnyV2V is a tuning-free framework to achieve high appearance and temporal consis
 
 ## 📰 News
 * 2024 Mar 21: Our paper is featured on [Huggingface Daily Papers](https://huggingface.co/papers/2403.14468)!
-* 2024 Mar 21: Paper available on [Arxiv](https://arxiv.org/abs/2403.14468). Code coming Soon!
+* 2024 Mar 21: Paper available on [Arxiv](https://arxiv.org/abs/2403.14468).
+
+## 📋 Tasks
+- [x] Release the code for AnyV2V(i2vgen-xl)
+- [ ] Release a notebook demo
+- [ ] Release a Gradio demo
+- [ ] Release the code for AnyV2V(SEINE) and AnyV2V(ConsistI2V)
+
+## ▶️ Quick Start for AnyV2V(i2vgen-xl)
+### Environment
+Prepare the codebase of the AnyV2V project and Conda environment using the following commands:
+```bash
+git clone https://github.com/TIGER-AI-Lab/AnyV2V
+cd AnyV2V
+
+cd i2vgen-xl
+conda env create -f environment.yml
+```
+
+### Inference
+Under ```i2vgen-xl/configs/group_ddim_inversion``` and ```i2vgen-xl/configs/group_pnp_edit``` 
+1. Modify the ```template.yaml``` files to specify the ``` device```.
+2. Modify the ``group_config.json`` files according to the provided examples. Configs in the ``group_config.json`` will overwrite the configs in the ``template.yaml``.
+You can set ```active: true``` to enable a example and ```active: false``` to disable a example.
+Then run the following commands to perform inference:
+```bash
+cd i2vgen-xl/scripts
+bash run_group_ddim_inversion.sh
+bash run_group_pnp_edit.sh
+```
+
+
 
 ## 🖊️ Citation
 
