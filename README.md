@@ -81,7 +81,14 @@ Under ```i2vgen-xl/configs/group_ddim_inversion``` and ```i2vgen-xl/configs/grou
 1. Modify the ```template.yaml``` files to specify the ``` device```.
 2. Modify the ``group_config.json`` files according to the provided examples. Configs in the ``group_config.json`` will overwrite the configs in the ``template.yaml``.
 You can set ```active: true``` to enable a example and ```active: false``` to disable a example.
-Then run the following commands to perform inference:
+
+Then you can run the following command to perform inference:
+```bash
+cd i2vgen-xl/scripts
+bash run_group_ddim_inversion.sh
+bash run_group_pnp_edit.sh
+```
+or run the following command using python:
 ```bash
 cd i2vgen-xl/scripts
 

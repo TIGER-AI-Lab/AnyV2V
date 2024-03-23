@@ -1,5 +1,5 @@
 #!/bin/bash
-source /home/YourName/miniconda3/etc/profile.d/conda.sh #<-- change this to your own miniconda path
+#source /home/YourName/miniconda3/etc/profile.d/conda.sh #<-- change this to your own miniconda path
 conda activate anyv2v-i2vgen-xl
 
 cd ..
