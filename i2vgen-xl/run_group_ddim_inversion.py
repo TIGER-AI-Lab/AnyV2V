@@ -49,6 +49,7 @@ def ddim_inversion(config, first_frame, frame_list, pipe: I2VGenXLPipeline, inve
         return_dict=False,
         output_dir=config.output_dir,
     )  # [b, num_inference_steps, c, num_frames, h, w]
+    logger = logging.getLogger(__name__)
     logger.debug(f"ddim_latents.shape: {ddim_latents.shape}")
     ddim_latents = ddim_latents[0]  # [num_inference_steps, c, num_frames, h, w]
     return ddim_latents

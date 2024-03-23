@@ -47,6 +47,7 @@ def init_pnp(pipe, scheduler, config):
     register_spatial_attention_pnp(pipe, spatial_attn_qk_injection_timesteps)
     register_temp_attention_pnp(pipe, temp_attn_qk_injection_timesteps)
 
+    logger = logging.getLogger(__name__)
     logger.debug(f"conv_injection_t: {conv_injection_t}")
     logger.debug(f"spatial_attn_qk_injection_t: {spatial_attn_qk_injection_t}")
     logger.debug(f"temp_attn_qk_injection_t: {temp_attn_qk_injection_t}")
