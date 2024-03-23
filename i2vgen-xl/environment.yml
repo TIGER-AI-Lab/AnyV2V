@@ -16,3 +16,6 @@ dependencies:
     - transformers
     - omegaconf
     - opencv-python
+    - ipython
+    - moviepy
+    - notebook
