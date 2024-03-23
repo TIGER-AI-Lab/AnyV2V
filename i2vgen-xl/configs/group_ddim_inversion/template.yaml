@@ -3,7 +3,7 @@
 # General
 seed: 8888
 device: "cuda:7" # <-- change this to the GPU you want to use
-debug: True # For logging DEBUG level messages otherwise INFO
+debug: False # For logging DEBUG level messages otherwise INFO
 
 # Dir
 data_dir: ".."  # <-- change this to the path of the data directory, if you cloned the repo, leave it as "..", the inversion latents will be saved in AnyV2V/
