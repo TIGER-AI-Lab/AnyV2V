@@ -3,6 +3,7 @@
 [![contributors](https://img.shields.io/github/contributors/TIGER-AI-Lab/AnyV2V)](https://github.com/TIGER-AI-Lab/AnyV2V/graphs/contributors)
 [![open issues](https://isitmaintained.com/badge/open/TIGER-AI-Lab/AnyV2V.svg)](https://github.com/TIGER-AI-Lab/AnyV2V/issues)
 [![pull requests](https://img.shields.io/github/issues-pr/TIGER-AI-Lab/AnyV2V?color=0088ff)](https://github.com/TIGER-AI-Lab/AnyV2V/pulls)
+[![license](https://img.shields.io/github/license/TIGER-AI-Lab/AnyV2V.svg)](https://github.com/TIGER-AI-Lab/AnyV2V/blob/main/LICENSE)
 
 AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks
 
@@ -23,6 +24,7 @@ AnyV2V is a tuning-free framework to achieve high appearance and temporal consis
 </div>
 
 ## 📰 News
+* 2024 Mar 22: Code released for AnyV2V(i2vgen-xl).
 * 2024 Mar 21: Our paper is featured on [Huggingface Daily Papers](https://huggingface.co/papers/2403.14468)!
 * 2024 Mar 21: Paper available on [Arxiv](https://arxiv.org/abs/2403.14468).
 
