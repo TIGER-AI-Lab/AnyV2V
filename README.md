@@ -5,8 +5,7 @@
 [![pull requests](https://img.shields.io/github/issues-pr/TIGER-AI-Lab/AnyV2V?color=0088ff)](https://github.com/TIGER-AI-Lab/AnyV2V/pulls)
 [![license](https://img.shields.io/github/license/TIGER-AI-Lab/AnyV2V.svg)](https://github.com/TIGER-AI-Lab/AnyV2V/blob/main/LICENSE)
 
-[**🌐 Homepage**](https://tiger-ai-lab.github.io/AnyV2V/)  | [**🤗 HuggingFace Paper**](https://huggingface.co/papers/2403.14468) | [**📖 arXiv**](https://arxiv.org/abs/2403.14468) | [**GitHub**](https://github.com/TIGER-AI-Lab/AnyV2V)
-
+[**🌐 Homepage**](https://tiger-ai-lab.github.io/AnyV2V/)  | [**🤗 HuggingFace Paper**](https://huggingface.co/papers/2403.14468) | [**📖 arXiv**](https://arxiv.org/abs/2403.14468) 
 
 This repo contains the codebase for the paper "[AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks](https://arxiv.org/pdf/2403.14468.pdf)"
 
