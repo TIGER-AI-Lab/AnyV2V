@@ -5,12 +5,16 @@
 [![pull requests](https://img.shields.io/github/issues-pr/TIGER-AI-Lab/AnyV2V?color=0088ff)](https://github.com/TIGER-AI-Lab/AnyV2V/pulls)
 [![license](https://img.shields.io/github/license/TIGER-AI-Lab/AnyV2V.svg)](https://github.com/TIGER-AI-Lab/AnyV2V/blob/main/LICENSE)
 
-AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks
+[**🌐 Homepage**](https://tiger-ai-lab.github.io/AnyV2V/)  | [**🤗 HuggingFace Paper**](https://huggingface.co/papers/2403.14468) | [**📖 arXiv**](https://arxiv.org/abs/2403.14468) | [**GitHub**](https://github.com/TIGER-AI-Lab/AnyV2V)
+
+
+This repo contains the codebase for the paper "[AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks](https://arxiv.org/pdf/2403.14468.pdf)"
 
 <div align="center">
   <img src="assets/AnyV2V-SlidesShow-GIF-1080P-02.gif" alt="AnyV2V" width="70%"/>
 </div>
 
+## Introduction
 AnyV2V is a tuning-free framework to achieve high appearance and temporal consistency in video editing.
 - can seamlessly build on top of advanced image editing methods to perform diverse types of editing
 - robust performance on the four tasks:
@@ -19,9 +23,6 @@ AnyV2V is a tuning-free framework to achieve high appearance and temporal consis
   - subject-driven editing
   - identity manipulation
 
-<div align="center">
- <a href = "https://tiger-ai-lab.github.io/AnyV2V/">[🌐 Project Page]</a> <a href = "https://arxiv.org/abs/2403.14468">[📄 Arxiv]</a> 
-</div>
 
 ## 📰 News
 * 2024 Mar 22: Code released for AnyV2V(i2vgen-xl).
