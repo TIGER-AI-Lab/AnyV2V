@@ -161,6 +161,16 @@ Please kindly cite our paper if you use our code, data, models or results:
   year={2024}
 }
 ```
+
+## 🎫 License [🔝](#-table-of-contents)
+
+This project is released under the [the MIT License](LICENSE).
+However, our code is based on some projects that might used another license:
+
+* [i2vgen-xl](https://github.com/ali-vilab/VGen): Missing License
+* [SEINE](https://github.com/Vchitect/SEINE): Apache-2.0
+* [ConsistI2V](https://github.com/TIGER-AI-Lab/ConsistI2V): MIT License
+
 ## ⭐ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=TIGER-AI-Lab/AnyV2V&type=Date)](https://star-history.com/#TIGER-AI-Lab/AnyV2V&Date)
