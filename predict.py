@@ -73,13 +73,9 @@ class Predictor(BasePredictor):
                 "negative_prompt": "",
             },
             "pnp_config": {
-                "ddim_init_latents_t_idx": 0,  # 0 for 981, 3 for 921, 9 for 801, 20 for 581 if n_steps=50
                 "ddim_inv_prompt": "",
                 "random_ratio": 0.0,
                 "target_fps": 8,
-                "pnp_f_t": 1.0,
-                "pnp_spatial_attn_t": 1.0,
-                "pnp_temp_attn_t": 1.0,
             },
         }
         self.config = OmegaConf.create(config)
@@ -104,6 +100,23 @@ class Predictor(BasePredictor):
         ),
         guidance_scale: float = Input(
             description="Scale for classifier-free guidance", ge=1, le=20, default=9.0
+        ),
+        pnp_f_t: float = Input(
+            description="Convolution injection value", ge=0.0, le=1.0, default=0.2
+        ),
+        pnp_spatial_attn_t: float = Input(
+            description="Self-Attention injection value", ge=0.0, le=1.0, default=0.2
+        ),
+        pnp_temp_attn_t: float = Input(
+            description="Temporal Attention injection value",
+            ge=0.0,
+            le=1.0,
+            default=0.5,
+        ),
+        ddim_init_latents_t_idx: int = Input(
+            description="Index of the starting latent, raning from 0 to (num_inference_steps - 1)",
+            ge=0,
+            default=0,
         ),
         ddim_inversion_steps: int = Input(
             description="Number of ddim inversion steps", default=500
@@ -131,6 +144,7 @@ class Predictor(BasePredictor):
         self.config.inverse_config.n_steps = ddim_inversion_steps
         self.config.inverse_config.n_frames = len(frame_list)
         self.config.inverse_config.output_dir = ddim_latents_path
+        ddim_init_latents_t_idx = min(ddim_init_latents_t_idx, num_inference_steps - 1)
 
         # Step 0. Black-box image editing for the first frame
         edited_first_frame_path = os.path.join(tmp_dir, "edited_first_frame.png")
@@ -168,7 +182,6 @@ class Predictor(BasePredictor):
             self.config.inverse_config.image_size, resample=Image.Resampling.LANCZOS
         )
         # Load the initial latents at t
-        ddim_init_latents_t_idx = self.config.pnp_config.ddim_init_latents_t_idx
         self.ddim_scheduler.set_timesteps(num_inference_steps)
         print(f"ddim_scheduler.timesteps: {self.ddim_scheduler.timesteps}")
         ddim_latents_at_t = load_ddim_latents_at_t(
@@ -192,6 +205,10 @@ class Predictor(BasePredictor):
 
         # Init Pnp
         self.config.pnp_config.n_steps = num_inference_steps
+        self.config.pnp_config.pnp_f_t = pnp_f_t
+        self.config.pnp_config.pnp_spatial_attn_t = pnp_spatial_attn_t
+        self.config.pnp_config.pnp_temp_attn_t = pnp_temp_attn_t
+        self.config.pnp_config.ddim_init_latents_t_idx = ddim_init_latents_t_idx
         init_pnp(pipe, self.ddim_scheduler, self.config.pnp_config)
         # Edit video
         pipe.register_modules(scheduler=self.ddim_scheduler)
