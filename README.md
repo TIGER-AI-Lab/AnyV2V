@@ -8,7 +8,10 @@
 AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks
 
 <div align="center">
-<img src="https://github.com/TIGER-AI-Lab/AnyV2V/blob/gh-pages/static/images/banner.png" width="70%">
+  <video width="70%" controls autoplay muted loop>
+    <source src="assets/AnyV2V-SlidesShow-MP4-1080P.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 </div>
 
 AnyV2V is a tuning-free framework to achieve high appearance and temporal consistency in video editing.
@@ -125,8 +128,9 @@ python edit_image.py --video_path "./demo/Your-Video.mp4" --input_dir "./demo" -
 ```
 You can also use any other image editing method, such as InstantID, AnyDoor, or WISE, to edit the first frame.
 Please put the edited first frame images in the ```demo/Your-Video-Name/edited_first_frame``` folder.
-4. Add an entry to the ```group_config.json``` files located in ```i2vgen-xl/configs/group_ddim_inversion``` and ```i2vgen-xl/configs/group_pnp_edit``` directories for your video, following the provided examples.
-6. Run the inference command:
+
+4. Add an entry to the ```group_config.json``` files located in ```i2vgen-xl/configs/group_ddim_inversion``` and ```i2vgen-xl/configs/group_pnp_edit``` directories for your video, following the provided examples. 
+5. Run the inference command:
 ```bash
 cd i2vgen-xl/scripts
 bash run_group_ddim_inversion.sh
