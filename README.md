@@ -6,7 +6,7 @@
 [![license](https://img.shields.io/github/license/TIGER-AI-Lab/AnyV2V.svg)](https://github.com/TIGER-AI-Lab/AnyV2V/blob/main/LICENSE)
 [![Replicate](https://replicate.com/cjwbw/anyv2v/badge)](https://replicate.com/cjwbw/anyv2v) 
 
-[**🌐 Homepage**](https://tiger-ai-lab.github.io/AnyV2V/)  | [**🤗 HuggingFace Paper**](https://huggingface.co/papers/2403.14468) | [**📖 arXiv**](https://arxiv.org/abs/2403.14468) | [**Replicate Demo**](https://replicate.com/cjwbw/anyv2v)
+[**🌐 Homepage**](https://tiger-ai-lab.github.io/AnyV2V/)  | [**🤗 HuggingFace Paper**](https://huggingface.co/papers/2403.14468) | [**📖 arXiv**](https://arxiv.org/abs/2403.14468) | [**🎬 Replicate Demo**](https://replicate.com/cjwbw/anyv2v)
 
 This repo contains the codebase for the paper "[AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks](https://arxiv.org/pdf/2403.14468.pdf)"
 
@@ -25,7 +25,7 @@ AnyV2V is a tuning-free framework to achieve high appearance and temporal consis
 
 
 ## 📰 News
-* 2024 Mar 24: Added [Replicate demo](https://replicate.com/cjwbw/anyv2v) for AnyV2V(i2vgen-xl)!
+* 2024 Mar 24: Added [Replicate demo](https://replicate.com/cjwbw/anyv2v) for AnyV2V(i2vgen-xl). Thanks [@chenxwh](https://github.com/chenxwh) for the effort!!
 * 2024 Mar 22: Code released for AnyV2V(i2vgen-xl).
 * 2024 Mar 21: Our paper is featured on [Huggingface Daily Papers](https://huggingface.co/papers/2403.14468)!
 * 2024 Mar 21: Paper available on [Arxiv](https://arxiv.org/abs/2403.14468).
