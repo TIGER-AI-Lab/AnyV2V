@@ -156,7 +156,7 @@ Please kindly cite our paper if you use our code, data, models or results:
 ```bibtex
 @article{ku2024anyv2v,
   title={AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks},
-  author={Ku, Max and Wei, Cong and Ren, Weiming and Yang, Huan and Chen, Wenhu},
+  author={Ku, Max and Wei, Cong and Ren, Weiming and Yang, Harry and Chen, Wenhu},
   journal={arXiv preprint arXiv:2403.14468},
   year={2024}
 }
@@ -164,3 +164,8 @@ Please kindly cite our paper if you use our code, data, models or results:
 ## ⭐ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=TIGER-AI-Lab/AnyV2V&type=Date)](https://star-history.com/#TIGER-AI-Lab/AnyV2V&Date)
+
+## 📞 Contact Authors
+Max Ku [@vinemsuic](https://github.com/vinesmsuic), m3ku@uwaterloo.ca
+Cong Wei [@lim142857](https://github.com/lim142857), c58wei@uwaterloo.ca
+Weiming Ren [@wren93](https://github.com/wren93), w2ren@uwaterloo.ca
