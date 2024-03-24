@@ -102,19 +102,25 @@ class Predictor(BasePredictor):
             description="Scale for classifier-free guidance", ge=1, le=20, default=9.0
         ),
         pnp_f_t: float = Input(
-            description="Convolution injection value", ge=0.0, le=1.0, default=0.2
-        ),
-        pnp_spatial_attn_t: float = Input(
-            description="Self-Attention injection value", ge=0.0, le=1.0, default=0.2
-        ),
-        pnp_temp_attn_t: float = Input(
-            description="Temporal Attention injection value",
+            description="Specifies the proportion of time steps in the DDIM sampling process where the convolutional injection is applied.  A higher value improves motion consistency. 1.0 indicates injection at every time step",
             ge=0.0,
             le=1.0,
-            default=0.5,
+            default=1.0,
+        ),
+        pnp_spatial_attn_t: float = Input(
+            description="Specifies the proportion of time steps in the DDIM sampling process where the spatial attention injection is applied.  A higher value improves motion consistency. 1.0 indicates injection at every time step",
+            ge=0.0,
+            le=1.0,
+            default=1.0,
+        ),
+        pnp_temp_attn_t: float = Input(
+            description="Specifies the proportion of time steps in the DDIM sampling process where the temporal attention injection is applied.  A higher value improves motion consistency. 1.0 indicates injection at every time step",
+            ge=0.0,
+            le=1.0,
+            default=1.0,
         ),
         ddim_init_latents_t_idx: int = Input(
-            description="Index of the starting latent, raning from 0 to (num_inference_steps - 1)",
+            description="This parameter determines the time step index at which to begin sampling from the initial DDIM inversed latents, with a range of [0, num_inference_steps-1]. In the context of a DDIM sampling process where the sampling step is 50, the scheduler progresses through the time steps in the sequence [981, 961, 941, ..., 1]. Therefore, setting ddim_init_latents_t_idx to 0 initiates the sampling from t=981, whereas setting it to 1 starts the process at t=961. A higher index enhances motion consistency with the source video but may lead to flickering and cause the edited video to diverge from the edited first frame.",
             ge=0,
             default=0,
         ),
