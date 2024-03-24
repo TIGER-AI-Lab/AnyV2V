@@ -97,7 +97,7 @@ class Predictor(BasePredictor):
             default="turn man into robot",
         ),
         editing_prompt: str = Input(
-            description="Describe how to edit the video",
+            description="Describe the input video",
             default="a man doing exercises for the body and mind",
         ),
         editing_negative_prompt: str = Input(
