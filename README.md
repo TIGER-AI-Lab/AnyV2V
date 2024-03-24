@@ -40,6 +40,13 @@ cd i2vgen-xl
 conda env create -f environment.yml
 ```
 
+#### 📜 Notebook Demo 
+We provide a notebook demo ```i2vgen-xl/demo.ipynb``` for AnyV2V(i2vgen-xl).
+You can run the notebook to perform a Prompt-Based Editing on a single video.
+Make sure the environment is set up correctly before running the notebook.
+
+#### To edit multiple demo videos, please refer to the [Video Editing](#Video-Editing) section.
+
 ### First Frame Image Edit
 We provide instructpix2pix port for image editing with instruction prompt.
 ```shell
@@ -72,20 +79,21 @@ optional arguments:
 
 Example usage:
 ```shell
-pip install moviepy
-python edit_image.py --video_path "./demo/Man Walking.mp4" --input_dir "./demo" --output_dir "./demo/edited_first_frame" --prompt "turn the man into darth vader"
+python edit_image.py --video_path "./demo/Man Walking.mp4" --input_dir "./demo" --output_dir "./demo/Man Walking/edited_first_frame" --prompt "turn the man into darth vader"
 ```
 
-You can use other image models for editing, here are some interesting online demo by other researchers:
+You can use other image models for editing, here are some online demo models that you can use:
 * [Idenity Manipulation model: InstantID](https://huggingface.co/spaces/InstantX/InstantID)
 * [Subject Driven Image editing model: AnyDoor](https://huggingface.co/spaces/xichenhku/AnyDoor-online)
 * [Style Transfer model: WISE](https://huggingface.co/spaces/MaxReimann/Whitebox-Style-Transfer-Editing)
 
-### Inference
-Under ```i2vgen-xl/configs/group_ddim_inversion``` and ```i2vgen-xl/configs/group_pnp_edit``` 
-1. Modify the ```template.yaml``` files to specify the ``` device```.
-2. Modify the ``group_config.json`` files according to the provided examples. Configs in the ``group_config.json`` will overwrite the configs in the ``template.yaml``.
-You can set ```active: true``` to enable a example and ```active: false``` to disable a example.
+### Video Editing
+We provide demo source videos and edited images in the ```demo``` folder. 
+Below are the instructions for performing video editing on the provided source videos. 
+Navigate to ```i2vgen-xl/configs/group_ddim_inversion``` and ```i2vgen-xl/configs/group_pnp_edit```:
+1. Modify the ```template.yaml``` files to specify the ```device```.
+2. Modify the ```group_config.json``` files according to the provided examples. The configurations in ```group_config.json``` will override the configurations in ```template.yaml```.
+To enable an example, set ```active: true```; to disable it, set ```active: false```.
 
 Then you can run the following command to perform inference:
 ```bash
@@ -108,15 +116,29 @@ python run_group_pnp_edit.py \
 --configs_json "configs/group_pnp_edit/group_config.json"
 ```
 
-#### 📜 Notebook Demo 
-We also provide a notebook demo ```i2vgen-xl/demo.ipynb``` for AnyV2V(i2vgen-xl).
-You can run the notebook to perform a Prompt-Based Editing on a single video.
-Make sure the environment is set up correctly before running the notebook.
+#### To edit your own source videos, follow the steps outlined below:
+1. Prepare the source video ```Your-Video.mp4```in the ```demo``` folder.
+2. Create two new folders ```demo/Your-Video-Name``` and  ```demo/Your-Video-Name/edited_first_frame```.
+3. Run the following command to perform first frame image editing:
+```bash
+python edit_image.py --video_path "./demo/Your-Video.mp4" --input_dir "./demo" --output_dir "./demo/Your-Video-Name/edited_first_frame" --prompt "Your prompt"
+```
+You can also use any other image editing method, such as InstantID, AnyDoor, or WISE, to edit the first frame.
+Please put the edited first frame images in the ```demo/Your-Video-Name/edited_first_frame``` folder.
+4. Add an entry to the ```group_config.json``` files located in ```i2vgen-xl/configs/group_ddim_inversion``` and ```i2vgen-xl/configs/group_pnp_edit``` directories for your video, following the provided examples.
+6. Run the inference command:
+```bash
+cd i2vgen-xl/scripts
+bash run_group_ddim_inversion.sh
+bash run_group_pnp_edit.sh
+```
+
 
 ## 📋 TODO
 AnyV2V(i2vgen-xl)
 - [x] Release the code for AnyV2V(i2vgen-xl)
 - [x] Release a notebook demo 
+- [ ] Release scripts for multiple image editing
 - [ ] Release a Gradio demo
 
 AnyV2V(SEINE)
@@ -131,11 +153,11 @@ AnyV2V(ConsistI2V)
 Please kindly cite our paper if you use our code, data, models or results:
 ```bibtex
 @article{ku2024anyv2v,
-        title={AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks},
-        author={Max Ku and Cong Wei and Weiming Ren and Harry Yang and Wenhu Chen},
-        journal={arXiv preprint arXiv:2403.14468},
-        year={2024}
-        }
+  title={AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks},
+  author={Ku, Max and Wei, Cong and Ren, Weiming and Yang, Huan and Chen, Wenhu},
+  journal={arXiv preprint arXiv:2403.14468},
+  year={2024}
+}
 ```
 ## ⭐ Star History
 

@@ -25,14 +25,16 @@ def infer_video(model, video_path, output_dir, prompt, prompt_type="instruct", f
 
     video_clip = VideoFileClip(video_path)
     video_filename = os.path.basename(video_path)
-    filename_noext = os.path.splitext(video_filename)[0]
+    # filename_noext = os.path.splitext(video_filename)[0]
     
     # Create the output directory if it does not exist
-    final_output_dir = os.path.join(output_dir, filename_noext)
+    # final_output_dir = os.path.join(output_dir, filename_noext)
+    final_output_dir = output_dir
     if not os.path.exists(final_output_dir):
         os.makedirs(final_output_dir)
 
     result_path = os.path.join(final_output_dir, prompt + ".png")
+
     # Check if result already exists
     if os.path.exists(result_path):
         print(f"Result already exists: {result_path}")
@@ -55,7 +57,7 @@ def infer_video(model, video_path, output_dir, prompt, prompt_type="instruct", f
     processed_frame = process_frame(first_frame)  # Process the first frame
 
 
-    Image.fromarray(first_frame).save(os.path.join(final_output_dir, "00000.png"))
+    #Image.fromarray(first_frame).save(os.path.join(final_output_dir, "00000.png"))
     Image.fromarray(processed_frame).save(result_path)
     print(f"Processed and saved the first frame: {result_path}")
 
