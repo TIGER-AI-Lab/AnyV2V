@@ -2,31 +2,22 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
-    <!-- Replace the content tag with appropriate information -->
-    <meta name="description" content="We introduce AnyV2V, A Unified Framework for Video-to-Video Generation Tasks.">
-    <meta property="og:title" content="AnyV2V" />
-    <meta property="og:description" content="A Unified Framework for Video-to-Video Generation Tasks." />
-    <meta property="og:url" content="https://tiger-ai-lab.github.io/AnyV2V/" />
-    <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
-    <meta property="og:image" content="static/images/banner.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-
-
-    <meta name="twitter:title" content="AnyV2V">
-    <meta name="twitter:description" content="A Unified Framework for Video-to-Video Generation Tasks.">
-    <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
-    <meta name="twitter:image" content="static/images/banner.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <!-- Keywords for your paper to be indexed by-->
-    <meta name="keywords" content="AnyV2V">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
     <title>AnyV2V</title>
-    <link rel="icon" type="image/x-icon" href="static/images/icon.png">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/f8ddf9854a.js" crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <meta name="description" content="We introduce AnyV2V, A Unified Framework for Video-to-Video Generation Tasks.">
+     <meta name="keywords" content="AnyV2V, VideoEdit, VideoGen, video, editing, artificial intelligence, AI, AIGC">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks</title>
+
+    <link rel="icon" href="static/images/icon.png">
+
     <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
     <link rel="stylesheet" href="static/css/bulma.min.css">
@@ -36,368 +27,630 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
     <link rel="stylesheet" href="static/css/index.css">
 
-    <script src="static/js/jquery.min.js"></script>
-    <script src="static/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="static/js/fontawesome.all.min.js"></script>
     <script defer src="static/js/fontawesome.all.min.js"></script>
     <script src="static/js/bulma-carousel.min.js"></script>
     <script src="static/js/bulma-slider.min.js"></script>
     <script src="static/js/index.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="static/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8" src="static/js/jquery-3.5.1.js"></script>
-    <script type="text/javascript" charset="utf8" src="static/js/jquery.dataTables.js"></script>
 </head>
 
 <body>
-
-
-    <section class="hero">
-        <div class="hero-body">
-            <div class="container is-max-desktop">
-                <div class="columns is-centered">
+<section class="hero">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column has-text-centered">
+                    <h1 class="title is-1 publication-title" style="display: flex; align-items: center;">
+                        <img src="static/images/icon.png" alt="AnyV2V Icon" style="flex: 0 0 auto; height: 2em; margin-right: 10px;">
+                        <span style="flex: 1 1 auto;">AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks</span>
+                    </h1>
+                    <div class="is-size-5 publication-authors">
+                        <!-- Paper authors -->
+                        <span class="author-block">
+                            <sup>♠️†</sup><a href="https://kuwingfung.github.io/" target="_blank">Max Ku</a>*,
+                        </span>
+                        <span class="author-block">
+                            <sup>♠️†</sup><a href="https://congwei1230.github.io/" target="_blank">Cong Wei</a>*,
+                        </span>
+                        <span class="author-block">
+                            <sup>♠️†</sup><a href="https://cs.uwaterloo.ca/~w2ren/" target="_blank">Weiming Ren</a>*,
+                        </span>
+                        <span class="author-block">
+                            <sup>♥</sup><a href="https://hyang0511.github.io/" target="_blank">Harry Yang</a>,
+                        </span>
+                        <span class="author-block">
+                            <sup>♠️†</sup><a href="https://wenhuchen.github.io/" target="_blank">Wenhu Chen</a>
+                        </span>
+                    </div>
+                    <div class="is-size-5 publication-authors">
+                        <span class="author-block">
+                            <sup>♠️</sup>University of Waterloo,
+                            <sup>†</sup>Vector Institute,
+                            <sup>♥</sup>Harmony.AI
+                        </span>
+                        <br>
+                        <span class="author-block"><small>*Equal contribution</small></span>
+                        <br>
+                        <span class="author-block"><small>{m3ku, c58wei, w2ren, wenhuchen}@uwaterloo.ca</small></span>
+                    </div>
                     <div class="column has-text-centered">
-                        <h1 class="title is-1 publication-title" style="display: flex; align-items: center;">
-                            <img src="static/images/icon.png" alt="AnyV2V Icon" style="flex: 0 0 auto; height: 2em; margin-right: 10px;">
-                            <span style="flex: 1 1 auto;">AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks</span>
-                          </h1>                          
-                          
-                        <div class="is-size-5 publication-authors">
-                            <!-- Paper authors -->
-                            <span class="author-block">
-                <sup>♠️†</sup><a href="https://kuwingfung.github.io/" target="_blank">Max Ku</a>*,</span>
-                            <span class="author-block">
-                  <sup>♠️†</sup><a href="https://congwei1230.github.io/" target="_blank">Cong Wei</a>*,
-                            <span class="author-block">
-                    <sup>♠️†</sup><a href="https://cs.uwaterloo.ca/~w2ren/" target="_blank">Weiming Ren</a>*,
-                  </span>
-                            <span class="author-block">
-                    <sup>♥</sup><a href="https://hyang0511.github.io/" target="_blank">Harry Yang</a>,
-                  </span>
-                            <span class="author-block">
-                    <sup>♠️†</sup><a href="https://wenhuchen.github.io/" target="_blank">Wenhu Chen</a>
-                  </span>
-                        </div>
-
-                        <div class="is-size-5 publication-authors">
-                            <span class="author-block">
-                    <sup>♠️</sup>University of Waterloo,
-                    <sup>†</sup>Vector Institute,
-                    <sup>♥</sup>Harmony.AI
+                        <div class="publication-links">
+                            <!-- Github link -->
+                            <span class="link-block">
+                                <a href="https://github.com/TIGER-AI-Lab/AnyV2V" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon"><i class="fab fa-github"></i></span>
+                                    <span>Code</span>
+                                </a>
                             </span>
-                            <br>
-                            <span class="author-block"><small>*Equal contribution</small></span>
-                            <br>
-                            <span class="author-block"><small>{m3ku, c58wei, w2ren, wenhuchen}@uwaterloo.ca</small></span>
-                        </div>
-
-                        <div class="column has-text-centered">
-                            <div class="publication-links">
-
-                                <!-- Github link -->
-                                <span class="link-block">
-                      <a href="https://github.com/TIGER-AI-Lab/AnyV2V" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fab fa-github"></i>
-                      </span>
-                                <span>Code</span>
+                            <!-- ArXiv abstract Link -->
+                            <span class="link-block">
+                                <a href="https://arxiv.org/abs/2403.14468" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon"><i class="ai ai-arxiv"></i></span>
+                                    <span>arXiv</span>
                                 </a>
-                                </span>
-
-                                <!-- ArXiv abstract Link -->
-                                <span class="link-block">
-                    <a href="https://arxiv.org/abs/2403.14468" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="ai ai-arxiv"></i>
-                      </span>
-                                <span>arXiv</span>
+                            </span>
+                            <!-- Twitter Link -->
+                            <span class="link-block">
+                                <a href="https://twitter.com/CongWei1230/status/1771528281197560109" class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon has-text-white"><i class="fa-brands fa-x-twitter"></i></span>
+                                    <span>Twitter</span>
                                 </a>
-                                </span>
-                                
-                                
-                            </div>
+                            </span>
+                            <!-- Notebook Link -->
+                            <span class="link-block">
+                                <a href="https://github.com/TIGER-AI-Lab/AnyV2V/blob/main/i2vgen-xl/demo.ipynb" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon has-text-white"><i class="fa-solid fa-book"></i></span>
+                                    <span>NoteBook</span>
+                                </a>
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="hero">
-        <div class="hero-body">
-            <div class="container is-max-desktop">
-                <div class="columns is-centered">
-                    <div class="column is-full">
-                        <div class="item">
-                            <!-- Your image here -->
-                            <img src="static/images/banner.png" width="100%" alt="AnyV2V" />
-                            <h2 class="subtitle">
-                                AnyV2V disentangles the video editing process into two stages: (1) first-frame image editing and (2) image-to-video reconstruction. The first phase benefits from the extensive range of existing image editing models, enabling (1) detailed and precise modification and (2) flexibility for any editing tasks.
-                            </h2>
-                        </div>
+<!-- Demo Video -->
+<section class="hero">
+    <div class="hero-body">
+        <div class="container is-max-desktop has-text-centered">
+            <div class="columns is-centered">
+                <div class="column is-full">
+                    <div class="item">
+                        <!-- Video here -->
+                        <video width="80%" controls autoplay muted loop>
+                            <source src="static/videos/demo/demo_video_with_music_subtitle_2k.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="hero is-light is-small">
-        <div class="hero-body">
-          <div class="container">
-            
-            <video style="display: block; margin: auto; max-height: 50vh;" poster="" id="" autoplay controls muted loop playsinline height="100%">
-                <source src="./static/videos/old_man/src.mp4"
-                        type="video/mp4">
-            </video>
-            Edited with AnyV2V:
-            <div id="results-carousel" class="carousel results-carousel">
-              <div class="item">
-                <video poster="" id="" autoplay controls muted loop playsinline height="100%">
-                  <source src="./static/videos/old_man/row_sub1.mp4"
-                          type="video/mp4">
-                </video>
-              </div>
-              <div class="item">
-                <video poster="" id="" autoplay controls muted loop playsinline height="100%">
-                  <source src="./static/videos/old_man/row_sub2.mp4"
-                          type="video/mp4">
-                </video>
-              </div>
+
+<!--<section class="hero">-->
+<!--        <div class="hero-body">-->
+<!--            <div class="container is-max-desktop">-->
+<!--                <div class="columns is-centered">-->
+<!--                    <div class="column is-full">-->
+<!--                        <div class="item">-->
+<!--                            &lt;!&ndash; Your image here &ndash;&gt;-->
+<!--                            <img src="static/images/banner.png" width="100%" alt="AnyV2V" />-->
+<!--                            <h2 class="subtitle">-->
+<!--                                AnyV2V disentangles the video editing process into two stages: (1) first-frame image editing and (2) image-to-video reconstruction. The first phase benefits from the extensive range of existing image editing models, enabling (1) detailed and precise modification and (2) flexibility for any editing tasks.-->
+<!--                            </h2>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--</section>-->
+
+<!-- Demo Video 2 -->
+<section class="hero">
+    <div class="hero-body">
+        <div class="container is-max-desktop has-text-centered">
+            <div class="columns is-centered">
+                <div class="column is-full">
+                    <div class="item">
+                        <!-- Video here -->
+                        <video width="80%" controls autoplay muted loop>
+                            <source src="static/videos/demo/AnyV2V-SlidesShow-Shorten-MP4-1080P.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Paper abstract -->
-    <section class="hero">
-        <div class="hero-body">
-            <div class="container is-max-desktop">
-                <div class="columns is-centered">
-                    <div class="column has-text-centered">
-                        <h2 class="title is-3">Abstract</h2>
-                        <div class="content has-text-justified">
+
+
+<!--<section class="hero is-small">-->
+<!--        <div class="hero-body">-->
+<!--          <div class="container">-->
+<!--            <video style="display: block; margin: auto; max-height: 50vh;" poster="" autoplay controls muted loop playsinline height="100%">-->
+<!--                <source src="./static/videos/old_man/src.mp4"-->
+<!--                        type="video/mp4">-->
+<!--            </video>-->
+<!--            Edited with AnyV2V:-->
+<!--            <div id="results-carousel" class="carousel results-carousel">-->
+<!--              <div class="item">-->
+<!--                <video poster="" autoplay controls muted loop playsinline height="100%">-->
+<!--                  <source src="./static/videos/old_man/row_sub1.mp4"-->
+<!--                          type="video/mp4">-->
+<!--                </video>-->
+<!--              </div>-->
+<!--              <div class="item">-->
+<!--                <video poster="" autoplay controls muted loop playsinline height="100%">-->
+<!--                  <source src="./static/videos/old_man/row_sub2.mp4"-->
+<!--                          type="video/mp4">-->
+<!--                </video>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--</section>-->
+
+<!-- Paper abstract -->
+<section class="section">
+  <div class="container" style="margin-bottom: 2vh;">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">🔔News</h2>
+        <div class="content has-text-justified">
+            <p>
+               <b>🚀[2024-03-23]: We released a <a href="https://github.com/TIGER-AI-Lab/AnyV2V/blob/main/i2vgen-xl/demo.ipynb">Notebook Demo</a> for AnyV2V(i2vgen-xl)🌟</b>
+            </p>
+      </div>
+        <h2 class="title is-3">Introduction</h2>
+        <div class="content has-text-justified">
                             <p>
                                 Video-to-video editing involves editing a source video along with additional control (such as text prompts, subjects, or styles) to generate a new video that aligns with the source video and the provided control. Traditional methods have been constrained to certain editing types, limiting their ability to meet the wide range of user demands. In this paper, we introduce AnyV2V, a novel training-free framework designed to simplify video editing into two primary steps: (1) employing an off-the-shelf image editing model (e.g. InstructPix2Pix, InstantID, etc) to modify the first frame, (2) utilizing an existing image-to-video generation model (e.g. I2VGen-XL) for DDIM inversion and feature injection.
 In the first stage, AnyV2V can plug in any existing image editing tools to support an extensive array of video editing tasks. Beyond the traditional prompt-based editing methods, AnyV2V also can support novel video editing tasks, including reference-based style transfer, subject-driven editing, and identity manipulation, which were unattainable by previous methods. In the second stage, AnyV2V can plug in any existing image-to-video models to perform DDIM inversion and intermediate feature injection to maintain the appearance and motion consistency with the source video. On the prompt-based editing, we show that AnyV2V can outperform the previous best approach by 35\% on prompt alignment, and 25\% on human preference. On the three novel tasks, we show that AnyV2V also achieves a high success rate. We believe AnyV2V will continue to thrive due to its ability to seamlessly integrate the fast-evolving image editing methods. Such compatibility can help AnyV2V to increase its versatility to cater to diverse user demands.
                             </p>
-                        </div>
-                    </div>
-                </div>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+</div>
+</section>
+<!-- End paper abstract -->
+
+
+<!-- Method -->
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+  <h1 class="title is-1 mmmu">
+    <img src="static/images/icon.png" style="width:1em;vertical-align: middle" alt="Logo"/>
+    <span class="mmmu" style="vertical-align: middle">AnyV2V</span>
+  </h1>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <!-- <div class="column is-full-width has-text-centered"> -->
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">AnyV2V Framework</h2>
+        <div class="content has-text-justified">
+            <p>
+                AnyV2V disentangles the video editing process into two stages: (1) first-frame image editing and (2) image-to-video reconstruction. The first phase benefits from the extensive range of existing image editing models, enabling (1) detailed and precise modification and (2) flexibility for any editing tasks.
+            </p>
+            <div class="box m-5">
+            <div class="content has-text-centered">
+                <img src="static/images/banner.png" width="80%" alt="AnyV2V" />-->
+            </div>
             </div>
         </div>
-    </section>
-    <!-- End paper abstract -->
-
-
-      <section class="section">
-        <div class="container is-max-desktop">
-      
-          <div class="columns is-centered">
-      
-            <div class="column">
-                <div class="content">
-                  <h2 class="title is-3" style="color: rgb(255, 68, 0);">Prompt based Editing</h2>
-                  <p>
-                    AnyV2V is robust in a wide range of localized editing tasks while maintaining the background. The generated result aligns the most with the text prompt and also maintains high motion consistency.
-                  </p>
-                  <!-- Text above Video 1 -->
-                  <div style="text-align: center; margin-bottom: 2px;">"make it snowing"</div>
-                  <video id="" autoplay controls muted loop playsinline height="100%">
-                    <source src="./static/videos/prompt_based/row1.mp4" type="video/mp4">
-                  </video>
-              
-                  <!-- Text above Video 2 -->
-                  <div style="text-align: center; margin-top: 2px; margin-bottom: 2px;">"turn the man into darth vader"</div>
-                  <video id="" autoplay controls muted loop playsinline height="100%">
-                      <source src="./static/videos/prompt_based/row2.mp4" type="video/mp4">
-                  </video>
-              
-                  <!-- Text above Video 3 -->
-                  <div style="text-align: center; margin-top: 2px; margin-bottom: 2px;">"turn the couple into robots"</div>
-                  <video id="" autoplay controls muted loop playsinline height="100%">
-                      <source src="./static/videos/prompt_based/row3.mp4" type="video/mp4">
-                  </video>
-
-                  <div style="text-align: center; margin-top: 2px; margin-bottom: 2px;">"turn the sand into snow"</div>
-                  <video id="" autoplay controls muted loop playsinline height="100%">
-                      <source src="./static/videos/prompt_based/row4.mp4" type="video/mp4">
-                  </video>
-
-                  <div style="text-align: center; margin-top: 2px; margin-bottom: 2px;">"turn horse into zebra"</div>
-                  <video id="" autoplay controls muted loop playsinline height="100%">
-                      <source src="./static/videos/prompt_based/row5.mp4" type="video/mp4">
-                  </video>
-                </div>
-              </div>
-              
-
-            <div class="column">
-              <h2 class="title is-3" style="color: lightgreen;">Subject Driven Editing</h2>
-              <div class="columns is-centered">
-                <div class="column content">
-                  <p>
-                    AnyV2V works well in subject-driven editing tasks, where the user can specify the subject to be edited. The model can generate high-quality results with the subject being edited while maintaining the background.
-                  </p>
-                  Single reference Image:
-                  <img src="./static//videos/subject_driven/v-car.png" width="30%" alt="style_1" />
-                  <video id="" autoplay controls muted loop playsinline height="100%">
-                      <source src="./static/videos/subject_driven/row1.mp4"
-                              type="video/mp4">
-                  </video>
-                  Single reference Image:
-                  <img src="./static//videos/subject_driven/v-dog.jpg" width="30%" alt="style_1" />
-                  <video id="" autoplay controls muted loop playsinline height="100%">
-                      <source src="./static/videos/subject_driven/row2.mp4"
-                              type="video/mp4">
-                  </video>
-                  Single reference Image:
-                  <img src="./static//videos/subject_driven/v-cat.jpg" width="30%" alt="style_1" />
-                  <video id="" autoplay controls muted loop playsinline height="100%">
-                      <source src="./static/videos/subject_driven/row3.mp4"
-                              type="video/mp4">
-                  </video>
-                  Single reference Image:
-                  <img src="./static//videos/subject_driven/v-backpack.jpg" width="30%" alt="style_1" />
-                  <video id="" autoplay controls muted loop playsinline height="100%">
-                      <source src="./static/videos/subject_driven/row4.mp4"
-                              type="video/mp4">
-                  </video>
-                </div>
-      
-              </div>
+    </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <!-- <div class="column is-full-width has-text-centered"> -->
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+            <p>
+                AnyV2V framework takes a source video as input.
+                                In the first stage, we apply a block-box image editing method on the first frame according to the editing task.
+                                In the second stage, the source video is inverted to initial noise, which is then denoised using DDIM sampling.
+                                During the sampling process, we extract spatial features, spatial attention and temporal attention from the image-to-video' decoder layers. To generate our edited video, we perform a DDIM sampling by fixing the latent and use the edited first frame as the conditional signal. During the sampling, we inject the features and attention into corresponding layers of the model.
+            </p>
+            <div class="box m-5">
+            <div class="content has-text-centered">
+                <img src="static/images/method.png" width="80%" alt="method"/>
             </div>
-
-          </div>
-
-          <div class="columns is-centered">
-                
-            <div class="column">
-                <div class="content">
-                <h2 class="title is-3" style="color: lightblue;">Style Transfer</h2>
-                <p>
-                    AnyV2V can perform reference-based style transfer tasks on styles that is never learned in a text encoder. The existing models lack such capability.
-                </p>
-                Single reference Image:
-                <img src="./static//videos/style_transfer/Vassily_Kandinsky.jpg" width="50%" alt="style_1" />
-                <video id="" autoplay controls muted loop playsinline height="100%">
-                    <source src="./static/videos/style_transfer/row1.mp4"
-                            type="video/mp4">
-                </video>
-                Single reference Image:
-                <img src="./static//videos/style_transfer/cyberpunk.jpg" width="50%" alt="style_1" />
-                <video id="" autoplay controls muted loop playsinline height="100%">
-                    <source src="./static/videos/style_transfer/row2.mp4"
-                            type="video/mp4">
-                </video>
-                </div>
             </div>
-
-            <div class="column">
-                <h2 class="title is-3" style="color: violet;">Identity Manipulation</h2>
-                <div class="columns is-centered">
-                <div class="column content">
-                    <p>
-                        AnyV2V can perform identity manipulation tasks based on InstantID, while such applications are not possible for existing methods.
-                    </p>
-                    Single reference Image:
-                    <img src="./static//videos/id/yann_lecun.jpg" width="40%" alt="" /> <!--<img src="./static//videos/id/instantid_wenhu.png" width="50%" alt="" />-->
-                    <video id="" autoplay controls muted loop playsinline height="100%">
-                        <source src="./static/videos/id/row3.mp4"
-                                type="video/mp4">
-                    </video>
-                    Single reference Image:
-                    <img src="./static//videos/id/hinton.jpg" width="40%" alt="" /> <!--<img src="./static//videos/id/instantid_wenhu.png" width="50%" alt="" />-->
-                    <video id="" autoplay controls muted loop playsinline height="100%">
-                        <source src="./static/videos/id/row2.mp4"
-                                type="video/mp4">
-                    </video>
-                </div>
-        
-                </div>
-            </div>
-
         </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS SECTION -->
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 mmmu">Experiment Results</h1>
+  </div>
+</section>
 
 
-        <div class="column">
+<!--<section class="section">-->
+<!--  <div class="container">-->
+<!--    <div class="columns is-centered has-text-centered">-->
+<!--      <div class="column is-four-fifths">-->
+<!--          <h2 class="title is-3" style="color: rgb(205, 48, 0);">Prompt based Editing</h2>-->
+<!--          <p>-->
+<!--                    AnyV2V is robust in a wide range of localized editing tasks while maintaining the background. The generated result aligns the most with the text prompt and also maintains high motion consistency.-->
+<!--          </p>-->
+<!--        <div class="box m-3">-->
+<!--          <div class="columns">-->
+<!--            &lt;!&ndash; Video 1 &ndash;&gt;-->
+<!--            <div class="column">-->
+<!--              <div style="text-align: center; margin-bottom: 2px;">"make it snowing"</div>-->
+<!--              <video autoplay controls muted loop playsinline height="100%">-->
+<!--                <source src="./static/videos/prompt_based/row1.mp4" type="video/mp4">-->
+<!--              </video>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Video 2 &ndash;&gt;-->
+<!--            <div class="column">-->
+<!--              <div style="text-align: center; margin-bottom: 2px;">"turn the man into darth vader"</div>-->
+<!--              <video autoplay controls muted loop playsinline height="100%">-->
+<!--                <source src="./static/videos/prompt_based/row2.mp4" type="video/mp4">-->
+<!--              </video>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Video 3 &ndash;&gt;-->
+<!--            <div class="column">-->
+<!--              <div style="text-align: center; margin-bottom: 2px;">"turn the couple into robots"</div>-->
+<!--              <video autoplay controls muted loop playsinline height="100%">-->
+<!--                <source src="./static/videos/prompt_based/row3.mp4" type="video/mp4">-->
+<!--              </video>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+
+
+<!--<section class="section">-->
+<!--  <div class="container">-->
+<!--    <div class="columns is-centered has-text-centered">-->
+<!--      <div class="column is-four-fifths">-->
+<!--        <h2 class="title is-3">AnyV2V Framework</h2>-->
+<!--        <div class="content has-text-justified">-->
+<!--          <p>-->
+<!--            AnyV2V disentangles the video editing process into two stages: (1) first-frame image editing and (2) image-to-video reconstruction. The first phase benefits from the extensive range of existing image editing models, enabling (1) detailed and precise modification and (2) flexibility for any editing tasks.-->
+<!--          </p>-->
+<!--          <div class="box m-5">-->
+<!--            &lt;!&ndash; First Row &ndash;&gt;-->
+<!--            <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">-->
+<!--              <div style="text-align: center;">-->
+<!--                <div>"make it snowing"</div>-->
+<!--                <video autoplay controls muted loop playsinline height="100%">-->
+<!--                  <source src="./static/videos/prompt_based/row1.mp4" type="video/mp4">-->
+<!--                </video>-->
+<!--              </div>-->
+<!--              <div style="text-align: center;">-->
+<!--                <div>"turn the man into darth vader"</div>-->
+<!--                <video autoplay controls muted loop playsinline height="100%">-->
+<!--                  <source src="./static/videos/prompt_based/row2.mp4" type="video/mp4">-->
+<!--                </video>-->
+<!--              </div>-->
+<!--              <div style="text-align: center;">-->
+<!--                <div>"turn the couple into robots"</div>-->
+<!--                <video autoplay controls muted loop playsinline height="100%">-->
+<!--                  <source src="./static/videos/prompt_based/row3.mp4" type="video/mp4">-->
+<!--                </video>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Second Row &ndash;&gt;-->
+<!--            <div style="display: flex; justify-content: space-between;">-->
+<!--              <div style="text-align: center;">-->
+<!--                <div>"turn the sand into snow"</div>-->
+<!--                <video autoplay controls muted loop playsinline height="100%">-->
+<!--                  <source src="./static/videos/prompt_based/row4.mp4" type="video/mp4">-->
+<!--                </video>-->
+<!--              </div>-->
+<!--              <div style="text-align: center;">-->
+<!--                <div>"turn horse into zebra"</div>-->
+<!--                <video autoplay controls muted loop playsinline height="100%">-->
+<!--                  <source src="./static/videos/prompt_based/row5.mp4" type="video/mp4">-->
+<!--                </video>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+
+<!-- Prompt based Editing -->
+<section class="video-grid">
+  <div class="container">
+     <div class="content has-text-justified">
+       <h2 class="title is-3" style="color: rgb(205, 48, 0);">Prompt based Editing</h2>
+         <p>
+             AnyV2V is robust in a wide range of localized editing tasks while maintaining the background. The generated result aligns the most with the text prompt and also maintains high motion consistency.
+         </p>
+     </div>
+  <!-- Row 1 -->
+  <div style="display: flex; justify-content: space-between; margin-bottom: 20px; margin-top: 20px;">
+    <div style="width: 30%; text-align: center;">
+        <div style="text-align: center; margin-bottom: 2px; background-color: #FFFFE0; font-family: 'Permanent Marker', cursive;">
+          "Make it <span style="color: darkred;">snowing</span>"
+        </div>
+      <video autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/prompt_based/row1.mp4" type="video/mp4">-
+      </video>
+    </div>
+    <div style="width: 30%; text-align: center;">
+        <div style="text-align: center; margin-bottom: 2px; background-color: #FFFFE0; font-family: 'Permanent Marker', cursive;">
+          "Turn the man into <span style="color: darkred;"> darth vader</span>"
+        </div>
+      <video autoplay controls muted loop playsinline width="100%">
+        <source src="./static/videos/prompt_based/row2.mp4" type="video/mp4">-
+      </video>
+    </div>
+    <div style="width: 30%; text-align: center;">
+        <div style="text-align: center; margin-bottom: 2px; background-color: #FFFFE0; font-family: 'Permanent Marker', cursive;">
+          "Turn the couple into <span style="color: darkred;">robots</span>"
+        </div>
+      <video autoplay controls muted loop playsinline width="100%">
+        <source src="./static/videos/prompt_based/row3.mp4" type="video/mp4">-
+      </video>
+    </div>
+  </div>
+
+  <!-- Row 2 -->
+  <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+    <div style="width: 30%; text-align: center;">
+        <div style="text-align: center; margin-bottom: 2px; background-color: #FFFFE0; font-family: 'Permanent Marker', cursive;">
+          "Turn the sand into <span style="color: darkred;">snow</span>"
+        </div>
+        <video autoplay controls muted loop playsinline width="100%">
+              <source src="./static/videos/prompt_based/row4.mp4" type="video/mp4">-
+        </video>
+    </div>
+    <div style="width: 30%; text-align: center;">
+        <div style="text-align: center; margin-bottom: 2px; background-color: #FFFFE0; font-family: 'Permanent Marker', cursive;">
+          "Turn horse into <span style="color: darkred;">zebra</span>"
+        </div>
+        <video autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/prompt_based/row5.mp4" type="video/mp4">-
+      </video>
+    </div>
+    <div style="width: 30%; text-align: center;">
+     <!-- Placeholder for a missing video -->
+      <div style="width: 100%; height: 100%; background-color: white; display: flex; align-items: center; justify-content: center;">
+        <span></span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- Subject Driven Editing -->
+<section class="video-grid" style="margin-top: 100px;">
+  <div class="container">
+     <div class="content has-text-justified">
+         <h2 class="title is-3" style="color: darkgreen;">Subject Driven Editing</h2>
+         <p>
+            <b>Given one subject image</b>, AnyDoor-equipped AnyV2V replaces an object in the video with the target subject while maintaining the video motion and persevering the background.
+         </p>
+     </div>
+  <!-- Row 1 -->
+  <div style="display: flex; justify-content: space-between; margin-bottom: 20px; margin-top: 20px;">
+    <div style="width: 30%; text-align: center;">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <div style="text-align: center; margin-bottom: 2px; background-color: #FFFFE0; font-family: 'Permanent Marker', cursive; margin-right: 5px;">Single Reference Image:</div>
+            <img src="./static/videos/subject_driven/v-car.png" width="34%" alt="style_1" />
+        </div>
+        <video autoplay controls muted loop playsinline width="100%" style="margin-top: 5px;">
+            <source src="./static/videos/subject_driven/row1.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div style="width: 30%; text-align: center;">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <div style="text-align: center; margin-bottom: 2px; background-color: #FFFFE0; font-family: 'Permanent Marker', cursive; margin-right: 5px;">Single Reference Image:</div>
+            <img src="./static/videos/subject_driven/v-dog.jpg" width="25%" alt="style_1" />
+        </div>
+        <video autoplay controls muted loop playsinline width="100%" style="margin-top: 5px;">
+            <source src="./static/videos/subject_driven/row2.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div style="width: 30%; text-align: center;">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <div style="text-align: center; margin-bottom: 2px; background-color: #FFFFE0; font-family: 'Permanent Marker', cursive; margin-right: 5px;">Single Reference Image:</div>
+            <img src="./static/videos/subject_driven/v-backpack.jpg" width="25%" alt="style_1" />
+        </div>
+        <video autoplay controls muted loop playsinline width="100%" style="margin-top: 5px;">
+            <source src="./static/videos/subject_driven/row4.mp4" type="video/mp4">
+        </video>
+    </div>
+  </div>
+
+  <!-- Row 2 -->
+  <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+    <div style="width: 100%; text-align: center;">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <div style="text-align: center; margin-bottom: 2px; background-color: #FFFFE0; font-family: 'Permanent Marker', cursive; margin-right: 5px;">Single Reference Image:</div>
+            <img src="./static/videos/subject_driven/v-cat.jpg" width="10%" alt="style_1" />
+        </div>
+        <video autoplay controls muted loop playsinline width="50%" style="margin-top: 5px;">
+            <source src="./static/videos/subject_driven/row3.mp4" type="video/mp4">
+        </video>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- Neural Style Transfer -->
+<section class="video-grid" style="margin-top: 80px;">
+  <div class="container">
+     <div class="content has-text-justified">
+         <h2 class="title is-3" style="color: dodgerblue;">Style Transfer</h2>
+         <p>
+            AnyV2V uses NST for the 1st frame style edits. <b>Prior text-based methods struggle with unseen styles</b>. In contrast, AnyV2V seamlessly transfers any reference style to the video, uniquely allowing artists to use their own creations as references.
+         </p>
+     </div>
+  <!-- Row 1 -->
+  <div style="display: flex; justify-content: space-between; margin-bottom: 20px; margin-top: 20px;">
+    <div style="width: 50%; text-align: center;">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <div style="text-align: center; margin-bottom: 2px; background-color: #FFFFE0; font-family: 'Permanent Marker', cursive; margin-right: 5px;">Single Reference Style Image:</div>
+            <img src="./static/videos/style_transfer/Vassily_Kandinsky.jpg" width="30%" alt="style_1" />
+        </div>
+        <video autoplay controls muted loop playsinline width="60%" style="margin-top: 5px;">
+            <source src="./static/videos/style_transfer/row1.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div style="width: 50%; text-align: center;">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <div style="text-align: center; margin-bottom: 2px; background-color: #FFFFE0; font-family: 'Permanent Marker', cursive; margin-right: 5px;">Single Reference Style Image:</div>
+            <img src="./static/videos/style_transfer/cyberpunk.jpg" width="19.7%" alt="style_1" />
+        </div>
+        <video autoplay controls muted loop playsinline width="60%" style="margin-top: 5px;">
+            <source src="./static/videos/style_transfer/row2.mp4" type="video/mp4">
+        </video>
+    </div>
+  </div>
+  </div>
+</div>
+</section>
+
+<!-- ID Manipulation -->
+<section class="video-grid" style="margin-top: 100px;">
+  <div class="container">
+     <div class="content has-text-justified">
+         <h2 class="title is-3" style="color: blueviolet;">Identity Manipulation</h2>
+         <p>
+             Integrating the InstantID, AnyV2V enables swapping a person's identity in a video with a <b>single-reference face image</b>. To the best of our knowledge, <b>our work is the first</b> to provide such flexibility in the video editing domain.
+         </p>
+     </div>
+  <!-- Row 1 -->
+  <div style="display: flex; justify-content: space-between; margin-bottom: 20px; margin-top: 20px;">
+    <div style="width: 50%; text-align: center;">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <div style="text-align: center; margin-bottom: 2px; background-color: #FFFFE0; font-family: 'Permanent Marker', cursive; margin-right: 5px;">Single Reference Face Image:</div>
+            <img src="./static/videos/id/yann_lecun.jpg" width="20%" alt="style_1" />
+        </div>
+        <video autoplay controls muted loop playsinline width="60%" style="margin-top: 5px;">
+            <source src="./static/videos/id/row3.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div style="width: 50%; text-align: center;">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <div style="text-align: center; margin-bottom: 2px; background-color: #FFFFE0; font-family: 'Permanent Marker', cursive; margin-right: 5px;">Single Reference Face Image:</div>
+            <img src="./static/videos/id/hinton.jpg" width="18%" alt="style_1" />
+        </div>
+        <video autoplay controls muted loop playsinline width="60%" style="margin-top: 5px;">
+            <source src="./static/videos/id/row2.mp4" type="video/mp4">
+        </video>
+    </div>
+  </div>
+  </div>
+</div>
+</section>
+
+<!-- RESULTS SECTION -->
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 mmmu">Comparison</h1>
+  </div>
+</section>
+<div class="column">
             <div class="column has-text-centered">
-                <h2 class="title is-3">Comparison</h2>
                 <p>
                     AnyV2V can preserve the video fidelity while performing the correct amount of edit.
                 </p>
+                <div style="width: 60%; margin: auto;">
                 <table class="table is-fullwidth is-striped is-hoverable">
                     <tbody>
                         <tr>
                             <td style="text-align: center;"><div style="margin-bottom: 2px;">Source</div></td>
-                            <td style="text-align: center;"><div style="margin-bottom: 2px;">AnyV2V(Ours)</div></td>
+                            <td style="text-align: center;"><div style="margin-bottom: 2px;"><b>AnyV2V(Ours)</b></div></td>
                             <td style="text-align: center;"><div style="margin-bottom: 2px;">TokenFlow</div></td>
                             <td style="text-align: center;"><div style="margin-bottom: 2px;">FLATTEN</div></td>
                         </tr>
                         <tr>
                             <td style="text-align: center;">
-                                <video autoplay controls muted loop playsinline height="100%">
+                                <video autoplay controls muted loop playsinline style="width: 100%; max-width: 250px;">
                                     <source src="./static/videos/comparison/snow/src.mp4" type="video/mp4">
                                 </video>
                             </td>
                             <td style="text-align: center;">
-                                <video autoplay controls muted loop playsinline height="100%">
+                                <video autoplay controls muted loop playsinline style="width: 98%; max-width: 250px;">
                                     <source src="./static/videos/comparison/snow/v2v_i2vgenxl.mp4" type="video/mp4">
                                 </video>
                             </td>
                             <td style="text-align: center;">
-                                <video autoplay controls muted loop playsinline height="100%">
+                                <video autoplay controls muted loop playsinline style="width: 100%; max-width: 250px;">
                                     <source src="./static/videos/comparison/snow/tokenflow.mp4" type="video/mp4">
                                 </video>
                             </td>
                             <td style="text-align: center;">
-                                <video autoplay controls muted loop playsinline height="100%">
+                                <video autoplay controls muted loop playsinline style="width: 100%; max-width: 250px;">
                                     <source src="./static/videos/comparison/snow/flatten.mp4" type="video/mp4">
                                 </video>
                             </td>
                         </tr>
                         <tr>
                             <td style="text-align: center;">
-                                
-                                <video autoplay controls muted loop playsinline height="100%">
+
+                                <video autoplay controls muted loop playsinline style="width: 100%; max-width: 250px;">
                                     <source src="./static/videos/comparison/man_hat/src.mp4" type="video/mp4">
                                 </video>
                             </td>
                             <td style="text-align: center;">
-                                <video autoplay controls muted loop playsinline height="100%">
+                                <video autoplay controls muted loop playsinline style="width: 98%; max-width: 250px;">
                                     <source src="./static/videos/comparison/man_hat/v2v_i2vgenxl.mp4" type="video/mp4">
                                 </video>
                             </td>
                             <td style="text-align: center;">
-                                <video autoplay controls muted loop playsinline height="100%">
+                                <video autoplay controls muted loop playsinline style="width: 100%; max-width: 250px;">
                                     <source src="./static/videos/comparison/man_hat/tokenflow.mp4" type="video/mp4">
                                 </video>
                             </td>
                             <td style="text-align: center;">
-                                <video autoplay controls muted loop playsinline height="100%">
+                                <video autoplay controls muted loop playsinline style="width: 100%; max-width: 250px;">
                                     <source src="./static/videos/comparison/man_hat/flatten.mp4" type="video/mp4">
                                 </video>
                             </td>
                         </tr>
                         <tr>
                             <td style="text-align: center;">
-                                
-                                <video autoplay controls muted loop playsinline height="100%">
+
+                                <video autoplay controls muted loop playsinline style="width: 100%; max-width: 250px;">
                                     <source src="./static/videos/comparison/robot_couple/src.mp4" type="video/mp4">
                                 </video>
                             </td>
                             <td style="text-align: center;">
-                                <video autoplay controls muted loop playsinline height="100%">
+                                <video autoplay controls muted loop playsinline style="width: 98%; max-width: 250px;">
                                     <source src="./static/videos/comparison/robot_couple/v2v_i2vgenxl.mp4" type="video/mp4">
                                 </video>
                             </td>
                             <td style="text-align: center;">
-                                <video autoplay controls muted loop playsinline height="100%">
+                                <video autoplay controls muted loop playsinline style="width: 100%; max-width: 250px;">
                                     <source src="./static/videos/comparison/robot_couple/tokenflow.mp4" type="video/mp4">
                                 </video>
                             </td>
                             <td style="text-align: center;">
-                                <video autoplay controls muted loop playsinline height="100%">
+                                <video autoplay controls muted loop playsinline style="width: 100%; max-width: 250px;">
                                     <source src="./static/videos/comparison/robot_couple/flatten.mp4" type="video/mp4">
                                 </video>
                             </td>
@@ -411,45 +664,45 @@ In the first stage, AnyV2V can plug in any existing image editing tools to suppo
                         <tr>
                             <td style="text-align: center;"><div style="margin-bottom: 2px;">Source</div></td>
                             <td style="text-align: center;"><div style="margin-bottom: 2px;">Reference</div></td>
-                            <td style="text-align: center;"><div style="margin-bottom: 2px;">AnyV2V(Ours)</div></td>
+                            <td style="text-align: center;"><div style="margin-bottom: 2px;"><b>AnyV2V(Ours)</b></div></td>
                             <td style="text-align: center;"><div style="margin-bottom: 2px;">VideoSwap</div></td>
                         </tr>
                         <tr>
                             <td style="text-align: center;">
-                                <video autoplay controls muted loop playsinline height="100%">
+                                <video autoplay controls muted loop playsinline style="width: 100%; max-width: 250px;">
                                     <source src="./static/videos/comparison/V_dog/src.mp4" type="video/mp4">
                                 </video>
                             </td>
                             <td style="text-align: center;">
-                                <img src="static/videos/subject_driven/v-dog.jpg" width="512" alt="AnyV2V" />
+                                <img src="static/videos/subject_driven/v-dog.jpg" style="width: 80%; max-width: 250px;" alt="AnyV2V" />
                             </td>
                             <td style="text-align: center;">
-                                <video autoplay controls muted loop playsinline height="100%">
+                                <video autoplay controls muted loop playsinline style="width: 98%; max-width: 250px;">
                                     <source src="./static/videos/comparison/V_dog/v2v_i2vgenxl.mp4" type="video/mp4">
                                 </video>
                             </td>
                             <td style="text-align: center;">
-                                <video autoplay controls muted loop playsinline height="100%">
+                                <video autoplay controls muted loop playsinline style="width: 100%; max-width: 250px;">
                                     <source src="./static/videos/comparison/V_dog/videoswap.mp4" type="video/mp4">
                                 </video>
                             </td>
                         </tr>
                         <tr>
                             <td style="text-align: center;">
-                                <video autoplay controls muted loop playsinline height="100%">
+                                <video autoplay controls muted loop playsinline style="width: 100%; max-width: 250px;">
                                     <source src="./static/videos/comparison/V_dog2/src.mp4" type="video/mp4">
                                 </video>
                             </td>
                             <td style="text-align: center;">
-                                <img src="static/videos/comparison/V_dog2/v-dog-01.jpg" width="512" alt="AnyV2V" />
+                                <img src="static/videos/comparison/V_dog2/v-dog-01.jpg" style="width: 80%; max-width: 250px;" alt="AnyV2V" />
                             </td>
                             <td style="text-align: center;">
-                                <video autoplay controls muted loop playsinline height="100%">
+                                <video autoplay controls muted loop playsinline style="width: 98%; max-width: 250px;">
                                     <source src="./static/videos/comparison/V_dog2/v2v_i2vgenxl.mp4" type="video/mp4">
                                 </video>
                             </td>
                             <td style="text-align: center;">
-                                <video autoplay controls muted loop playsinline height="100%">
+                                <video autoplay controls muted loop playsinline style="width: 100%; max-width: 250px;">
                                     <source src="./static/videos/comparison/V_dog2/videoswap.mp4" type="video/mp4">
                                 </video>
                             </td>
@@ -457,29 +710,11 @@ In the first stage, AnyV2V can plug in any existing image editing tools to suppo
 
                     </tbody>
                 </table>
-            </div>
-        </div>
-
-    <section class="hero is-small">
-        <div class="hero-body">
-            <div class="container  is-max-desktop">
-                <div class="columns is-centered has-text-centered">
-                    <div class="column is-four-fifths">
-                        <h2 class="title is-3">Technical Detail</h2>
-                        <div class="item">
-                            <img src="static/images/method.png" width="100%" alt="method" />
-                            <h2 class="subtitle">
-                                AnyV2V framework. Our framework takes a source video as input.
-                                In the first stage, we apply a block-box image editing method on the first frame according to the editing task.
-                                In the second stage, the source video is inverted to initial noise, which is then denoised using DDIM sampling.
-                                During the sampling process, we extract spatial features, spatial attention and temporal attention from the image-to-video' decoder layers. To generate our edited video, we perform a DDIM sampling by fixing the latent and use the edited first frame as the conditional signal. During the sampling, we inject the features and attention into corresponding layers of the model.
-                            </h2>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-    </section>
+
+
 
 
     <!-- BibTex citation -->
@@ -488,16 +723,17 @@ In the first stage, AnyV2V can plug in any existing image editing tools to suppo
             <h2 class="title">Citation</h2>
             Please kindly cite our paper if you use our code, data, models or results:
             <br><br>
-            <pre><code>@article{
-                ku2024anyv2v,
-                title={AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks},
-                author={Max Ku and Cong Wei and Weiming Ren and Harry Yang and Wenhu Chen},
-                journal={arXiv preprint arXiv:2403.14468},
-                year={2024}
-                }
-            </code></pre>
+            <pre><code>@article{ku2024anyv2v,
+  title={AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks},
+  author={Ku, Max and Wei, Cong and Ren, Weiming and Yang, Huan and Chen, Wenhu},
+  journal={arXiv preprint arXiv:2403.14468},
+  year={2024}
+}</code></pre>
         </div>
     </section>
+
+
+
 
 
     <footer class="footer">
@@ -520,20 +756,62 @@ In the first stage, AnyV2V can plug in any existing image editing tools to suppo
 
 </body>
 <style>
-    .buttonGroup {
-        text-align: center;
-    }
-    
-    .buttonGroup>button {
-        padding: 15px;
-        color: white;
-        background-color: #363636;
-        border-radius: 5px;
-    }
-    
-    .buttonGroup>button:hover {
-        box-shadow: 5px;
+  .hidden {
+      display: none;
+  }
+  .sortable:hover {
+      cursor: pointer;
+  }
+  .asc::after {
+      content: ' ↑';
+  }
+  .desc::after {
+      content: ' ↓';
+  }
+  #toggleButton {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #555555;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition-duration: 0.4s;
+  }
+
+  #toggleButton:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19); /* 鼠标悬停时的阴影效果 */
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+  }
+
+  th, td {
+      text-align: left;
+      padding: 8px;
+  }
+
+  th {
+      background-color: #f2f2f2;
+      border-bottom: 2px solid #ddd;
+  }
+
+  td:hover {background-color: #ffffff;}
+
+  .video-grid .video-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
     }
 </style>
-
 </html>
