@@ -8,10 +8,7 @@
 AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks
 
 <div align="center">
-  <video width="70%" controls autoplay muted loop>
-    <source src="assets/AnyV2V-SlidesShow-MP4-1080P.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+  <img src="assets/AnyV2V-SlidesShow-GIF-1080P-02.gif" alt="AnyV2V" width="70%"/>
 </div>
 
 AnyV2V is a tuning-free framework to achieve high appearance and temporal consistency in video editing.
