@@ -50,11 +50,6 @@ class Predictor(BasePredictor):
 
         if not os.path.exists(ALI_I2VGENXL_CACHE):
             download_weights(ALI_I2VGENXL_URL, ALI_I2VGENXL_CACHE)
-        self.pipe = I2VGenXLPipeline.from_pretrained(
-            ALI_I2VGENXL_CACHE,
-            torch_dtype=torch.float16,
-            variant="fp16",
-        ).to("cuda:0")
 
         # Initialize the DDIM inverse scheduler
         self.inverse_scheduler = DDIMInverseScheduler.from_pretrained(
@@ -150,13 +145,19 @@ class Predictor(BasePredictor):
         # Step 1. DDIM Inversion
         first_frame = frame_list[0]
 
+        pipe = I2VGenXLPipeline.from_pretrained(
+            ALI_I2VGENXL_CACHE,
+            torch_dtype=torch.float16,
+            variant="fp16",
+        ).to("cuda:0")
+
         generator = torch.Generator(device="cuda:0")
         generator = generator.manual_seed(seed)
         _ddim_latents = ddim_inversion(
             self.config.inverse_config,
             first_frame,
             frame_list,
-            self.pipe,
+            pipe,
             self.inverse_scheduler,
             generator,
         )
@@ -191,11 +192,11 @@ class Predictor(BasePredictor):
 
         # Init Pnp
         self.config.pnp_config.n_steps = num_inference_steps
-        init_pnp(self.pipe, self.ddim_scheduler, self.config.pnp_config)
+        init_pnp(pipe, self.ddim_scheduler, self.config.pnp_config)
         # Edit video
-        self.pipe.register_modules(scheduler=self.ddim_scheduler)
+        pipe.register_modules(scheduler=self.ddim_scheduler)
 
-        edited_video = self.pipe.sample_with_pnp(
+        edited_video = pipe.sample_with_pnp(
             prompt=editing_prompt,
             image=edited_1st_frame,
             height=self.config.inverse_config.image_size[1],
