@@ -162,7 +162,7 @@ Please kindly cite our paper if you use our code, data, models or results:
 }
 ```
 
-## 🎫 License [🔝](#-table-of-contents)
+## 🎫 License
 
 This project is released under the [the MIT License](LICENSE).
 However, our code is based on some projects that might used another license:
