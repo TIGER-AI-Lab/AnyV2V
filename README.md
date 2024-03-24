@@ -167,5 +167,8 @@ Please kindly cite our paper if you use our code, data, models or results:
 
 ## 📞 Contact Authors
 Max Ku [@vinemsuic](https://github.com/vinesmsuic), m3ku@uwaterloo.ca
+<br>
 Cong Wei [@lim142857](https://github.com/lim142857), c58wei@uwaterloo.ca
+<br>
 Weiming Ren [@wren93](https://github.com/wren93), w2ren@uwaterloo.ca
+<br>
