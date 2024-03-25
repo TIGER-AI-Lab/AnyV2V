@@ -79,7 +79,7 @@ optional arguments:
                         Negative prompt for editing
 ```
 
-Example usage:
+Usage Example:
 ```shell
 python edit_image.py --video_path "./demo/Man Walking.mp4" --input_dir "./demo" --output_dir "./demo/Man Walking/edited_first_frame" --prompt "turn the man into darth vader"
 ```
@@ -136,6 +136,47 @@ bash run_group_ddim_inversion.sh
 bash run_group_pnp_edit.sh
 ```
 
+## Misc
+
+### Video Preprocess Script
+
+As the current I2V models only support videos with 2 seconds (16 frames), we provide script to trim and crop video into the desired 2 second video with any dimension.
+
+```shell
+usage: prepare_video.py [-h] [--input_folder INPUT_FOLDER] [--video_path VIDEO_PATH] [--output_folder OUTPUT_FOLDER]
+                        [--clip_duration CLIP_DURATION] [--width WIDTH] [--height HEIGHT] [--start_time START_TIME] [--end_time END_TIME]
+                        [--n_frames N_FRAMES] [--center_crop] [--x_offset X_OFFSET] [--y_offset Y_OFFSET] [--longest_to_width]
+
+Crop and resize video segments.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --input_folder INPUT_FOLDER
+                        Path to the input folder containing video files
+  --video_path VIDEO_PATH
+                        Path to the input video file
+  --output_folder OUTPUT_FOLDER
+                        Path to the folder for the output videos
+  --clip_duration CLIP_DURATION
+                        Duration of the video clips in seconds default=2
+  --width WIDTH         Width of the output video (optional) default=512
+  --height HEIGHT       Height of the output video (optional) default=512
+  --start_time START_TIME
+                        Start time for cropping (optional)
+  --end_time END_TIME   End time for cropping (optional)
+  --n_frames N_FRAMES   Number of frames to extract from each video
+  --center_crop         Center crop the video
+  --x_offset X_OFFSET   Horizontal offset for center cropping, range -1 to 1 (optional)
+  --y_offset Y_OFFSET   Vertical offset for center cropping, range -1 to 1 (optional)
+  --longest_to_width    Resize the longest dimension to the specified width
+```
+
+Usage Example:
+```shell
+python prepare_video.py --input_folder src_center_crop/ --output_folder processed --start_time 1 --center_crop --x_offset 0 --y_offset 0
+python prepare_video.py --input_folder src_left_crop/ --output_folder processed --start_time 1 --center_crop --x_offset -1 --y_offset 0
+python prepare_video.py --input_folder src_right_crop/ --output_folder processed --start_time 1 --center_crop --x_offset 1 --y_offset 0
+```
 
 ## 📋 TODO
 AnyV2V(i2vgen-xl)
