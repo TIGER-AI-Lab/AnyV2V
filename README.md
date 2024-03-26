@@ -50,46 +50,6 @@ Make sure the environment is set up correctly before running the notebook.
 
 #### To edit multiple demo videos, please refer to the [Video Editing](#Video-Editing) section.
 
-### First Frame Image Edit
-We provide instructpix2pix port for image editing with instruction prompt.
-```shell
-usage: edit_image.py [-h] [--model {magicbrush,instructpix2pix}]
-                     [--video_path VIDEO_PATH] [--input_dir INPUT_DIR]
-                     [--output_dir OUTPUT_DIR] [--prompt PROMPT] [--force_512]
-                     [--dict_file DICT_FILE] [--seed SEED]
-                     [--negative_prompt NEGATIVE_PROMPT]
-
-Process some images.
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --model {magicbrush,instructpix2pix}
-                        Name of the image editing model
-  --video_path VIDEO_PATH
-                        Name of the video
-  --input_dir INPUT_DIR
-                        Directory containing the video
-  --output_dir OUTPUT_DIR
-                        Directory to save the processed images
-  --prompt PROMPT       Instruction prompt for editing
-  --force_512           Force resize to 512x512 when feeding into image model
-  --dict_file DICT_FILE
-                        JSON file containing files, instructions etc.
-  --seed SEED           Seed for random number generator
-  --negative_prompt NEGATIVE_PROMPT
-                        Negative prompt for editing
-```
-
-Usage Example:
-```shell
-python edit_image.py --video_path "./demo/Man Walking.mp4" --input_dir "./demo" --output_dir "./demo/Man Walking/edited_first_frame" --prompt "turn the man into darth vader"
-```
-
-You can use other image models for editing, here are some online demo models that you can use:
-* [Idenity Manipulation model: InstantID](https://huggingface.co/spaces/InstantX/InstantID)
-* [Subject Driven Image editing model: AnyDoor](https://huggingface.co/spaces/xichenhku/AnyDoor-online)
-* [Style Transfer model: WISE](https://huggingface.co/spaces/MaxReimann/Whitebox-Style-Transfer-Editing)
-
 ### Video Editing
 We provide demo source videos and edited images in the ```demo``` folder. 
 Below are the instructions for performing video editing on the provided source videos. 
@@ -137,7 +97,51 @@ bash run_group_ddim_inversion.sh
 bash run_group_pnp_edit.sh
 ```
 
-## Misc
+## ▶️ Quick Start for AnyV2V(seine)
+
+Please refer to [./seine/README.md](seine/README.md)
+
+## ▶️ Misc
+
+### First Frame Image Edit
+We provide instructpix2pix port for image editing with instruction prompt.
+```shell
+usage: edit_image.py [-h] [--model {magicbrush,instructpix2pix}]
+                     [--video_path VIDEO_PATH] [--input_dir INPUT_DIR]
+                     [--output_dir OUTPUT_DIR] [--prompt PROMPT] [--force_512]
+                     [--dict_file DICT_FILE] [--seed SEED]
+                     [--negative_prompt NEGATIVE_PROMPT]
+
+Process some images.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --model {magicbrush,instructpix2pix}
+                        Name of the image editing model
+  --video_path VIDEO_PATH
+                        Name of the video
+  --input_dir INPUT_DIR
+                        Directory containing the video
+  --output_dir OUTPUT_DIR
+                        Directory to save the processed images
+  --prompt PROMPT       Instruction prompt for editing
+  --force_512           Force resize to 512x512 when feeding into image model
+  --dict_file DICT_FILE
+                        JSON file containing files, instructions etc.
+  --seed SEED           Seed for random number generator
+  --negative_prompt NEGATIVE_PROMPT
+                        Negative prompt for editing
+```
+
+Usage Example:
+```shell
+python edit_image.py --video_path "./demo/Man Walking.mp4" --input_dir "./demo" --output_dir "./demo/Man Walking/edited_first_frame" --prompt "turn the man into darth vader"
+```
+
+You can use other image models for editing, here are some online demo models that you can use:
+* [Idenity Manipulation model: InstantID](https://huggingface.co/spaces/InstantX/InstantID)
+* [Subject Driven Image editing model: AnyDoor](https://huggingface.co/spaces/xichenhku/AnyDoor-online)
+* [Style Transfer model: WISE](https://huggingface.co/spaces/MaxReimann/Whitebox-Style-Transfer-Editing)
 
 ### Video Preprocess Script
 
@@ -187,11 +191,14 @@ AnyV2V(i2vgen-xl)
 - [ ] Release a Gradio demo
 
 AnyV2V(SEINE)
-- [ ] Release the code for AnyV2V(SEINE) 
+- [x] Release the code for AnyV2V(SEINE) 
 
 AnyV2V(ConsistI2V)
 - [ ] Release the code for AnyV2V(ConsistI2V) 
 
+Misc
+- [x] Helper script to preprocess the source video
+- [x] Helper script to obtain edited first frame from the source video
 
 ## 🖊️ Citation
 
@@ -225,3 +232,11 @@ Cong Wei [@lim142857](https://github.com/lim142857), c58wei@uwaterloo.ca
 <br>
 Weiming Ren [@wren93](https://github.com/wren93), w2ren@uwaterloo.ca
 <br>
+
+## 💞 Acknowledgements
+The code is built upon the below repositories, we thank all the contributors for open-sourcing.
+* [diffusers](https://github.com/huggingface/diffusers)
+* [TokenFlow](https://github.com/omerbt/TokenFlow)
+* [i2vgen-xl](https://github.com/ali-vilab/VGen)
+* [SEINE](https://github.com/Vchitect/SEINE)
+* [ConsistI2V](https://github.com/TIGER-AI-Lab/ConsistI2V)

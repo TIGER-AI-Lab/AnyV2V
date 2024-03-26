@@ -1,0 +1,47 @@
+# General
+seed: 1
+device: "cuda:0"
+debug: False # For logging
+
+# Dir
+exp_name: "default"
+output_dir: "anyv2v_results/${exp_name}"
+
+# Data
+data_dir: "<your_path>/data"
+src_video_path: "${data_dir}/video.mp4" #Override it with src_video_path
+ddim_inversion_dir: 'ddim-inversion/default/'
+n_ddim_inversion_steps: 500 # for retrieving the latents of the inversion
+n_frame_inverted: 16
+n_frames: 16
+edited_first_frame_path: '<your_path>/edited_first_frame.png' #Override it with edited_first_frame_path
+image_size: [512, 512]
+
+# Model
+model_name: "seine"
+sd_path: "./pretrained/stable-diffusion-v1-4"
+ckpt_path: "./pretrained/SEINE/seine.pt"
+model_key: "./pretrained/stable-diffusion-v1-4"
+enable_xformers_memory_efficient_attention: True
+use_fp16: True
+
+# Schedular
+sample_method: 'ddpm'
+beta_start: 0.0001
+beta_end: 0.02
+beta_schedule: "linear"
+
+# Diffusion
+cfg_scale: 4
+n_steps: 50
+init_with_ddim_inversion: True
+prompt: "<prompt>" #Override it with prompt
+negative_prompt: ""
+batch_size: 1 # TODO: batchsize is always 1, we can remove this
+
+# Pnp params -- injection thresholds ∈ [0, 1]
+enable_pnp: True
+pnp_f_t: 0.2
+pnp_spatial_attn_t: 0.2
+pnp_temp_attn_t: 0.5
+pnp_cross_attn_t: 0.0
