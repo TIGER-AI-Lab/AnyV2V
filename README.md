@@ -236,6 +236,7 @@ Weiming Ren [@wren93](https://github.com/wren93), w2ren@uwaterloo.ca
 ## 💞 Acknowledgements
 The code is built upon the below repositories, we thank all the contributors for open-sourcing.
 * [diffusers](https://github.com/huggingface/diffusers)
+* [ImagenHub](https://github.com/TIGER-AI-Lab/ImagenHub)
 * [TokenFlow](https://github.com/omerbt/TokenFlow)
 * [i2vgen-xl](https://github.com/ali-vilab/VGen)
 * [SEINE](https://github.com/Vchitect/SEINE)
