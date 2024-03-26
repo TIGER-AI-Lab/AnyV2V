@@ -18,7 +18,7 @@ This repo contains the codebase for the paper "[AnyV2V: A Plug-and-Play Framewor
 ## Introduction
 AnyV2V is a tuning-free framework to achieve high appearance and temporal consistency in video editing.
 - can seamlessly build on top of advanced image editing methods to perform diverse types of editing
-- robust performance on the four tasks:
+- Utilizing I2V model's inherent knowledge to achieve robust performance on the four tasks:
   - prompt-based editing
   - reference-based style transfer
   - subject-driven editing
