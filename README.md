@@ -4,10 +4,10 @@
 [![open issues](https://isitmaintained.com/badge/open/TIGER-AI-Lab/AnyV2V.svg)](https://github.com/TIGER-AI-Lab/AnyV2V/issues)
 [![pull requests](https://img.shields.io/github/issues-pr/TIGER-AI-Lab/AnyV2V?color=0088ff)](https://github.com/TIGER-AI-Lab/AnyV2V/pulls)
 [![license](https://img.shields.io/github/license/TIGER-AI-Lab/AnyV2V.svg)](https://github.com/TIGER-AI-Lab/AnyV2V/blob/main/LICENSE)
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FTIGER-AI-Lab%2FAnyV2V&count_bg=%23C83DB9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visitors&edge_flat=false)](https://hits.seeyoufarm.com)
 [![Replicate](https://replicate.com/cjwbw/anyv2v/badge)](https://replicate.com/cjwbw/anyv2v) 
 
-[**🌐 Homepage**](https://tiger-ai-lab.github.io/AnyV2V/)  | [**🤗 HuggingFace Paper**](https://huggingface.co/papers/2403.14468) | [**📖 arXiv**](https://arxiv.org/abs/2403.14468) | [**GitHub**](https://github.com/TIGER-AI-Lab/AnyV2V)
-
+[**🌐 Homepage**](https://tiger-ai-lab.github.io/AnyV2V/)  | [**🤗 HuggingFace Paper**](https://huggingface.co/papers/2403.14468) | [**📖 arXiv**](https://arxiv.org/abs/2403.14468) | [**🎬 Replicate Demo**](https://replicate.com/cjwbw/anyv2v)
 
 This repo contains the codebase for the paper "[AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks](https://arxiv.org/pdf/2403.14468.pdf)"
 
@@ -18,7 +18,7 @@ This repo contains the codebase for the paper "[AnyV2V: A Plug-and-Play Framewor
 ## Introduction
 AnyV2V is a tuning-free framework to achieve high appearance and temporal consistency in video editing.
 - can seamlessly build on top of advanced image editing methods to perform diverse types of editing
-- robust performance on the four tasks:
+- Utilizing I2V model's inherent knowledge to achieve robust performance on the four tasks:
   - prompt-based editing
   - reference-based style transfer
   - subject-driven editing
@@ -26,7 +26,7 @@ AnyV2V is a tuning-free framework to achieve high appearance and temporal consis
 
 
 ## 📰 News
-* 2024 Mar 24: Added [Replicate demo](https://replicate.com/cjwbw/anyv2v) for AnyV2V(i2vgen-xl)!
+* 2024 Mar 24: Added [Replicate demo](https://replicate.com/cjwbw/anyv2v) for AnyV2V(i2vgen-xl). Thanks [@chenxwh](https://github.com/chenxwh) for the effort!!
 * 2024 Mar 22: Code released for AnyV2V(i2vgen-xl).
 * 2024 Mar 21: Our paper is featured on [Huggingface Daily Papers](https://huggingface.co/papers/2403.14468)!
 * 2024 Mar 21: Paper available on [Arxiv](https://arxiv.org/abs/2403.14468).
@@ -49,46 +49,6 @@ You can run the notebook to perform a Prompt-Based Editing on a single video.
 Make sure the environment is set up correctly before running the notebook.
 
 #### To edit multiple demo videos, please refer to the [Video Editing](#Video-Editing) section.
-
-### First Frame Image Edit
-We provide instructpix2pix port for image editing with instruction prompt.
-```shell
-usage: edit_image.py [-h] [--model {magicbrush,instructpix2pix}]
-                     [--video_path VIDEO_PATH] [--input_dir INPUT_DIR]
-                     [--output_dir OUTPUT_DIR] [--prompt PROMPT] [--force_512]
-                     [--dict_file DICT_FILE] [--seed SEED]
-                     [--negative_prompt NEGATIVE_PROMPT]
-
-Process some images.
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --model {magicbrush,instructpix2pix}
-                        Name of the image editing model
-  --video_path VIDEO_PATH
-                        Name of the video
-  --input_dir INPUT_DIR
-                        Directory containing the video
-  --output_dir OUTPUT_DIR
-                        Directory to save the processed images
-  --prompt PROMPT       Instruction prompt for editing
-  --force_512           Force resize to 512x512 when feeding into image model
-  --dict_file DICT_FILE
-                        JSON file containing files, instructions etc.
-  --seed SEED           Seed for random number generator
-  --negative_prompt NEGATIVE_PROMPT
-                        Negative prompt for editing
-```
-
-Example usage:
-```shell
-python edit_image.py --video_path "./demo/Man Walking.mp4" --input_dir "./demo" --output_dir "./demo/Man Walking/edited_first_frame" --prompt "turn the man into darth vader"
-```
-
-You can use other image models for editing, here are some online demo models that you can use:
-* [Idenity Manipulation model: InstantID](https://huggingface.co/spaces/InstantX/InstantID)
-* [Subject Driven Image editing model: AnyDoor](https://huggingface.co/spaces/xichenhku/AnyDoor-online)
-* [Style Transfer model: WISE](https://huggingface.co/spaces/MaxReimann/Whitebox-Style-Transfer-Editing)
 
 ### Video Editing
 We provide demo source videos and edited images in the ```demo``` folder. 
@@ -137,6 +97,91 @@ bash run_group_ddim_inversion.sh
 bash run_group_pnp_edit.sh
 ```
 
+## ▶️ Quick Start for AnyV2V(seine)
+
+Please refer to [./seine/README.md](seine/README.md)
+
+## ▶️ Misc
+
+### First Frame Image Edit
+We provide instructpix2pix port for image editing with instruction prompt.
+```shell
+usage: edit_image.py [-h] [--model {magicbrush,instructpix2pix}]
+                     [--video_path VIDEO_PATH] [--input_dir INPUT_DIR]
+                     [--output_dir OUTPUT_DIR] [--prompt PROMPT] [--force_512]
+                     [--dict_file DICT_FILE] [--seed SEED]
+                     [--negative_prompt NEGATIVE_PROMPT]
+
+Process some images.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --model {magicbrush,instructpix2pix}
+                        Name of the image editing model
+  --video_path VIDEO_PATH
+                        Name of the video
+  --input_dir INPUT_DIR
+                        Directory containing the video
+  --output_dir OUTPUT_DIR
+                        Directory to save the processed images
+  --prompt PROMPT       Instruction prompt for editing
+  --force_512           Force resize to 512x512 when feeding into image model
+  --dict_file DICT_FILE
+                        JSON file containing files, instructions etc.
+  --seed SEED           Seed for random number generator
+  --negative_prompt NEGATIVE_PROMPT
+                        Negative prompt for editing
+```
+
+Usage Example:
+```shell
+python edit_image.py --video_path "./demo/Man Walking.mp4" --input_dir "./demo" --output_dir "./demo/Man Walking/edited_first_frame" --prompt "turn the man into darth vader"
+```
+
+You can use other image models for editing, here are some online demo models that you can use:
+* [Idenity Manipulation model: InstantID](https://huggingface.co/spaces/InstantX/InstantID)
+* [Subject Driven Image editing model: AnyDoor](https://huggingface.co/spaces/xichenhku/AnyDoor-online)
+* [Style Transfer model: WISE](https://huggingface.co/spaces/MaxReimann/Whitebox-Style-Transfer-Editing)
+
+### Video Preprocess Script
+
+As the current I2V models only support videos with 2 seconds (16 frames), we provide script to trim and crop video into the desired 2 second video with any dimension.
+
+```shell
+usage: prepare_video.py [-h] [--input_folder INPUT_FOLDER] [--video_path VIDEO_PATH] [--output_folder OUTPUT_FOLDER]
+                        [--clip_duration CLIP_DURATION] [--width WIDTH] [--height HEIGHT] [--start_time START_TIME] [--end_time END_TIME]
+                        [--n_frames N_FRAMES] [--center_crop] [--x_offset X_OFFSET] [--y_offset Y_OFFSET] [--longest_to_width]
+
+Crop and resize video segments.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --input_folder INPUT_FOLDER
+                        Path to the input folder containing video files
+  --video_path VIDEO_PATH
+                        Path to the input video file
+  --output_folder OUTPUT_FOLDER
+                        Path to the folder for the output videos
+  --clip_duration CLIP_DURATION
+                        Duration of the video clips in seconds default=2
+  --width WIDTH         Width of the output video (optional) default=512
+  --height HEIGHT       Height of the output video (optional) default=512
+  --start_time START_TIME
+                        Start time for cropping (optional)
+  --end_time END_TIME   End time for cropping (optional)
+  --n_frames N_FRAMES   Number of frames to extract from each video
+  --center_crop         Center crop the video
+  --x_offset X_OFFSET   Horizontal offset for center cropping, range -1 to 1 (optional)
+  --y_offset Y_OFFSET   Vertical offset for center cropping, range -1 to 1 (optional)
+  --longest_to_width    Resize the longest dimension to the specified width
+```
+
+Usage Example:
+```shell
+python prepare_video.py --input_folder src_center_crop/ --output_folder processed --start_time 1 --center_crop --x_offset 0 --y_offset 0
+python prepare_video.py --input_folder src_left_crop/ --output_folder processed --start_time 1 --center_crop --x_offset -1 --y_offset 0
+python prepare_video.py --input_folder src_right_crop/ --output_folder processed --start_time 1 --center_crop --x_offset 1 --y_offset 0
+```
 
 ## 📋 TODO
 AnyV2V(i2vgen-xl)
@@ -146,11 +191,14 @@ AnyV2V(i2vgen-xl)
 - [ ] Release a Gradio demo
 
 AnyV2V(SEINE)
-- [ ] Release the code for AnyV2V(SEINE) 
+- [x] Release the code for AnyV2V(SEINE) 
 
 AnyV2V(ConsistI2V)
 - [ ] Release the code for AnyV2V(ConsistI2V) 
 
+Misc
+- [x] Helper script to preprocess the source video
+- [x] Helper script to obtain edited first frame from the source video
 
 ## 🖊️ Citation
 
@@ -158,11 +206,38 @@ Please kindly cite our paper if you use our code, data, models or results:
 ```bibtex
 @article{ku2024anyv2v,
   title={AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks},
-  author={Ku, Max and Wei, Cong and Ren, Weiming and Yang, Huan and Chen, Wenhu},
+  author={Ku, Max and Wei, Cong and Ren, Weiming and Yang, Harry and Chen, Wenhu},
   journal={arXiv preprint arXiv:2403.14468},
   year={2024}
 }
 ```
+
+## 🎫 License
+
+This project is released under the [the MIT License](LICENSE).
+However, our code is based on some projects that might used another license:
+
+* [i2vgen-xl](https://github.com/ali-vilab/VGen): Missing License
+* [SEINE](https://github.com/Vchitect/SEINE): Apache-2.0
+* [ConsistI2V](https://github.com/TIGER-AI-Lab/ConsistI2V): MIT License
+
 ## ⭐ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=TIGER-AI-Lab/AnyV2V&type=Date)](https://star-history.com/#TIGER-AI-Lab/AnyV2V&Date)
+
+## 📞 Contact Authors
+Max Ku [@vinemsuic](https://github.com/vinesmsuic), m3ku@uwaterloo.ca
+<br>
+Cong Wei [@lim142857](https://github.com/lim142857), c58wei@uwaterloo.ca
+<br>
+Weiming Ren [@wren93](https://github.com/wren93), w2ren@uwaterloo.ca
+<br>
+
+## 💞 Acknowledgements
+The code is built upon the below repositories, we thank all the contributors for open-sourcing.
+* [diffusers](https://github.com/huggingface/diffusers)
+* [ImagenHub](https://github.com/TIGER-AI-Lab/ImagenHub)
+* [TokenFlow](https://github.com/omerbt/TokenFlow)
+* [i2vgen-xl](https://github.com/ali-vilab/VGen)
+* [SEINE](https://github.com/Vchitect/SEINE)
+* [ConsistI2V](https://github.com/TIGER-AI-Lab/ConsistI2V)
