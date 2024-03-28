@@ -83,8 +83,12 @@ class Predictor(BasePredictor):
     def predict(
         self,
         video: Path = Input(description="Input video"),
+        edited_first_frame: Path = Input(
+            description="Provide the edited first frame of the input video. This is optional, leave it blank and provide the prompt below to use the default pipeline that edits the frist frame with instructpix2pix",
+            default=None,
+        ),
         instruct_pix2pix_prompt: str = Input(
-            description="The first step invovles using timbrooks/instruct-pix2pix to edit the first frame. Specify the prompt for editing the first frame.",
+            description="The first step invovles using timbrooks/instruct-pix2pix to edit the first frame. Specify the prompt for editing the first frame. This will be ignored if edited_first_frame above is provided.",
             default="turn man into robot",
         ),
         editing_prompt: str = Input(
@@ -125,7 +129,7 @@ class Predictor(BasePredictor):
             default=0,
         ),
         ddim_inversion_steps: int = Input(
-            description="Number of ddim inversion steps", default=500
+            description="Number of ddim inversion steps", default=100
         ),
         seed: int = Input(
             description="Random seed. Leave blank to randomize the seed", default=None
@@ -152,15 +156,18 @@ class Predictor(BasePredictor):
         self.config.inverse_config.output_dir = ddim_latents_path
         ddim_init_latents_t_idx = min(ddim_init_latents_t_idx, num_inference_steps - 1)
 
-        # Step 0. Black-box image editing for the first frame
-        edited_first_frame_path = os.path.join(tmp_dir, "edited_first_frame.png")
-        infer_video(
-            self.black_box_image_model,
-            str(video),
-            edited_first_frame_path,
-            instruct_pix2pix_prompt,
-            seed=seed,
-        )
+        if edited_first_frame is not None:
+            edited_first_frame_path = str(edited_first_frame)
+        else:
+            # Step 0. Black-box image editing for the first frame
+            edited_first_frame_path = os.path.join(tmp_dir, "edited_first_frame.png")
+            infer_video(
+                self.black_box_image_model,
+                str(video),
+                edited_first_frame_path,
+                instruct_pix2pix_prompt,
+                seed=seed,
+            )
 
         # Step 1. DDIM Inversion
         first_frame = frame_list[0]
