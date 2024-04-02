@@ -7,7 +7,7 @@ import numpy as np
 
 import black_box_image_edit as image_edit
 
-def infer_video(model, video_path, output_dir, prompt, prompt_type="instruct", force_512=False, seed=42, negative_prompt=""):
+def infer_video(model, video_path, output_dir, prompt, prompt_type="instruct", force_512=False, seed=42, negative_prompt="", overwrite=False):
     """
     Processes videos from the input directory, resizes them to 512x512 before feeding into the model by first frame,
     and saves the processed video back to its original size in the output directory.
@@ -36,7 +36,7 @@ def infer_video(model, video_path, output_dir, prompt, prompt_type="instruct", f
     result_path = os.path.join(final_output_dir, prompt + ".png")
 
     # Check if result already exists
-    if os.path.exists(result_path):
+    if os.path.exists(result_path) and overwrite is False:
         print(f"Result already exists: {result_path}")
         return
 
@@ -60,6 +60,7 @@ def infer_video(model, video_path, output_dir, prompt, prompt_type="instruct", f
     #Image.fromarray(first_frame).save(os.path.join(final_output_dir, "00000.png"))
     Image.fromarray(processed_frame).save(result_path)
     print(f"Processed and saved the first frame: {result_path}")
+    return result_path
 
 
 if __name__ == "__main__":

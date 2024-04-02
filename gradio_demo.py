@@ -1,0 +1,403 @@
+import os
+import sys
+import time
+import subprocess
+import shutil
+
+import random
+from omegaconf import OmegaConf
+from moviepy.editor import VideoFileClip
+from PIL import Image
+import torch
+import numpy as np
+import gradio as gr
+
+
+from black_box_image_edit.instructpix2pix import InstructPix2Pix
+from prepare_video import crop_and_resize_video
+from edit_image import infer_video
+
+sys.path.insert(0, "i2vgen-xl")
+from utils import load_ddim_latents_at_t
+from pipelines.pipeline_i2vgen_xl import I2VGenXLPipeline
+from run_group_ddim_inversion import ddim_inversion
+from run_group_pnp_edit import init_pnp
+from diffusers import DDIMInverseScheduler, DDIMScheduler
+from diffusers.utils import load_image
+import imageio
+
+DEBUG_MODE = False
+
+demo_examples = [
+                    ["./demo/A kitten turning its head on a wooden floor.mp4", "./demo/A kitten turning its head on a wooden floor/edited_first_frame/A dog turning its head on a wooden floor.png", "Dog turning its head"],
+                    ["./demo/An Old Man Doing Exercises For The Body And Mind.mp4", "./demo/An Old Man Doing Exercises For The Body And Mind/edited_first_frame/jack ma.png", "A Man Doing Exercises For The Body And Mind"],
+                    ["./demo/Ballet.mp4", "./demo/Ballet/edited_first_frame/van gogh style.png", "Girl dancing ballet"],
+                ]
+
+TEMP_DIR = "_demo_temp"
+
+class ImageEditor:
+    def __init__(self) -> None:
+        self.image_edit_model = InstructPix2Pix()
+
+    @torch.no_grad()
+    def perform_edit(self, video_path, prompt, force_512=False, seed=42, negative_prompt=""):
+        edited_image_path = infer_video(self.image_edit_model, 
+                    video_path, 
+                    output_dir=TEMP_DIR, 
+                    prompt=prompt, 
+                    prompt_type="instruct", 
+                    force_512=force_512, 
+                    seed=seed, 
+                    negative_prompt=negative_prompt,
+                    overwrite=True)
+        return edited_image_path
+
+class AnyV2V_I2VGenXL:
+    def __init__(self) -> None:
+        # Set up default inversion config file
+        config = {
+            # DDIM inversion
+            "inverse_config": {
+                "image_size": [512, 512],
+                "n_frames": 16,
+                "cfg": 1.0,
+                "target_fps": 8,
+                "ddim_inv_prompt": "",
+                "prompt": "",
+                "negative_prompt": "",
+            },
+            "pnp_config": {
+                "random_ratio": 0.0,
+                "target_fps": 8,
+            },
+        }
+        self.config = OmegaConf.create(config)
+
+    @torch.no_grad()
+    def perform_anyv2v(self, 
+                       video_path, 
+                       video_prompt, 
+                       video_negative_prompt,
+                       edited_first_frame_path, 
+                       conv_inj, 
+                       spatial_inj, 
+                       temp_inj, 
+                       num_inference_steps,
+                       guidance_scale,
+                       ddim_init_latents_t_idx,
+                       ddim_inversion_steps,
+                       seed,
+                       ):
+
+        # Initialize the I2VGenXL pipeline
+        self.pipe = I2VGenXLPipeline.from_pretrained(
+            "ali-vilab/i2vgen-xl",
+            torch_dtype=torch.float16,
+            variant="fp16",
+        ).to("cuda:0")
+
+        # Initialize the DDIM inverse scheduler
+        self.inverse_scheduler = DDIMInverseScheduler.from_pretrained(
+                "ali-vilab/i2vgen-xl",
+                subfolder="scheduler",
+        )
+        # Initialize the DDIM scheduler
+        self.ddim_scheduler = DDIMScheduler.from_pretrained(
+                "ali-vilab/i2vgen-xl",
+                subfolder="scheduler",
+        )
+
+        tmp_dir = os.path.join(TEMP_DIR, "AnyV2V")
+        if os.path.exists(tmp_dir):
+            shutil.rmtree(tmp_dir)
+        os.makedirs(tmp_dir)
+
+        ddim_latents_path = os.path.join(tmp_dir, "ddim_latents")
+
+        def read_frames(video_path):
+            frames = []
+            with imageio.get_reader(video_path) as reader:
+                for i, frame in enumerate(reader):
+                    pil_image = Image.fromarray(frame)
+                    frames.append(pil_image)
+            return frames
+        frame_list = read_frames(str(video_path))
+
+        self.config.inverse_config.image_size = list(frame_list[0].size)
+        self.config.inverse_config.n_steps = ddim_inversion_steps
+        self.config.inverse_config.n_frames = len(frame_list)
+        self.config.inverse_config.output_dir = ddim_latents_path
+        ddim_init_latents_t_idx = min(ddim_init_latents_t_idx, num_inference_steps - 1)
+
+        # Step 1. DDIM Inversion
+        first_frame = frame_list[0]
+
+        generator = torch.Generator(device="cuda:0")
+        generator = generator.manual_seed(seed)
+        _ddim_latents = ddim_inversion(
+            self.config.inverse_config,
+            first_frame,
+            frame_list,
+            self.pipe,
+            self.inverse_scheduler,
+            generator,
+        )
+
+        # Step 2. DDIM Sampling + PnP feature and attention injection
+        # Load the edited first frame
+        edited_1st_frame = load_image(edited_first_frame_path).resize(
+            self.config.inverse_config.image_size, resample=Image.Resampling.LANCZOS
+        )
+        # Load the initial latents at t
+        self.ddim_scheduler.set_timesteps(num_inference_steps)
+        print(f"ddim_scheduler.timesteps: {self.ddim_scheduler.timesteps}")
+        ddim_latents_at_t = load_ddim_latents_at_t(
+            self.ddim_scheduler.timesteps[ddim_init_latents_t_idx],
+            ddim_latents_path=ddim_latents_path,
+        )
+        print(
+            f"ddim_scheduler.timesteps[t_idx]: {self.ddim_scheduler.timesteps[ddim_init_latents_t_idx]}"
+        )
+        print(f"ddim_latents_at_t.shape: {ddim_latents_at_t.shape}")
+
+        # Blend the latents
+        random_latents = torch.randn_like(ddim_latents_at_t)
+        print(
+            f"Blending random_ratio (1 means random latent): {self.config.pnp_config.random_ratio}"
+        )
+        mixed_latents = (
+            random_latents * self.config.pnp_config.random_ratio
+            + ddim_latents_at_t * (1 - self.config.pnp_config.random_ratio)
+        )
+
+        # Init Pnp
+        self.config.pnp_config.n_steps = num_inference_steps
+        self.config.pnp_config.pnp_f_t = conv_inj
+        self.config.pnp_config.pnp_spatial_attn_t = spatial_inj
+        self.config.pnp_config.pnp_temp_attn_t = temp_inj
+        self.config.pnp_config.ddim_init_latents_t_idx = ddim_init_latents_t_idx
+        init_pnp(self.pipe, self.ddim_scheduler, self.config.pnp_config)
+        # Edit video
+        self.pipe.register_modules(scheduler=self.ddim_scheduler)
+
+        edited_video = self.pipe.sample_with_pnp(
+            prompt=video_prompt,
+            image=edited_1st_frame,
+            height=self.config.inverse_config.image_size[1],
+            width=self.config.inverse_config.image_size[0],
+            num_frames=self.config.inverse_config.n_frames,
+            num_inference_steps=self.config.pnp_config.n_steps,
+            guidance_scale=guidance_scale,
+            negative_prompt=video_negative_prompt,
+            target_fps=self.config.pnp_config.target_fps,
+            latents=mixed_latents,
+            generator=generator,
+            return_dict=True,
+            ddim_init_latents_t_idx=ddim_init_latents_t_idx,
+            ddim_inv_latents_path=ddim_latents_path,
+            ddim_inv_prompt=self.config.inverse_config.ddim_inv_prompt,
+            ddim_inv_1st_frame=first_frame,
+        ).frames[0]
+
+        edited_video = [
+            frame.resize(self.config.inverse_config.image_size, resample=Image.LANCZOS)
+            for frame in edited_video
+        ]
+
+        def images_to_video(images, output_path, fps=24):
+            writer = imageio.get_writer(output_path, fps=fps)
+
+            for img in images:
+                img_np = np.array(img)
+                writer.append_data(img_np)
+
+            writer.close()
+        output_path = os.path.join(tmp_dir, "edited_video.mp4")
+        images_to_video(
+            edited_video, output_path, fps=self.config.pnp_config.target_fps
+        )
+        return output_path
+
+
+# Init the class
+#=====================================
+if not DEBUG_MODE:
+    Image_Editor = ImageEditor()
+    AnyV2V_Editor = AnyV2V_I2VGenXL()
+#=====================================
+
+def btn_preprocess_video_fn(video_path, width, height, start_time, end_time, center_crop, x_offset, y_offset, longest_to_width):
+    def check_video(video_path):
+        with VideoFileClip(video_path) as clip:
+            if clip.duration == 2 and clip.fps == 8:
+                return True
+            else:
+                return False
+
+    if check_video(video_path) == False:
+        processed_video_path = crop_and_resize_video(input_video_path=video_path, 
+                                                    output_folder=TEMP_DIR,
+                                                    clip_duration=2,
+                                                    width=width, 
+                                                    height=height, 
+                                                    start_time=start_time, 
+                                                    end_time=end_time, 
+                                                    center_crop=center_crop, 
+                                                    x_offset=x_offset, 
+                                                    y_offset=y_offset, 
+                                                    longest_to_width=longest_to_width)
+        return processed_video_path
+    else:
+        return video_path
+
+def btn_image_edit_fn(video_path, instruct_prompt, ie_force_512, ie_seed, ie_neg_prompt):
+    """
+    Generate an image based on the video and text input.
+    This function should be replaced with your actual image generation logic.
+    """
+    # Placeholder logic for image generation
+
+    if ie_seed < 0:
+        ie_seed = int.from_bytes(os.urandom(2), "big")
+    print(f"Using seed: {ie_seed}")
+
+    edited_image_path = Image_Editor.perform_edit(video_path=video_path, 
+                                             prompt=instruct_prompt,
+                                             force_512=ie_force_512,
+                                             seed=ie_seed,
+                                             negative_prompt=ie_neg_prompt)
+    return edited_image_path
+
+
+def btn_infer_fn(video_path, 
+                video_prompt, 
+                video_negative_prompt,
+                edited_first_frame_path, 
+                conv_inj, 
+                spatial_inj, 
+                temp_inj, 
+                num_inference_steps,
+                guidance_scale,
+                ddim_init_latents_t_idx,
+                ddim_inversion_steps,
+                seed,
+                ):
+    if seed < 0:
+        seed = int.from_bytes(os.urandom(2), "big")
+    print(f"Using seed: {seed}")
+
+    result_video_path = AnyV2V_Editor.perform_anyv2v(video_path=video_path,
+                                                        video_prompt=video_prompt,
+                                                        video_negative_prompt=video_negative_prompt,
+                                                        edited_first_frame_path=edited_first_frame_path,
+                                                        conv_inj=conv_inj,
+                                                        spatial_inj=spatial_inj,
+                                                        temp_inj=temp_inj,
+                                                        num_inference_steps=num_inference_steps,
+                                                        guidance_scale=guidance_scale,
+                                                        ddim_init_latents_t_idx=ddim_init_latents_t_idx,
+                                                        ddim_inversion_steps=ddim_inversion_steps,
+                                                        seed=seed)
+
+    return result_video_path
+
+# Create the UI
+#=====================================
+with gr.Blocks() as demo:
+    gr.Markdown("# <img src='https://tiger-ai-lab.github.io/AnyV2V/static/images/icon.png' width='30'/> AnyV2V")
+    gr.Markdown("Official 🤗 Gradio demo for [AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks](https://tiger-ai-lab.github.io/AnyV2V/)")
+    with gr.Row():
+        with gr.Column():
+            gr.Markdown("# Preprocessing Video Stage")
+            gr.Markdown("AnyV2V only support video with 2 seconds duration and 8 fps. If your video is not in this format, we will preprocess it for you. Click on the Preprocess video button!")
+            video_raw = gr.Video(label="Raw Video Input")
+            btn_pv = gr.Button("Preprocess Video")
+            video_input = gr.Video(label="Preprocessed Video Input")
+            advanced_settings_pv = gr.Accordion("Advanced Settings for Video Preprocessing", open=False)
+            with advanced_settings_pv:
+                with gr.Column():
+                    pv_width = gr.Number(label="Width", value=512, minimum=1, maximum=4096)
+                    pv_height = gr.Number(label="Height", value=512, minimum=1, maximum=4096)
+                    pv_start_time = gr.Number(label="Start Time (End time - Start time must be = 2)", value=0, minimum=0)
+                    pv_end_time = gr.Number(label="End Time (End time - Start time must be = 2)", value=2, minimum=0)
+                    pv_center_crop = gr.Checkbox(label="Center Crop", value=True)
+                    pv_x_offset = gr.Number(label="Horizontal Offset (-1 to 1)", value=0, minimum=-1, maximum=1)
+                    pv_y_offset = gr.Number(label="Vertical Offset (-1 to 1)", value=0, minimum=-1, maximum=1)
+                    pv_longest_to_width = gr.Checkbox(label="Resize Longest Dimension to Width")
+
+        with gr.Column():
+            gr.Markdown("# Image Editing Stage")
+            gr.Markdown("Edit the first frame of the video to your liking! Click on the Edit the first frame button after inputting the editing instruction prompt.")
+            image_input_output = gr.Image(label="Edited Frame", type="filepath")
+            image_instruct_prompt = gr.Textbox(label="Editing instruction prompt")
+            btn_image_edit = gr.Button("Edit the first frame")
+            advanced_settings_image_edit = gr.Accordion("Advanced Settings for Image Editing", open=True)
+            with advanced_settings_image_edit:
+                with gr.Column():
+                    ie_neg_prompt = gr.Textbox(label="Negative Prompt", value="low res, blurry, watermark, jpeg artifacts")
+                    ie_seed = gr.Number(label="Seed (-1 means random)", value=-1, minimum=-1, maximum=sys.maxsize)
+                    ie_force_512 = gr.Checkbox(label="Force resize to 512x512 before feeding into the image editing model")
+            
+        with gr.Column():
+            gr.Markdown("# AnyV2V Stage")
+            gr.Markdown("Enjoy the full control of the video editing process using the edited image and the preprocessed video! Click on the Run AnyV2V button after inputting the video description prompt. Try tweak with the setting if the output does not satisfy you!")
+            video_output = gr.Video(label="Video Output")
+            video_prompt = gr.Textbox(label="Video description prompt")
+            btn_infer = gr.Button("Run AnyV2V")
+            settings_anyv2v = gr.Accordion("Settings for AnyV2V")
+            with settings_anyv2v:
+                with gr.Column():
+                    av_pnp_f_t = gr.Slider(minimum=0, maximum=1, step=0.01, value=0.2, label="Convolutional injection (pnp_f_t)")
+                    av_pnp_spatial_attn_t = gr.Slider(minimum=0, maximum=1, step=0.01, value=0.2, label="Spatial Attention injection (pnp_spatial_attn_t)")
+                    av_pnp_temp_attn_t = gr.Slider(minimum=0, maximum=1, step=0.01, value=0.5, label="Temporal Attention injection (pnp_temp_attn_t)")
+            advanced_settings_anyv2v = gr.Accordion("Advanced Settings for AnyV2V", open=False)
+            with advanced_settings_anyv2v:
+                with gr.Column():
+                    av_ddim_init_latents_t_idx = gr.Number(label="DDIM Initial Latents t Index", value=0, minimum=0)
+                    av_ddim_inversion_steps = gr.Number(label="DDIM Inversion Steps", value=100, minimum=1)
+                    av_num_inference_steps = gr.Number(label="Number of Inference Steps", value=50, minimum=1)
+                    av_guidance_scale = gr.Number(label="Guidance Scale", value=9, minimum=0)
+                    av_seed = gr.Number(label="Seed (-1 means random)", value=42, minimum=-1, maximum=sys.maxsize)
+                    av_neg_prompt = gr.Textbox(label="Negative Prompt", value="Distorted, discontinuous, Ugly, blurry, low resolution, motionless, static, disfigured, disconnected limbs, Ugly faces, incomplete arms")
+
+
+    examples = gr.Examples(examples=demo_examples, 
+                           label="Examples (Just click on AnyV2V button after loading them into the UI)",
+                            inputs=[video_input, image_input_output, video_prompt])
+
+    btn_pv.click(
+        btn_preprocess_video_fn,
+        inputs=[video_raw, pv_width, pv_height, pv_start_time, pv_end_time, pv_center_crop, pv_x_offset, pv_y_offset, pv_longest_to_width],
+        outputs=video_input
+    )
+
+    btn_image_edit.click(
+        btn_image_edit_fn,
+        inputs=[video_input, image_instruct_prompt, ie_force_512, ie_seed, ie_neg_prompt],
+        outputs=image_input_output
+    )
+    
+    btn_infer.click(
+        btn_infer_fn,
+        inputs=[video_input, 
+                video_prompt, 
+                av_neg_prompt,
+                image_input_output, 
+                av_pnp_f_t, 
+                av_pnp_spatial_attn_t, 
+                av_pnp_temp_attn_t,
+                av_num_inference_steps,
+                av_guidance_scale,
+                av_ddim_init_latents_t_idx,
+                av_ddim_inversion_steps,
+                av_seed],
+        outputs=video_output
+    )
+#=====================================
+
+# Minimizing usage of GPU Resources
+torch.set_grad_enabled(False)
+
+
+demo.launch()

@@ -84,6 +84,8 @@ def crop_and_resize_video(input_video_path, output_folder, clip_duration, width=
     final_video = cropped_video.set_fps(fps)
     
     # Prepare the output video path
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
     filename = os.path.basename(input_video_path)
     output_video_path = os.path.join(output_folder, filename)
     
