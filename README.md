@@ -7,8 +7,7 @@
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FTIGER-AI-Lab%2FAnyV2V&count_bg=%23C83DB9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visitors&edge_flat=false)](https://hits.seeyoufarm.com)
 [![Replicate](https://replicate.com/cjwbw/anyv2v/badge)](https://replicate.com/cjwbw/anyv2v) 
 
-[**🌐 Homepage**](https://tiger-ai-lab.github.io/AnyV2V/)  | [**🤗 HuggingFace Paper**](https://huggingface.co/papers/2403.14468) | [**📖 arXiv**](https://arxiv.org/abs/2403.14468) | [**🎬 Replicate Demo**](https://replicate.com/cjwbw/anyv2v)
-
+[**🌐 Homepage**](https://tiger-ai-lab.github.io/AnyV2V/)  | [**🤗 HuggingFace Paper**](https://huggingface.co/papers/2403.14468) | [**📖 arXiv**](https://arxiv.org/abs/2403.14468) | [**🤗 HuggingFace Demo**](https://huggingface.co/spaces/TIGER-Lab/AnyV2V) [**🎬 Replicate Demo**](https://replicate.com/cjwbw/anyv2v) 
 This repo contains the codebase for the paper "[AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks](https://arxiv.org/pdf/2403.14468.pdf)"
 
 <div align="center">
@@ -26,7 +25,8 @@ AnyV2V is a tuning-free framework to achieve high appearance and temporal consis
 
 
 ## 📰 News
-* 2024 Apr 3: Added local gradio demo for AnyV2V(i2vgen-xl).
+* 2024 Apr 3: [HuggingFace Demo](https://huggingface.co/spaces/TIGER-Lab/AnyV2V) is available!
+* 2024 Apr 2: Added local gradio demo for AnyV2V(i2vgen-xl).
 * 2024 Mar 24: Added [Replicate demo](https://replicate.com/cjwbw/anyv2v) for AnyV2V(i2vgen-xl). Thanks [@chenxwh](https://github.com/chenxwh) for the effort!!
 * 2024 Mar 22: Code released for AnyV2V(i2vgen-xl).
 * 2024 Mar 21: Our paper is featured on [Huggingface Daily Papers](https://huggingface.co/papers/2403.14468)!
