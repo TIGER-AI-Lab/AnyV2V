@@ -1,13 +1,19 @@
 # <img src="https://tiger-ai-lab.github.io/AnyV2V/static/images/icon.png" width="30"/> AnyV2V
 [![arXiv](https://img.shields.io/badge/arXiv-2403.14468-b31b1b.svg)](https://arxiv.org/abs/2403.14468)
+<a href='https://huggingface.co/papers/2403.14468'><img src='https://img.shields.io/static/v1?label=Paper&message=Huggingface&color=orange'></a> 
+
+<a href='https://huggingface.co/spaces/TIGER-Lab/AnyV2V'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue'></a>
+[![Replicate](https://replicate.com/cjwbw/anyv2v/badge)](https://replicate.com/cjwbw/anyv2v) 
+
+[**🌐 Homepage**](https://tiger-ai-lab.github.io/AnyV2V/)  | [**📖 arXiv**](https://arxiv.org/abs/2403.14468) | [**🤗 HuggingFace Demo**](https://huggingface.co/spaces/TIGER-Lab/AnyV2V) | [**🎬 Replicate Demo**](https://replicate.com/cjwbw/anyv2v) 
+
+
 [![contributors](https://img.shields.io/github/contributors/TIGER-AI-Lab/AnyV2V)](https://github.com/TIGER-AI-Lab/AnyV2V/graphs/contributors)
 [![open issues](https://isitmaintained.com/badge/open/TIGER-AI-Lab/AnyV2V.svg)](https://github.com/TIGER-AI-Lab/AnyV2V/issues)
 [![pull requests](https://img.shields.io/github/issues-pr/TIGER-AI-Lab/AnyV2V?color=0088ff)](https://github.com/TIGER-AI-Lab/AnyV2V/pulls)
 [![license](https://img.shields.io/github/license/TIGER-AI-Lab/AnyV2V.svg)](https://github.com/TIGER-AI-Lab/AnyV2V/blob/main/LICENSE)
+[![GitHub](https://img.shields.io/github/stars/TIGER-AI-Lab/AnyV2V?style=social)](https://github.com/TIGER-AI-Lab/AnyV2V)
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FTIGER-AI-Lab%2FAnyV2V&count_bg=%23C83DB9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visitors&edge_flat=false)](https://hits.seeyoufarm.com)
-[![Replicate](https://replicate.com/cjwbw/anyv2v/badge)](https://replicate.com/cjwbw/anyv2v) 
-
-[**🌐 Homepage**](https://tiger-ai-lab.github.io/AnyV2V/)  | [**🤗 HuggingFace Paper**](https://huggingface.co/papers/2403.14468) | [**📖 arXiv**](https://arxiv.org/abs/2403.14468) | [**🤗 HuggingFace Demo**](https://huggingface.co/spaces/TIGER-Lab/AnyV2V) [**🎬 Replicate Demo**](https://replicate.com/cjwbw/anyv2v) 
 
 This repo contains the codebase for the paper "[AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks](https://arxiv.org/pdf/2403.14468.pdf)"
 
