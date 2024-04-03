@@ -26,10 +26,10 @@ from diffusers import DDIMInverseScheduler, DDIMScheduler
 from diffusers.utils import load_image
 import imageio
 
-DEBUG_MODE = False
+DEBUG_MODE = True
 
 demo_examples = [
-                    ["./demo/Man Walking.mp4", "./demo/Man Walking/edited_first_frame/turn the man into darth vader.png", "darth vader walking", 0.1, 0.1, 1.0],
+                    ["./demo/Man Walking.mp4", "./demo/Man Walking/edited_first_frame/turn the man into darth vader.png", "man walking", 0.1, 0.1, 1.0],
                     ["./demo/A kitten turning its head on a wooden floor.mp4", "./demo/A kitten turning its head on a wooden floor/edited_first_frame/A dog turning its head on a wooden floor.png", "A dog turning its head on a wooden floor", 0.2, 0.2, 0.5],
                     ["./demo/An Old Man Doing Exercises For The Body And Mind.mp4", "./demo/An Old Man Doing Exercises For The Body And Mind/edited_first_frame/jack ma.png", "a man doing exercises for the body and mind", 0.8, 0.8, 1.0],
                     ["./demo/Ballet.mp4", "./demo/Ballet/edited_first_frame/van gogh style.png", "girl dancing ballet, in the style of van gogh", 1.0, 1.0, 1.0],
@@ -229,6 +229,14 @@ if not DEBUG_MODE:
     AnyV2V_Editor = AnyV2V_I2VGenXL()
 #=====================================
 
+def get_first_frame_as_pil(video_path):
+    with VideoFileClip(video_path) as clip:
+        # Extract the first frame (at t=0) as an array
+        first_frame_array = clip.get_frame(0)
+        # Convert the numpy array to a PIL Image
+        first_frame_image = Image.fromarray(first_frame_array)
+        return first_frame_image
+        
 def btn_preprocess_video_fn(video_path, width, height, start_time, end_time, center_crop, x_offset, y_offset, longest_to_width):
     def check_video(video_path):
         with VideoFileClip(video_path) as clip:
@@ -249,6 +257,7 @@ def btn_preprocess_video_fn(video_path, width, height, start_time, end_time, cen
                                                     x_offset=x_offset, 
                                                     y_offset=y_offset, 
                                                     longest_to_width=longest_to_width)
+
         return processed_video_path
     else:
         return video_path
@@ -309,60 +318,76 @@ def btn_infer_fn(video_path,
 with gr.Blocks() as demo:
     gr.Markdown("# <img src='https://tiger-ai-lab.github.io/AnyV2V/static/images/icon.png' width='30'/> AnyV2V")
     gr.Markdown("Official 🤗 Gradio demo for [AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks](https://tiger-ai-lab.github.io/AnyV2V/)")
-    with gr.Row():
-        with gr.Column():
-            gr.Markdown("# Preprocessing Video Stage")
-            gr.Markdown("AnyV2V only support video with 2 seconds duration and 8 fps. If your video is not in this format, we will preprocess it for you. Click on the Preprocess video button!")
-            video_raw = gr.Video(label="Raw Video Input")
-            btn_pv = gr.Button("Preprocess Video")
-            video_input = gr.Video(label="Preprocessed Video Input", interactive=False)
-            advanced_settings_pv = gr.Accordion("Advanced Settings for Video Preprocessing", open=False)
-            with advanced_settings_pv:
-                with gr.Column():
-                    pv_width = gr.Number(label="Width", value=512, minimum=1, maximum=4096)
-                    pv_height = gr.Number(label="Height", value=512, minimum=1, maximum=4096)
-                    pv_start_time = gr.Number(label="Start Time (End time - Start time must be = 2)", value=0, minimum=0)
-                    pv_end_time = gr.Number(label="End Time (End time - Start time must be = 2)", value=2, minimum=0)
-                    pv_center_crop = gr.Checkbox(label="Center Crop", value=True)
-                    pv_x_offset = gr.Number(label="Horizontal Offset (-1 to 1)", value=0, minimum=-1, maximum=1)
-                    pv_y_offset = gr.Number(label="Vertical Offset (-1 to 1)", value=0, minimum=-1, maximum=1)
-                    pv_longest_to_width = gr.Checkbox(label="Resize Longest Dimension to Width")
 
-        with gr.Column():
-            gr.Markdown("# Image Editing Stage")
-            gr.Markdown("Edit the first frame of the video to your liking! Click on the Edit the first frame button after inputting the editing instruction prompt.")
-            image_input_output = gr.Image(label="Edited Frame", type="filepath")
-            image_instruct_prompt = gr.Textbox(label="Editing instruction prompt")
-            btn_image_edit = gr.Button("Edit the first frame")
-            advanced_settings_image_edit = gr.Accordion("Advanced Settings for Image Editing", open=True)
-            with advanced_settings_image_edit:
-                with gr.Column():
-                    ie_neg_prompt = gr.Textbox(label="Negative Prompt", value="low res, blurry, watermark, jpeg artifacts")
-                    ie_seed = gr.Number(label="Seed (-1 means random)", value=-1, minimum=-1, maximum=sys.maxsize)
-                    ie_force_512 = gr.Checkbox(label="Force resize to 512x512 before feeding into the image editing model")
-            
-        with gr.Column():
-            gr.Markdown("# Video Editing Stage")
-            gr.Markdown("Enjoy the full control of the video editing process using the edited image and the preprocessed video! Click on the Run AnyV2V button after inputting the video description prompt. Try tweak with the setting if the output does not satisfy you!")
-            video_output = gr.Video(label="Video Output")
-            video_prompt = gr.Textbox(label="Video description prompt")
-            btn_infer = gr.Button("Run Video Editing")
-            settings_anyv2v = gr.Accordion("Settings for AnyV2V")
-            with settings_anyv2v:
-                with gr.Column():
-                    av_pnp_f_t = gr.Slider(minimum=0, maximum=1, step=0.01, value=0.2, label="Convolutional injection (pnp_f_t)")
-                    av_pnp_spatial_attn_t = gr.Slider(minimum=0, maximum=1, step=0.01, value=0.2, label="Spatial Attention injection (pnp_spatial_attn_t)")
-                    av_pnp_temp_attn_t = gr.Slider(minimum=0, maximum=1, step=0.01, value=0.5, label="Temporal Attention injection (pnp_temp_attn_t)")
-            advanced_settings_anyv2v = gr.Accordion("Advanced Settings for AnyV2V", open=False)
-            with advanced_settings_anyv2v:
-                with gr.Column():
-                    av_ddim_init_latents_t_idx = gr.Number(label="DDIM Initial Latents t Index", value=0, minimum=0)
-                    av_ddim_inversion_steps = gr.Number(label="DDIM Inversion Steps", value=100, minimum=1)
-                    av_num_inference_steps = gr.Number(label="Number of Inference Steps", value=50, minimum=1)
-                    av_guidance_scale = gr.Number(label="Guidance Scale", value=9, minimum=0)
-                    av_seed = gr.Number(label="Seed (-1 means random)", value=42, minimum=-1, maximum=sys.maxsize)
-                    av_neg_prompt = gr.Textbox(label="Negative Prompt", value="Distorted, discontinuous, Ugly, blurry, low resolution, motionless, static, disfigured, disconnected limbs, Ugly faces, incomplete arms")
 
+    with gr.Tabs():
+        with gr.TabItem('AnyV2V + InstructPix2Pix'):
+            with gr.Group():
+                gr.Markdown("# Preprocessing Video Stage")
+                gr.Markdown("AnyV2V only support video with 2 seconds duration and 8 fps. If your video is not in this format, we will preprocess it for you. Click on the Preprocess video button!")
+                with gr.Row():
+                    with gr.Column():
+                        video_raw = gr.Video(label="Raw Video Input")
+                        btn_pv = gr.Button("Preprocess Video")
+                        
+                    with gr.Column():
+                        video_input = gr.Video(label="Preprocessed Video Input", interactive=False)
+                    with gr.Column():
+                        advanced_settings_pv = gr.Accordion("Advanced Settings for Video Preprocessing", open=False)
+                        with advanced_settings_pv:
+                            with gr.Column():
+                                pv_width = gr.Number(label="Width", value=512, minimum=1, maximum=4096)
+                                pv_height = gr.Number(label="Height", value=512, minimum=1, maximum=4096)
+                                pv_start_time = gr.Number(label="Start Time (End time - Start time must be = 2)", value=0, minimum=0)
+                                pv_end_time = gr.Number(label="End Time (End time - Start time must be = 2)", value=2, minimum=0)
+                                pv_center_crop = gr.Checkbox(label="Center Crop", value=True)
+                                pv_x_offset = gr.Number(label="Horizontal Offset (-1 to 1)", value=0, minimum=-1, maximum=1)
+                                pv_y_offset = gr.Number(label="Vertical Offset (-1 to 1)", value=0, minimum=-1, maximum=1)
+                                pv_longest_to_width = gr.Checkbox(label="Resize Longest Dimension to Width")
+                        
+            with gr.Group():
+                gr.Markdown("# Image Editing Stage")
+                gr.Markdown("Edit the first frame of the video to your liking! Click on the Edit the first frame button after inputting the editing instruction prompt.")
+                with gr.Row():
+                    with gr.Column():
+                        src_first_frame = gr.Image(label="First Frame", type="filepath", interactive=False)
+                        image_instruct_prompt = gr.Textbox(label="Editing instruction prompt")
+                        btn_image_edit = gr.Button("Edit the first frame")
+                    with gr.Column():
+                        image_input_output = gr.Image(label="Edited Frame", type="filepath")
+                    with gr.Column():
+                        advanced_settings_image_edit = gr.Accordion("Advanced Settings for Image Editing", open=True)
+                        with advanced_settings_image_edit:
+                            with gr.Column():
+                                ie_neg_prompt = gr.Textbox(label="Negative Prompt", value="low res, blurry, watermark, jpeg artifacts")
+                                ie_seed = gr.Number(label="Seed (-1 means random)", value=-1, minimum=-1, maximum=sys.maxsize)
+                                ie_force_512 = gr.Checkbox(label="Force resize to 512x512 before feeding into the image editing model")
+
+            with gr.Group():
+                gr.Markdown("# Video Editing Stage")
+                gr.Markdown("Enjoy the full control of the video editing process using the edited image and the preprocessed video! Click on the Run AnyV2V button after inputting the video description prompt. Try tweak with the setting if the output does not satisfy you!")
+                with gr.Row():
+                    with gr.Column():
+                        video_prompt = gr.Textbox(label="Video description prompt")
+                        settings_anyv2v = gr.Accordion("Settings for AnyV2V")
+                        with settings_anyv2v:
+                            with gr.Column():
+                                av_pnp_f_t = gr.Slider(minimum=0, maximum=1, step=0.01, value=0.2, label="Convolutional injection (pnp_f_t)")
+                                av_pnp_spatial_attn_t = gr.Slider(minimum=0, maximum=1, step=0.01, value=0.2, label="Spatial Attention injection (pnp_spatial_attn_t)")
+                                av_pnp_temp_attn_t = gr.Slider(minimum=0, maximum=1, step=0.01, value=0.5, label="Temporal Attention injection (pnp_temp_attn_t)")
+                        btn_infer = gr.Button("Run Video Editing")
+                    with gr.Column():
+                        video_output = gr.Video(label="Video Output")
+                    with gr.Column():
+                        advanced_settings_anyv2v = gr.Accordion("Advanced Settings for AnyV2V", open=False)
+                        with advanced_settings_anyv2v:
+                            with gr.Column():
+                                av_ddim_init_latents_t_idx = gr.Number(label="DDIM Initial Latents t Index", value=0, minimum=0)
+                                av_ddim_inversion_steps = gr.Number(label="DDIM Inversion Steps", value=100, minimum=1)
+                                av_num_inference_steps = gr.Number(label="Number of Inference Steps", value=50, minimum=1)
+                                av_guidance_scale = gr.Number(label="Guidance Scale", value=9, minimum=0)
+                                av_seed = gr.Number(label="Seed (-1 means random)", value=42, minimum=-1, maximum=sys.maxsize)
+                                av_neg_prompt = gr.Textbox(label="Negative Prompt", value="Distorted, discontinuous, Ugly, blurry, low resolution, motionless, static, disfigured, disconnected limbs, Ugly faces, incomplete arms")
 
     examples = gr.Examples(examples=demo_examples, 
                            label="Examples (Just click on Video Editing button after loading them into the UI)",
@@ -396,6 +421,9 @@ with gr.Blocks() as demo:
                 av_seed],
         outputs=video_output
     )
+
+    video_input.change(fn=get_first_frame_as_pil, inputs=video_input, outputs=src_first_frame)
+
 #=====================================
 
 # Minimizing usage of GPU Resources
