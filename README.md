@@ -45,6 +45,11 @@ cd i2vgen-xl
 conda env create -f environment.yml
 ```
 
+#### 🤗 Local Gradio Demo
+```shell
+python gradio_demo.py
+```
+
 #### 📜 Notebook Demo 
 We provide a notebook demo ```i2vgen-xl/demo.ipynb``` for AnyV2V(i2vgen-xl).
 You can run the notebook to perform a Prompt-Based Editing on a single video.
