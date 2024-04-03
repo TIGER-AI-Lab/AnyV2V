@@ -1,3 +1,5 @@
+import gradio as gr
+
 import os
 import sys
 import time
@@ -10,8 +12,6 @@ from moviepy.editor import VideoFileClip
 from PIL import Image
 import torch
 import numpy as np
-import gradio as gr
-
 
 from black_box_image_edit.instructpix2pix import InstructPix2Pix
 from prepare_video import crop_and_resize_video
@@ -29,9 +29,11 @@ import imageio
 DEBUG_MODE = False
 
 demo_examples = [
-                    ["./demo/A kitten turning its head on a wooden floor.mp4", "./demo/A kitten turning its head on a wooden floor/edited_first_frame/A dog turning its head on a wooden floor.png", "Dog turning its head"],
-                    ["./demo/An Old Man Doing Exercises For The Body And Mind.mp4", "./demo/An Old Man Doing Exercises For The Body And Mind/edited_first_frame/jack ma.png", "A Man Doing Exercises For The Body And Mind"],
-                    ["./demo/Ballet.mp4", "./demo/Ballet/edited_first_frame/van gogh style.png", "Girl dancing ballet"],
+                    ["./demo/Man Walking.mp4", "./demo/Man Walking/edited_first_frame/turn the man into darth vader.png", "darth vader walking", 0.1, 0.1, 1.0],
+                    ["./demo/A kitten turning its head on a wooden floor.mp4", "./demo/A kitten turning its head on a wooden floor/edited_first_frame/A dog turning its head on a wooden floor.png", "A dog turning its head on a wooden floor", 0.2, 0.2, 0.5],
+                    ["./demo/An Old Man Doing Exercises For The Body And Mind.mp4", "./demo/An Old Man Doing Exercises For The Body And Mind/edited_first_frame/jack ma.png", "a man doing exercises for the body and mind", 0.8, 0.8, 1.0],
+                    ["./demo/Ballet.mp4", "./demo/Ballet/edited_first_frame/van gogh style.png", "girl dancing ballet, in the style of van gogh", 1.0, 1.0, 1.0],
+                    ["./demo/A Couple In A Public Display Of Affection.mp4", "./demo/A Couple In A Public Display Of Affection/edited_first_frame/Snowing.png", "A couple in a public display of affection, snowing", 0.3, 0.3, 1.0]
                 ]
 
 TEMP_DIR = "_demo_temp"
@@ -313,7 +315,7 @@ with gr.Blocks() as demo:
             gr.Markdown("AnyV2V only support video with 2 seconds duration and 8 fps. If your video is not in this format, we will preprocess it for you. Click on the Preprocess video button!")
             video_raw = gr.Video(label="Raw Video Input")
             btn_pv = gr.Button("Preprocess Video")
-            video_input = gr.Video(label="Preprocessed Video Input")
+            video_input = gr.Video(label="Preprocessed Video Input", interactive=False)
             advanced_settings_pv = gr.Accordion("Advanced Settings for Video Preprocessing", open=False)
             with advanced_settings_pv:
                 with gr.Column():
@@ -340,11 +342,11 @@ with gr.Blocks() as demo:
                     ie_force_512 = gr.Checkbox(label="Force resize to 512x512 before feeding into the image editing model")
             
         with gr.Column():
-            gr.Markdown("# AnyV2V Stage")
+            gr.Markdown("# Video Editing Stage")
             gr.Markdown("Enjoy the full control of the video editing process using the edited image and the preprocessed video! Click on the Run AnyV2V button after inputting the video description prompt. Try tweak with the setting if the output does not satisfy you!")
             video_output = gr.Video(label="Video Output")
             video_prompt = gr.Textbox(label="Video description prompt")
-            btn_infer = gr.Button("Run AnyV2V")
+            btn_infer = gr.Button("Run Video Editing")
             settings_anyv2v = gr.Accordion("Settings for AnyV2V")
             with settings_anyv2v:
                 with gr.Column():
@@ -363,8 +365,8 @@ with gr.Blocks() as demo:
 
 
     examples = gr.Examples(examples=demo_examples, 
-                           label="Examples (Just click on AnyV2V button after loading them into the UI)",
-                            inputs=[video_input, image_input_output, video_prompt])
+                           label="Examples (Just click on Video Editing button after loading them into the UI)",
+                            inputs=[video_input, image_input_output, video_prompt, av_pnp_f_t, av_pnp_spatial_attn_t, av_pnp_temp_attn_t])
 
     btn_pv.click(
         btn_preprocess_video_fn,
