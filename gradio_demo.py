@@ -26,7 +26,7 @@ from diffusers import DDIMInverseScheduler, DDIMScheduler
 from diffusers.utils import load_image
 import imageio
 
-DEBUG_MODE = True
+DEBUG_MODE = False
 
 demo_examples = [
                     ["./demo/Man Walking.mp4", "./demo/Man Walking/edited_first_frame/turn the man into darth vader.png", "man walking", 0.1, 0.1, 1.0],
