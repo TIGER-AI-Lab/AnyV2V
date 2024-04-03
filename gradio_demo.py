@@ -319,11 +319,10 @@ with gr.Blocks() as demo:
     gr.Markdown("# <img src='https://tiger-ai-lab.github.io/AnyV2V/static/images/icon.png' width='30'/> AnyV2V")
     gr.Markdown("Official 🤗 Gradio demo for [AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks](https://tiger-ai-lab.github.io/AnyV2V/)")
 
-
     with gr.Tabs():
-        with gr.TabItem('AnyV2V + InstructPix2Pix'):
+        with gr.TabItem('AnyV2V(I2VGenXL) + InstructPix2Pix'):
             gr.Markdown("# Preprocessing Video Stage")
-            gr.Markdown("AnyV2V only support video with 2 seconds duration and 8 fps. If your video is not in this format, we will preprocess it for you. Click on the Preprocess video button!")
+            gr.Markdown("In this demo, AnyV2V only support video with 2 seconds duration and 8 fps. If your video is not in this format, we will preprocess it for you. Click on the Preprocess video button!")
             with gr.Row():
                 with gr.Column():
                     video_raw = gr.Video(label="Raw Video Input")
@@ -345,7 +344,7 @@ with gr.Blocks() as demo:
                             pv_longest_to_width = gr.Checkbox(label="Resize Longest Dimension to Width")
                     
             gr.Markdown("# Image Editing Stage")
-            gr.Markdown("Edit the first frame of the video to your liking! Click on the Edit the first frame button after inputting the editing instruction prompt.")
+            gr.Markdown("Edit the first frame of the video to your liking! Click on the Edit the first frame button after inputting the editing instruction prompt. This image editing stage is powered by InstructPix2Pix. You can try edit the image multiple times until you are happy with the result! You can also choose to download the first frame of the video and edit it with other software (e.g. Photoshop, GIMP, etc.) or use other image editing models to obtain the edited frame and upload it directly.")
             with gr.Row():
                 with gr.Column():
                     src_first_frame = gr.Image(label="First Frame", type="filepath", interactive=False)
