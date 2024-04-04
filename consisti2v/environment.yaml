@@ -1,0 +1,28 @@
+name: consisti2v
+channels:
+  - pytorch
+  - nvidia
+dependencies:
+  - python=3.10
+  - pytorch=2.1.0
+  - torchvision=0.16.0
+  - torchaudio=2.1.0
+  - pytorch-cuda=11.8
+  - pip
+  - pip:
+    - diffusers==0.21.2
+    - transformers==4.25.1
+    - accelerate==0.23.0
+    - imageio==2.27.0
+    - decord==0.6.0
+    - einops
+    - omegaconf
+    - safetensors
+    - gradio==3.42.0
+    - wandb
+    - moviepy
+    - scikit-learn
+    - av
+    - rotary_embedding_torch
+    - torchmetrics
+    - torch-fidelity

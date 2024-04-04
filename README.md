@@ -110,6 +110,10 @@ bash run_group_ddim_inversion.sh
 bash run_group_pnp_edit.sh
 ```
 
+## ▶️ Quick Start for AnyV2V(consisti2v)
+
+Please refer to [./consisti2v/README.md](consisti2v/README.md)
+
 ## ▶️ Quick Start for AnyV2V(seine)
 
 Please refer to [./seine/README.md](seine/README.md)
@@ -207,7 +211,7 @@ AnyV2V(SEINE)
 - [x] Release the code for AnyV2V(SEINE) 
 
 AnyV2V(ConsistI2V)
-- [ ] Release the code for AnyV2V(ConsistI2V) 
+- [x] Release the code for AnyV2V(ConsistI2V) 
 
 Misc
 - [x] Helper script to preprocess the source video

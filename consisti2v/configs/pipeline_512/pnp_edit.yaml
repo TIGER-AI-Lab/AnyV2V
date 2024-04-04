@@ -1,0 +1,36 @@
+# General
+seed: 8888
+device: "cuda:0"
+debug: True # For logging
+
+# Dir
+exp_name: "${video_name}"
+output_dir: "anyv2v_results/${exp_name}"
+
+# Data
+image_size: [512, 512]
+data_dir: null
+video_name: "<your_video>"
+video_path: "<your_path>/${video_name}.mp4"
+video_frames_path: "<your_path>/${video_name}"
+edited_first_frame_path: "<your_path>/<edited_first_frame>.png"
+
+
+# Pnp Editing
+n_frames: 16
+cfg_txt: 35
+cfg_img: 1.0
+frame_stride: 3
+editing_prompt: "<editing_prompt>"
+editing_negative_prompt: "Distorted, discontinuous, Ugly, blurry, low resolution, motionless, static, disfigured, disconnected limbs, Ugly faces, incomplete arms"
+n_steps: 50
+ddim_init_latents_t_idx: 4  # 0 for 981, 3 for 921, 9 for 801, 20 for 581 if n_steps=50
+ddim_inv_prompt: ""
+ddim_latents_path: "path/to/ddim_latents"
+
+# Pnp config
+pnp_f_t: 0.2
+pnp_spatial_attn_t: 0.2
+pnp_temp_attn_t: 0.5
+
+blend_ratio: 0.0

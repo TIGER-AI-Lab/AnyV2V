@@ -1,0 +1,43 @@
+# General
+seed: 8888
+device: "cuda:0"
+debug: False # For logging
+
+# Dir
+exp_name: "${video_name}"
+output_dir: "ddim_inversion/${exp_name}"
+
+# Data
+image_size: [256, 256]
+data_dir: null
+video_name: "<your_video>"
+video_path: "<your_path>/${video_name}.mp4"
+video_frames_path: null
+save_frames: True
+
+# DDIM settings
+n_frames: 16
+
+# DDIM inversion
+inverse_config:
+    image_size: ${image_size}
+    n_frames: ${n_frames}
+    cfg_txt: 1.0
+    cfg_img: 1.0
+    frame_stride: 3
+    prompt: ""
+    negative_prompt: ""
+    n_steps: 500
+    output_dir: "outputs/${exp_name}"
+
+# DDIM reconstruction
+recon_config:
+    image_size: ${image_size}
+    n_frames: ${n_frames}
+    cfg_txt: 1.0
+    cfg_img: 1.0
+    frame_stride: 3
+    prompt: ""
+    negative_prompt: ""
+    n_steps: 50
+    ddim_init_latents_t_idx: 0  # 0 for 981, 3 for 921, 9 for 801, 20 for 581 if n_steps=50
