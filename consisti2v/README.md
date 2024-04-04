@@ -36,4 +36,4 @@ python run_pnp_edit.py --config configs/pipeline_256/pnp_edit.yaml \
     ddim_latents_path=/path/to/ddim_latents
 ```
 
-Saved video goes to `./anyv2v_results` (can be configurated in `./configs/pnp_edit.yaml`).
+Saved video goes to `./anyv2v_results` (can be configurated in `./configs/pipeline_256(512)/pnp_edit.yaml`).
