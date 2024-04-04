@@ -205,7 +205,8 @@ AnyV2V(i2vgen-xl)
 - [x] Release the code for AnyV2V(i2vgen-xl)
 - [x] Release a notebook demo 
 - [ ] Release scripts for multiple image editing
-- [ ] Release a Gradio demo
+- [x] Release a Gradio demo
+- [x] Hosting Gradio demo on HuggingFace Space
 
 AnyV2V(SEINE)
 - [x] Release the code for AnyV2V(SEINE) 
