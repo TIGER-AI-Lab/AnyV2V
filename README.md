@@ -204,7 +204,6 @@ python prepare_video.py --input_folder src_right_crop/ --output_folder processed
 AnyV2V(i2vgen-xl)
 - [x] Release the code for AnyV2V(i2vgen-xl)
 - [x] Release a notebook demo 
-- [ ] Release scripts for multiple image editing
 - [x] Release a Gradio demo
 - [x] Hosting Gradio demo on HuggingFace Space
 
