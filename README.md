@@ -22,14 +22,12 @@ This repo contains the codebase for the paper "[AnyV2V: A Plug-and-Play Framewor
 </div>
 
 ## Introduction
-AnyV2V is a tuning-free framework to achieve high appearance and temporal consistency in video editing.
-- can seamlessly build on top of advanced image editing methods to perform diverse types of editing
-- Utilizing I2V model's inherent knowledge to achieve robust performance on the four tasks:
-  - prompt-based editing
-  - reference-based style transfer
-  - subject-driven editing
-  - identity manipulation
-
+AnyV2V is a framework to achieve high appearance and temporal consistency in video editing.
+- Perform Video Editing **WITH ONLY SINGLE IMAGE**
+  - turning video editing into an image editing problem
+  - can seamlessly build on top of image editing methods to perform diverse types of editing
+- Training-Free
+  - Does not require any training / fine-tuning
 
 ## 📰 News
 * 2024 Apr 3: [HuggingFace Demo](https://huggingface.co/spaces/TIGER-Lab/AnyV2V) is available!
