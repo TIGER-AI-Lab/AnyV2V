@@ -31,6 +31,7 @@ AnyV2V is a framework to achieve high appearance and temporal consistency in vid
 
 
 ## 📰 News
+* 2024 Apr 7: We recommend using [InstantStyle](https://github.com/InstantStyle/InstantStyle) with AnyV2V for Video Stylization!
 * 2024 Apr 3: [HuggingFace Demo](https://huggingface.co/spaces/TIGER-Lab/AnyV2V) is available!
 * 2024 Apr 2: Added local gradio demo for AnyV2V(i2vgen-xl).
 * 2024 Mar 24: Added [Replicate demo](https://replicate.com/cjwbw/anyv2v) for AnyV2V(i2vgen-xl). Thanks [@chenxwh](https://github.com/chenxwh) for the effort!!
