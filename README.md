@@ -9,8 +9,6 @@
 
 
 [![contributors](https://img.shields.io/github/contributors/TIGER-AI-Lab/AnyV2V)](https://github.com/TIGER-AI-Lab/AnyV2V/graphs/contributors)
-[![open issues](https://isitmaintained.com/badge/open/TIGER-AI-Lab/AnyV2V.svg)](https://github.com/TIGER-AI-Lab/AnyV2V/issues)
-[![pull requests](https://img.shields.io/github/issues-pr/TIGER-AI-Lab/AnyV2V?color=0088ff)](https://github.com/TIGER-AI-Lab/AnyV2V/pulls)
 [![license](https://img.shields.io/github/license/TIGER-AI-Lab/AnyV2V.svg)](https://github.com/TIGER-AI-Lab/AnyV2V/blob/main/LICENSE)
 [![GitHub](https://img.shields.io/github/stars/TIGER-AI-Lab/AnyV2V?style=social)](https://github.com/TIGER-AI-Lab/AnyV2V)
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FTIGER-AI-Lab%2FAnyV2V&count_bg=%23C83DB9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visitors&edge_flat=false)](https://hits.seeyoufarm.com)
