@@ -23,28 +23,29 @@ def extract_frames(video_path, frame_count=16):
     
     return frames
 
-def crop_and_resize_video(input_video_path, output_folder, clip_duration, width=None, height=None, start_time=None, end_time=None, n_frames=16, center_crop=False, x_offset=0, y_offset=0, longest_to_width=False):    # Load the video file
+def crop_and_resize_video(input_video_path, output_folder, clip_duration, width=None, height=None, start_time=None, end_time=None, n_frames=16, center_crop=False, x_offset=0, y_offset=0, longest_to_width=False, use_full_clip=False):    # Load the video file
     video = VideoFileClip(input_video_path)
     
-    # Calculate start and end times for cropping
-    if start_time is not None:
-        start_time = float(start_time)
-        end_time = start_time + clip_duration
-    elif end_time is not None:
-        end_time = float(end_time)
-        start_time = end_time - clip_duration
+    if use_full_clip:
+        cropped_video = video
     else:
-        # Default to random cropping if neither start nor end time is specified
-        video_duration = video.duration
-        if video_duration <= clip_duration:
-            print(f"Skipping {input_video_path}: duration is less than or equal to the clip duration.")
-            return
-        max_start_time = video_duration - clip_duration
-        start_time = random.uniform(0, max_start_time)
-        end_time = start_time + clip_duration
-    
-    # Crop the video
-    cropped_video = video.subclip(start_time, end_time)
+        # Calculate start and end times for cropping
+        if start_time is not None:
+            start_time = float(start_time)
+            end_time = start_time + clip_duration
+        elif end_time is not None:
+            end_time = float(end_time)
+            start_time = end_time - clip_duration
+        else:
+            # Default to random cropping if neither start nor end time is specified
+            video_duration = video.duration
+            if video_duration <= clip_duration:
+                print(f"Skipping {input_video_path}: duration is less than or equal to the clip duration.")
+                return
+            max_start_time = video_duration - clip_duration
+            start_time = random.uniform(0, max_start_time)
+            end_time = start_time + clip_duration
+        cropped_video = video.subclip(start_time, end_time)
 
     if center_crop:
         # Calculate scale to ensure the desired crop size fits within the video
@@ -94,14 +95,14 @@ def crop_and_resize_video(input_video_path, output_folder, clip_duration, width=
     print(f"Processed {input_video_path}, saved to {output_video_path}")
     return output_video_path
 
-def process_videos(input_folder, output_base_folder, clip_duration, width=None, height=None, start_time=None, end_time=None, n_frames=16, center_crop=False, x_offset=0, y_offset=0, longest_to_width=False):
+def process_videos(input_folder, output_base_folder, clip_duration, width=None, height=None, start_time=None, end_time=None, n_frames=16, center_crop=False, x_offset=0, y_offset=0, longest_to_width=False, use_full_clip=False):
     video_files = glob.glob(os.path.join(input_folder, '*.mp4'))  # Adjust the pattern if needed
     if video_files == []:
         print(f"No video files found in {input_folder}")
         return
     
     for video_file in video_files:
-        crop_and_resize_video(video_file, output_base_folder, clip_duration, width, height, start_time, end_time, n_frames, center_crop, x_offset, y_offset, longest_to_width)
+        crop_and_resize_video(video_file, output_base_folder, clip_duration, width, height, start_time, end_time, n_frames, center_crop, x_offset, y_offset, longest_to_width, use_full_clip)
     return 
 
 def main():
@@ -119,7 +120,7 @@ def main():
     parser.add_argument('--x_offset', type=float, default=0, required=False, help='Horizontal offset for center cropping, range -1 to 1 (optional)')
     parser.add_argument('--y_offset', type=float, default=0, required=False, help='Vertical offset for center cropping, range -1 to 1 (optional)')
     parser.add_argument('--longest_to_width', action='store_true', help='Resize the longest dimension to the specified width')
-
+    parser.add_argument('--use_full_clip', action='store_true', help='Use the full video clip without trimming')
     args = parser.parse_args()
     
     if args.start_time and args.end_time:
@@ -133,7 +134,8 @@ def main():
                               args.width, args.height, 
                               args.start_time, args.end_time, 
                               args.n_frames, 
-                              args.center_crop, args.x_offset, args.y_offset, args.longest_to_width)
+                              args.center_crop, args.x_offset, args.y_offset, args.longest_to_width,
+                              args.use_full_clip)
     else:
         process_videos(args.input_folder, 
                        args.output_folder, 
@@ -141,7 +143,8 @@ def main():
                        args.width, args.height, 
                        args.start_time, args.end_time, 
                        args.n_frames, 
-                       args.center_crop, args.x_offset, args.y_offset, args.longest_to_width)
+                       args.center_crop, args.x_offset, args.y_offset, args.longest_to_width,
+                       args.use_full_clip)
 
 if __name__ == "__main__":
     main()
