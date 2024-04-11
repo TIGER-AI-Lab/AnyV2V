@@ -345,7 +345,7 @@ with gr.Blocks() as demo:
                             pv_longest_to_width = gr.Checkbox(label="Resize Longest Dimension to Width")
                     
             gr.Markdown("# Image Editing Stage")
-            gr.Markdown("Edit the first frame of the video to your liking! Click on the Edit the first frame button after inputting the editing instruction prompt. This image editing stage is powered by InstructPix2Pix. You can try edit the image multiple times until you are happy with the result! You can also choose to download the first frame of the video and edit it with other software (e.g. Photoshop, GIMP, etc.) or use other image editing models to obtain the edited frame and upload it directly.")
+            gr.Markdown("Edit the first frame of the video to your liking! Click on the Edit the first frame button after uploading the style reference. This image editing stage is powered by InstantStyle. You can try edit the image multiple times until you are happy with the result! You can also choose to download the first frame of the video and edit it with other software (e.g. Photoshop, GIMP, etc.) or use other image editing models to obtain the edited frame and upload it directly.")
             with gr.Row():
                 with gr.Column():
                     src_first_frame = gr.Image(label="First Frame", type="filepath", interactive=False)
