@@ -13,8 +13,8 @@ from PIL import Image
 import torch
 import numpy as np
 
-from black_box_image_edit.instructpix2pix import InstructPix2Pix
-from black_box_image_edit.utils import crop_and_resize_video, infer_video_prompt
+from black_box_image_edit.instantstyle import InstantStyle
+from black_box_image_edit.utils import crop_and_resize_video, infer_video_style
 
 sys.path.insert(0, "i2vgen-xl")
 from utils import load_ddim_latents_at_t
@@ -37,17 +37,18 @@ demo_examples = [
 
 TEMP_DIR = "_demo_temp"
 
-class ImageEditor:
+class StyleEditor:
     def __init__(self) -> None:
-        self.image_edit_model = InstructPix2Pix()
+        self.image_edit_model = InstantStyle()
 
     @torch.no_grad()
-    def perform_edit(self, video_path, prompt, force_512=False, seed=42, negative_prompt=""):
-        edited_image_path = infer_video_prompt(self.image_edit_model, 
+    def perform_edit(self, video_path, style_image, prompt, force_512=False, seed=42, negative_prompt=""):
+        style_image = load_image(style_image) if isinstance(style_image, str) else style_image
+        edited_image_path = infer_video_style(self.image_edit_model, 
                     video_path, 
                     output_dir=TEMP_DIR, 
+                    style_image=style_image,
                     prompt=prompt, 
-                    prompt_type="instruct", 
                     force_512=force_512, 
                     seed=seed, 
                     negative_prompt=negative_prompt,
@@ -224,7 +225,7 @@ class AnyV2V_I2VGenXL:
 # Init the class
 #=====================================
 if not DEBUG_MODE:
-    Image_Editor = ImageEditor()
+    Image_Editor = StyleEditor()
     AnyV2V_Editor = AnyV2V_I2VGenXL()
 #=====================================
 
@@ -261,7 +262,7 @@ def btn_preprocess_video_fn(video_path, width, height, start_time, end_time, cen
     else:
         return video_path
 
-def btn_image_edit_fn(video_path, instruct_prompt, ie_force_512, ie_seed, ie_neg_prompt):
+def btn_image_edit_fn(video_path, style_image, ie_force_512, ie_seed, ie_neg_prompt):
     """
     Generate an image based on the video and text input.
     This function should be replaced with your actual image generation logic.
@@ -273,8 +274,9 @@ def btn_image_edit_fn(video_path, instruct_prompt, ie_force_512, ie_seed, ie_neg
     print(f"Using seed: {ie_seed}")
 
     edited_image_path = Image_Editor.perform_edit(video_path=video_path, 
-                                             prompt=instruct_prompt,
+                                             style_image=style_image,
                                              force_512=ie_force_512,
+                                             prompt=None,
                                              seed=ie_seed,
                                              negative_prompt=ie_neg_prompt)
     return edited_image_path
@@ -319,7 +321,7 @@ with gr.Blocks() as demo:
     gr.Markdown("Official 🤗 Gradio demo for [AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks](https://tiger-ai-lab.github.io/AnyV2V/)")
 
     with gr.Tabs():
-        with gr.TabItem('AnyV2V(I2VGenXL) + InstructPix2Pix'):
+        with gr.TabItem('AnyV2V(I2VGenXL) + InstantStyle'):
             gr.Markdown("# Preprocessing Video Stage")
             gr.Markdown("In this demo, AnyV2V only support video with 2 seconds duration and 8 fps. If your video is not in this format, we will preprocess it for you. Click on the Preprocess video button!")
             with gr.Row():
@@ -347,7 +349,7 @@ with gr.Blocks() as demo:
             with gr.Row():
                 with gr.Column():
                     src_first_frame = gr.Image(label="First Frame", type="filepath", interactive=False)
-                    image_instruct_prompt = gr.Textbox(label="Editing instruction prompt")
+                    style_image = gr.Image(label="Style Image", type="filepath")
                     btn_image_edit = gr.Button("Edit the first frame")
                 with gr.Column():
                     image_input_output = gr.Image(label="Edited Frame", type="filepath")
@@ -396,7 +398,7 @@ with gr.Blocks() as demo:
 
     btn_image_edit.click(
         btn_image_edit_fn,
-        inputs=[video_input, image_instruct_prompt, ie_force_512, ie_seed, ie_neg_prompt],
+        inputs=[video_input, style_image, ie_force_512, ie_seed, ie_neg_prompt],
         outputs=image_input_output
     )
     

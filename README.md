@@ -29,6 +29,7 @@ AnyV2V is a framework to achieve high appearance and temporal consistency in vid
 
 
 ## 📰 News
+* 2024 Apr 11: Added local gradio demo for AnyV2V(i2vgen-xl)+[InstantStyle](https://github.com/InstantStyle/InstantStyle).
 * 2024 Apr 7: Added sections [the showcases](https://github.com/TIGER-AI-Lab/AnyV2V/issues/6). Share your AnyV2V Edits with us! 
 * 2024 Apr 7: We recommend using [InstantStyle](https://github.com/InstantStyle/InstantStyle) with AnyV2V for Video Stylization! Checkout [the demo!](https://twitter.com/vinesmsuic/status/1777170927500787782)!
 * 2024 Apr 3: [HuggingFace Demo](https://huggingface.co/spaces/TIGER-Lab/AnyV2V) is available!
@@ -51,8 +52,22 @@ conda env create -f environment.yml
 ```
 
 #### 🤗 Local Gradio Demo
+
+AnyV2V+InstructPix2Pix Demo (Prompt-based Editing)
 ```shell
 python gradio_demo.py
+```
+
+AnyV2V+InstantStyle Demo (Style Transfer)
+```shell
+# Download InstantStyle depends
+git lfs install
+git clone https://huggingface.co/h94/IP-Adapter
+mv IP-Adapter/models models
+mv IP-Adapter/sdxl_models sdxl_models
+rm -rf IP-Adapter
+# Run script
+python gradio_demo_style.py
 ```
 
 #### 📜 Notebook Demo 
