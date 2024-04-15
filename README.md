@@ -176,7 +176,8 @@ You can use other image models for editing, here are some online demo models tha
 
 ### Video Preprocess Script
 
-As the current I2V models only support videos with 2 seconds (16 frames), we provide script to trim and crop video into the desired 2 second video with any dimension.
+It is possible to edit videos with 16 seconds (64 frames) under a A6000 gpu.
+We provide script to trim and crop video into the desired 2 second video with any dimension.
 
 ```shell
 usage: prepare_video.py [-h] [--input_folder INPUT_FOLDER] [--video_path VIDEO_PATH] [--output_folder OUTPUT_FOLDER]
