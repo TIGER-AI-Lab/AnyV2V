@@ -173,6 +173,7 @@ You can use other image models for editing, here are some online demo models tha
 * [Idenity Manipulation model: InstantID](https://huggingface.co/spaces/InstantX/InstantID)
 * [Subject Driven Image editing model: AnyDoor](https://huggingface.co/spaces/xichenhku/AnyDoor-online)
 * [Style Transfer model: WISE](https://huggingface.co/spaces/MaxReimann/Whitebox-Style-Transfer-Editing)
+* [Style Transfer model: InstantStyle](https://github.com/InstantStyle/InstantStyle)
 
 ### Video Preprocess Script
 
