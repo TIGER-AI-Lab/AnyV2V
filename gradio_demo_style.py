@@ -238,29 +238,22 @@ def get_first_frame_as_pil(video_path):
         return first_frame_image
         
 def btn_preprocess_video_fn(video_path, width, height, start_time, end_time, center_crop, x_offset, y_offset, longest_to_width):
-    def check_video(video_path):
-        with VideoFileClip(video_path) as clip:
-            if clip.duration == 2 and clip.fps == 8:
-                return True
-            else:
-                return False
+    fps = 8
+    desired_n_frames = int(end_time-start_time)*fps
+    processed_video_path = crop_and_resize_video(input_video_path=video_path, 
+                                                output_folder=TEMP_DIR,
+                                                clip_duration=None,
+                                                width=width, 
+                                                height=height, 
+                                                start_time=start_time, 
+                                                end_time=end_time, 
+                                                center_crop=center_crop, 
+                                                n_frames=desired_n_frames,
+                                                x_offset=x_offset, 
+                                                y_offset=y_offset, 
+                                                longest_to_width=longest_to_width)
 
-    if check_video(video_path) == False:
-        processed_video_path = crop_and_resize_video(input_video_path=video_path, 
-                                                    output_folder=TEMP_DIR,
-                                                    clip_duration=2,
-                                                    width=width, 
-                                                    height=height, 
-                                                    start_time=start_time, 
-                                                    end_time=end_time, 
-                                                    center_crop=center_crop, 
-                                                    x_offset=x_offset, 
-                                                    y_offset=y_offset, 
-                                                    longest_to_width=longest_to_width)
-
-        return processed_video_path
-    else:
-        return video_path
+    return processed_video_path
 
 def btn_image_edit_fn(video_path, style_image, ie_force_512, ie_seed, ie_neg_prompt):
     """
@@ -323,7 +316,7 @@ with gr.Blocks() as demo:
     with gr.Tabs():
         with gr.TabItem('AnyV2V(I2VGenXL) + InstantStyle'):
             gr.Markdown("# Preprocessing Video Stage")
-            gr.Markdown("In this demo, AnyV2V only support video with 2 seconds duration and 8 fps. If your video is not in this format, we will preprocess it for you. Click on the Preprocess video button!")
+            gr.Markdown("In this demo, AnyV2V only support video up to 16 seconds duration and 8 fps. If your video is not in this format, we will preprocess it for you. Click on the Preprocess video button!")
             with gr.Row():
                 with gr.Column():
                     video_raw = gr.Video(label="Raw Video Input")
@@ -337,8 +330,8 @@ with gr.Blocks() as demo:
                         with gr.Column():
                             pv_width = gr.Number(label="Width", value=512, minimum=1, maximum=4096)
                             pv_height = gr.Number(label="Height", value=512, minimum=1, maximum=4096)
-                            pv_start_time = gr.Number(label="Start Time (End time - Start time must be = 2)", value=0, minimum=0)
-                            pv_end_time = gr.Number(label="End Time (End time - Start time must be = 2)", value=2, minimum=0)
+                            pv_start_time = gr.Number(label="Start Time", value=0, minimum=0)
+                            pv_end_time = gr.Number(label="End Time", value=2, minimum=0)
                             pv_center_crop = gr.Checkbox(label="Center Crop", value=True)
                             pv_x_offset = gr.Number(label="Horizontal Offset (-1 to 1)", value=0, minimum=-1, maximum=1)
                             pv_y_offset = gr.Number(label="Vertical Offset (-1 to 1)", value=0, minimum=-1, maximum=1)

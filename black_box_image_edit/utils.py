@@ -4,28 +4,36 @@ import random
 from PIL import Image
 import numpy as np
 
-def crop_and_resize_video(input_video_path, output_folder, clip_duration, width=None, height=None, start_time=None, end_time=None, n_frames=16, center_crop=False, x_offset=0, y_offset=0, longest_to_width=False):    # Load the video file
+def crop_and_resize_video(input_video_path, output_folder, clip_duration=None, width=None, height=None, start_time=None, end_time=None, n_frames=16, center_crop=False, x_offset=0, y_offset=0, longest_to_width=False):    # Load the video file
     video = VideoFileClip(input_video_path)
     
     # Calculate start and end times for cropping
-    if start_time is not None:
+    if clip_duration is not None:
+        if start_time is not None:
+            start_time = float(start_time)
+            end_time = start_time + clip_duration
+        elif end_time is not None:
+            end_time = float(end_time)
+            start_time = end_time - clip_duration
+        else:
+            # Default to random cropping if neither start nor end time is specified
+            video_duration = video.duration
+            if video_duration <= clip_duration:
+                print(f"Skipping {input_video_path}: duration is less than or equal to the clip duration.")
+                return
+            max_start_time = video_duration - clip_duration
+            start_time = random.uniform(0, max_start_time)
+            end_time = start_time + clip_duration
+    elif start_time is not None and end_time is not None:
         start_time = float(start_time)
-        end_time = start_time + clip_duration
-    elif end_time is not None:
         end_time = float(end_time)
-        start_time = end_time - clip_duration
+        clip_duration = int(end_time - start_time)
     else:
-        # Default to random cropping if neither start nor end time is specified
-        video_duration = video.duration
-        if video_duration <= clip_duration:
-            print(f"Skipping {input_video_path}: duration is less than or equal to the clip duration.")
-            return
-        max_start_time = video_duration - clip_duration
-        start_time = random.uniform(0, max_start_time)
-        end_time = start_time + clip_duration
-    
+        raise ValueError("Either clip_duration must be provided, or both start_time and end_time must be specified.")
+
     # Crop the video
     cropped_video = video.subclip(start_time, end_time)
+
 
     if center_crop:
         # Calculate scale to ensure the desired crop size fits within the video
