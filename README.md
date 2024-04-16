@@ -29,6 +29,7 @@ AnyV2V is a framework to achieve high appearance and temporal consistency in vid
 
 
 ## 📰 News
+* 2024 Apr 16: local gradio demo now support edits up to 16 seconds (128 frames).
 * 2024 Apr 11: Added local gradio demo for AnyV2V(i2vgen-xl)+[InstantStyle](https://github.com/InstantStyle/InstantStyle).
 * 2024 Apr 7: Added sections [the showcases](https://github.com/TIGER-AI-Lab/AnyV2V/issues/6). Share your AnyV2V Edits with us! 
 * 2024 Apr 7: We recommend using [InstantStyle](https://github.com/InstantStyle/InstantStyle) with AnyV2V for Video Stylization! Checkout [the demo!](https://twitter.com/vinesmsuic/status/1777170927500787782)!
