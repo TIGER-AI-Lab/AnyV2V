@@ -173,10 +173,12 @@ You can use other image models for editing, here are some online demo models tha
 * [Idenity Manipulation model: InstantID](https://huggingface.co/spaces/InstantX/InstantID)
 * [Subject Driven Image editing model: AnyDoor](https://huggingface.co/spaces/xichenhku/AnyDoor-online)
 * [Style Transfer model: WISE](https://huggingface.co/spaces/MaxReimann/Whitebox-Style-Transfer-Editing)
+* [Style Transfer model: InstantStyle](https://github.com/InstantStyle/InstantStyle)
 
 ### Video Preprocess Script
 
-As the current I2V models only support videos with 2 seconds (16 frames), we provide script to trim and crop video into the desired 2 second video with any dimension.
+It is possible to edit videos with 16 seconds (128 frames) under a A6000 gpu.
+We provide script to trim and crop video into the desired 2 second video with any dimension.
 
 ```shell
 usage: prepare_video.py [-h] [--input_folder INPUT_FOLDER] [--video_path VIDEO_PATH] [--output_folder OUTPUT_FOLDER]
