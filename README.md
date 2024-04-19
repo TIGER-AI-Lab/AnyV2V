@@ -179,7 +179,7 @@ You can use other image models for editing, here are some online demo models tha
 ### Video Preprocess Script
 
 It is possible to edit videos with 16 seconds (128 frames) under a A6000 gpu.
-We provide script to trim and crop video into the desired 2 second video with any dimension.
+We provide script to trim and crop video into any dimension and length.
 
 ```shell
 usage: prepare_video.py [-h] [--input_folder INPUT_FOLDER] [--video_path VIDEO_PATH] [--output_folder OUTPUT_FOLDER]
