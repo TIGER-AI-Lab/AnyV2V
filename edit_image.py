@@ -65,7 +65,7 @@ def infer_video(model, video_path, output_dir, prompt, prompt_type="instruct", f
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process some images.')
-    parser.add_argument('--model', type=str, default='instructpix2pix', choices=['magicbrush','instructpix2pix'], help='Name of the image editing model')
+    parser.add_argument('--model', type=str, default='instructpix2pix', choices=['magicbrush','instructpix2pix', 'cosxl'], help='Name of the image editing model')
     parser.add_argument('--video_path', type=str, required=False, help='Name of the video', default=None)
     parser.add_argument('--input_dir', type=str, required=False, help='Directory containing the video', default="./demo/")
     parser.add_argument('--output_dir', type=str, required=False, help='Directory to save the processed images', default=None)
@@ -105,6 +105,14 @@ if __name__ == "__main__":
                     model = image_edit.InstructPix2Pix()
                     prompt_type = "instruct"
                     prompt = instruction
+                elif model_name == 'cosxl':
+                    model = image_edit.CosXLEdit()
+                    prompt_type = "instruct"
+                    prompt = instruction
+                else:
+                    prompt_type = "target"
+                    prompt = target_caption
+
 
                 if args.output_dir is None:
                     video_filename = os.path.basename(video_path)
@@ -120,6 +128,9 @@ if __name__ == "__main__":
             prompt_type = "instruct"
         elif args.model == 'instructpix2pix':
             model = image_edit.InstructPix2Pix()
+            prompt_type = "instruct"
+        elif args.model == 'cosxl':
+            model = image_edit.CosXLEdit()
             prompt_type = "instruct"
 
         video_path = args.video_path

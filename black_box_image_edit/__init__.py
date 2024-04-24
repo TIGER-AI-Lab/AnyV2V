@@ -1,4 +1,5 @@
 from .instructpix2pix import InstructPix2Pix, MagicBrush
+from .cosxl_edit import CosXLEdit
 
 from typing import Union, Optional, Tuple
 import numpy as np
