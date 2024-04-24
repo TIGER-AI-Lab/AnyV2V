@@ -29,7 +29,6 @@ AnyV2V is a framework to achieve high appearance and temporal consistency in vid
 
 
 ## 📰 News
-* 2024 Apr 24: We replaced InstructPix2Pix with CosXLEdit for better prompt-based image editing effect.
 * 2024 Apr 16: local gradio demo now support edits up to 16 seconds (128 frames).
 * 2024 Apr 11: Added local gradio demo for AnyV2V(i2vgen-xl)+[InstantStyle](https://github.com/InstantStyle/InstantStyle).
 * 2024 Apr 7: Added sections [the showcases](https://github.com/TIGER-AI-Lab/AnyV2V/issues/6). Share your AnyV2V Edits with us! 
@@ -55,7 +54,7 @@ conda env create -f environment.yml
 
 #### 🤗 Local Gradio Demo
 
-~~AnyV2V+InstructPix2Pix~~ AnyV2V+CosXLEdit Demo (Prompt-based Editing)
+AnyV2V+InstructPix2Pix (Prompt-based Editing)
 ```shell
 python gradio_demo.py
 ```

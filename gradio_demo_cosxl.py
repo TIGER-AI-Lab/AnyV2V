@@ -13,8 +13,7 @@ from PIL import Image
 import torch
 import numpy as np
 
-from black_box_image_edit.instructpix2pix import InstructPix2Pix
-#from black_box_image_edit.cosxl_edit import CosXLEdit
+from black_box_image_edit.cosxl_edit import CosXLEdit
 from black_box_image_edit.utils import crop_and_resize_video, infer_video_prompt
 
 sys.path.insert(0, "i2vgen-xl")
@@ -40,7 +39,7 @@ TEMP_DIR = "_demo_temp"
 
 class ImageEditor:
     def __init__(self) -> None:
-        self.image_edit_model = InstructPix2Pix()
+        self.image_edit_model = CosXLEdit()
 
     @torch.no_grad()
     def perform_edit(self, video_path, prompt, force_512=False, seed=42, negative_prompt=""):
@@ -314,7 +313,7 @@ with gr.Blocks() as demo:
     gr.Markdown("Official 🤗 Gradio demo for [AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks](https://tiger-ai-lab.github.io/AnyV2V/)")
 
     with gr.Tabs():
-        with gr.TabItem('AnyV2V(I2VGenXL) + InstructPix2Pix'):
+        with gr.TabItem('AnyV2V(I2VGenXL) + CosXLEdit'):
             gr.Markdown("# Preprocessing Video Stage")
             gr.Markdown("In this demo, AnyV2V only support video up to 16 seconds duration and 8 fps. If your video is not in this format, we will preprocess it for you. Click on the Preprocess video button!")
             with gr.Row():
@@ -338,7 +337,7 @@ with gr.Blocks() as demo:
                             pv_longest_to_width = gr.Checkbox(label="Resize Longest Dimension to Width")
                     
             gr.Markdown("# Image Editing Stage")
-            gr.Markdown("Edit the first frame of the video to your liking! Click on the Edit the first frame button after inputting the editing instruction prompt. This image editing stage is powered by InstructPix2Pix. You can try edit the image multiple times until you are happy with the result! You can also choose to download the first frame of the video and edit it with other software (e.g. Photoshop, GIMP, etc.) or use other image editing models to obtain the edited frame and upload it directly.")
+            gr.Markdown("Edit the first frame of the video to your liking! Click on the Edit the first frame button after inputting the editing instruction prompt. This image editing stage is powered by CosXLEdit. You can try edit the image multiple times until you are happy with the result! You can also choose to download the first frame of the video and edit it with other software (e.g. Photoshop, GIMP, etc.) or use other image editing models to obtain the edited frame and upload it directly.")
             with gr.Row():
                 with gr.Column():
                     src_first_frame = gr.Image(label="First Frame", type="filepath", interactive=False)
