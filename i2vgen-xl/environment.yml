@@ -12,7 +12,7 @@ dependencies:
   - pip
   - pip:
     - accelerate
-    - diffusers==0.26.3
+    - diffusers==0.27.0
     - transformers
     - omegaconf
     - opencv-python
