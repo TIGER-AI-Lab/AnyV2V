@@ -1,3 +1,6 @@
+sdxl_models
+_demo_temp
+
 # Logging
 *.out
 *.bak

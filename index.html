@@ -540,7 +540,7 @@ In the first stage, AnyV2V can plug in any existing image editing tools to suppo
      <div class="content has-text-justified">
          <h2 class="title is-3" style="color: dodgerblue;">Style Transfer</h2>
          <p>
-            AnyV2V uses NST for the 1st frame style edits. <b>Prior text-based methods struggle with unseen styles</b>. In contrast, AnyV2V seamlessly transfers any reference style to the video, uniquely allowing artists to use their own creations as references.
+            AnyV2V uses NST / InstantStyle for the 1st frame style edits. <b>Prior text-based methods struggle with unseen styles</b>. In contrast, AnyV2V seamlessly transfers any reference style to the video, uniquely allowing artists to use their own creations as references.
          </p>
      </div>
   <!-- Row 1 -->
@@ -561,6 +561,27 @@ In the first stage, AnyV2V can plug in any existing image editing tools to suppo
         </div>
         <video autoplay controls muted loop playsinline width="60%" style="margin-top: 5px;">
             <source src="./static/videos/style_transfer/row2.mp4" type="video/mp4">
+        </video>
+    </div>
+  </div>
+
+  <div style="display: flex; justify-content: space-between; margin-bottom: 20px; margin-top: 20px;">
+    <div style="width: 50%; text-align: center;">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <div style="text-align: center; margin-bottom: 2px; background-color: #FFFFE0; font-family: 'Permanent Marker', cursive; margin-right: 5px;">Single Reference Style Image:</div>
+            <img src="./static/videos/style_transfer/style_2.jpg" width="12%" alt="style_1" />
+        </div>
+        <video autoplay controls muted loop playsinline width="60%" style="margin-top: 5px;">
+            <source src="./static/videos/style_transfer/style_2.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div style="width: 50%; text-align: center;">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <div style="text-align: center; margin-bottom: 2px; background-color: #FFFFE0; font-family: 'Permanent Marker', cursive; margin-right: 5px;">Single Reference Style Image:</div>
+            <img src="./static/videos/style_transfer/style_5.jpg" width="22%" alt="style_1" />
+        </div>
+        <video autoplay controls muted loop playsinline width="60%" style="margin-top: 5px;">
+            <source src="./static/videos/style_transfer/style_5.mp4" type="video/mp4">
         </video>
     </div>
   </div>
@@ -601,6 +622,44 @@ In the first stage, AnyV2V can plug in any existing image editing tools to suppo
   </div>
 </div>
 </section>
+
+<!-- Long Video Editing -->
+<section class="hero is-light is-small">
+    <div class="hero-body has-text-centered">
+      <h1 class="title is-1 mmmu">Extra</h1>
+    </div>
+</section>
+<section class="video-grid">
+    <div class="container">
+       <div class="content has-text-justified">
+         <h2 class="title is-3" style="color: rgb(255, 0, 242);">Long Video Editing</h2>
+           <p>
+               AnyV2V can perform video editing beyond the training frames of the I2V Model.
+           </p>
+       </div>
+    <!-- Row 1 -->
+    <div style="display: flex; justify-content: space-between; margin-bottom: 20px; margin-top: 20px;">
+      <div style="width: 47%; text-align: center;">
+          <div style="text-align: center; margin-bottom: 2px; background-color: #FFFFE0; font-family: 'Permanent Marker', cursive;">
+            "Turn woman into <span style="color: darkred;">robot</span>"
+          </div>
+        <video autoplay controls muted loop playsinline width="100%">
+            <source src="./static/videos/long_video_results/tokyo-walk_robot.mp4" type="video/mp4">-
+        </video>
+      </div>
+      <div style="width: 47%; text-align: center;">
+          <div style="text-align: center; margin-bottom: 2px; background-color: #FFFFE0; font-family: 'Permanent Marker', cursive;">
+            "change her clothes to a <span style="color: darkred;">hoodie</span>"
+          </div>
+        <video autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/long_video_results/woman-running_hoodie.mp4" type="video/mp4">-
+        </video>
+      </div>
+    </div>
+  
+  </div>
+  </section>
+  
 
 <!-- RESULTS SECTION -->
 <section class="hero is-light is-small">
