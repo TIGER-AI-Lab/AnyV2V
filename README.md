@@ -38,7 +38,7 @@ AnyV2V is a framework to achieve high appearance and temporal consistency in vid
 * 2024 Mar 24: Added [Replicate demo](https://replicate.com/cjwbw/anyv2v) for AnyV2V(i2vgen-xl). Thanks [@chenxwh](https://github.com/chenxwh) for the effort!!
 * 2024 Mar 22: Code released.
 * 2024 Mar 21: Our paper is featured on [Huggingface Daily Papers](https://huggingface.co/papers/2403.14468)!
-* 2024 Mar 21: Paper available on [Arxiv](https://arxiv.org/abs/2403.14468).
+* 2024 Mar 21: Paper available on [Arxiv](https://arxiv.org/abs/2403.14468). AnyV2V is the first work to leverage I2V models in Video Editing!
 
 
 ## ▶️ Quick Start for AnyV2V(i2vgen-xl)
