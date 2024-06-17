@@ -13,7 +13,7 @@
 [![GitHub](https://img.shields.io/github/stars/TIGER-AI-Lab/AnyV2V?style=social)](https://github.com/TIGER-AI-Lab/AnyV2V)
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FTIGER-AI-Lab%2FAnyV2V&count_bg=%23C83DB9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visitors&edge_flat=false)](https://hits.seeyoufarm.com)
 
-This repo contains the codebase for the paper "[AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks](https://arxiv.org/pdf/2403.14468.pdf)"
+This repo contains the codebase for the paper "[AnyV2V: A Tuning-Free Framework For Any Video-to-Video Editing Tasks](https://arxiv.org/pdf/2403.14468.pdf)"
 
 ## Introduction
 AnyV2V is a framework to achieve high appearance and temporal consistency in video editing.
@@ -21,7 +21,7 @@ AnyV2V is a framework to achieve high appearance and temporal consistency in vid
   - turning video editing into an image editing problem
   - can seamlessly build on top of image editing methods to perform diverse types of editing
 - Training-Free
-  - Does not require any training / fine-tuning
+  - Does not require any training/fine-tuning
 
 <div align="center">
   <img src="assets/AnyV2V-SlidesShow-GIF-1080P-02.gif" alt="AnyV2V" width="70%"/>
@@ -29,12 +29,12 @@ AnyV2V is a framework to achieve high appearance and temporal consistency in vid
 
 
 ## 📰 News
-* 2024 Apr 16: local gradio demo now support edits up to 16 seconds (128 frames).
+* 2024 Apr 16: Local Gradio demo now supports edits up to 16 seconds (128 frames).
 * 2024 Apr 11: Added local gradio demo for AnyV2V(i2vgen-xl)+[InstantStyle](https://github.com/InstantStyle/InstantStyle).
 * 2024 Apr 7: Added sections [the showcases](https://github.com/TIGER-AI-Lab/AnyV2V/issues/6). Share your AnyV2V Edits with us! 
-* 2024 Apr 7: We recommend using [InstantStyle](https://github.com/InstantStyle/InstantStyle) with AnyV2V for Video Stylization! Checkout [the demo!](https://twitter.com/vinesmsuic/status/1777170927500787782)!
+* 2024 Apr 7: We recommend using [InstantStyle](https://github.com/InstantStyle/InstantStyle) with AnyV2V for Video Stylization! Check out [the demo!](https://twitter.com/vinesmsuic/status/1777170927500787782)!
 * 2024 Apr 3: [HuggingFace Demo](https://huggingface.co/spaces/TIGER-Lab/AnyV2V) is available!
-* 2024 Apr 2: Added local gradio demo for AnyV2V(i2vgen-xl).
+* 2024 Apr 2: Added local Gradio demo for AnyV2V(i2vgen-xl).
 * 2024 Mar 24: Added [Replicate demo](https://replicate.com/cjwbw/anyv2v) for AnyV2V(i2vgen-xl). Thanks [@chenxwh](https://github.com/chenxwh) for the effort!!
 * 2024 Mar 22: Code released.
 * 2024 Mar 21: Our paper is featured on [Huggingface Daily Papers](https://huggingface.co/papers/2403.14468)!
@@ -73,7 +73,7 @@ python gradio_demo_style.py
 
 #### 📜 Notebook Demo 
 We provide a notebook demo ```i2vgen-xl/demo.ipynb``` for AnyV2V(i2vgen-xl).
-You can run the notebook to perform a Prompt-Based Editing on a single video.
+You can run the notebook to perform Prompt-Based Editing on a single video.
 Make sure the environment is set up correctly before running the notebook.
 
 #### To edit multiple demo videos, please refer to the [Video Editing](#Video-Editing) section.
@@ -92,7 +92,7 @@ cd i2vgen-xl/scripts
 bash run_group_ddim_inversion.sh
 bash run_group_pnp_edit.sh
 ```
-or run the following command using python:
+or run the following command using Python:
 ```bash
 cd i2vgen-xl/scripts
 
@@ -136,7 +136,7 @@ Please refer to [./seine/README.md](seine/README.md)
 ## ▶️ Misc
 
 ### First Frame Image Edit
-We provide instructpix2pix port for image editing with instruction prompt.
+We provide the instructpix2pix port for image editing with an instruction prompt.
 ```shell
 usage: edit_image.py [-h] [--model {magicbrush,instructpix2pix}]
                      [--video_path VIDEO_PATH] [--input_dir INPUT_DIR]
@@ -178,8 +178,8 @@ You can use other image models for editing, here are some online demo models tha
 
 ### Video Preprocess Script
 
-It is possible to edit videos with 16 seconds (128 frames) under a A6000 gpu.
-We provide script to trim and crop video into any dimension and length.
+It is possible to edit videos with 16 seconds (128 frames) under an A6000 gpu.
+We provide a script to trim and crop video into any dimension and length.
 
 ```shell
 usage: prepare_video.py [-h] [--input_folder INPUT_FOLDER] [--video_path VIDEO_PATH] [--output_folder OUTPUT_FOLDER]
@@ -239,7 +239,7 @@ Misc
 Please kindly cite our paper if you use our code, data, models or results:
 ```bibtex
 @article{ku2024anyv2v,
-  title={AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks},
+  title={AnyV2V: A Tuning-Free Framework For Any Video-to-Video Editing Tasks},
   author={Ku, Max and Wei, Cong and Ren, Weiming and Yang, Harry and Chen, Wenhu},
   journal={arXiv preprint arXiv:2403.14468},
   year={2024}
