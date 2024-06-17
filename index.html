@@ -14,7 +14,7 @@
     <meta name="description" content="We introduce AnyV2V, A Unified Framework for Video-to-Video Generation Tasks.">
      <meta name="keywords" content="AnyV2V, VideoEdit, VideoGen, video, editing, artificial intelligence, AI, AIGC">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks</title>
+    <title> AnyV2V: A Tuning-Free Framework For Any Video-to-Video Editing Tasks</title>
 
     <link rel="icon" href="static/images/icon.png">
 
@@ -43,7 +43,7 @@
                 <div class="column has-text-centered">
                     <h1 class="title is-1 publication-title" style="display: flex; align-items: center;">
                         <img src="static/images/icon.png" alt="AnyV2V Icon" style="flex: 0 0 auto; height: 2em; margin-right: 10px;">
-                        <span style="flex: 1 1 auto;">AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks</span>
+                        <span style="flex: 1 1 auto;">AnyV2V: A Tuning-Free Framework For Any Video-to-Video Editing Tasks</span>
                     </h1>
                     <div class="is-size-5 publication-authors">
                         <!-- Paper authors -->
@@ -233,13 +233,7 @@
         <div class="content has-text-justified">
             <p>
                <ul>
-                <li>2024 Apr 7: Added sections <a href="https://github.com/TIGER-AI-Lab/AnyV2V/issues/6">the showcases</a>. Share your AnyV2V Edits with us! </li>
-                <li>2024 Apr 7: We recommend using <a href="https://github.com/InstantStyle/InstantStyle">InstantStyle</a> with AnyV2V for Video Stylization! Checkout <a href="https://twitter.com/vinesmsuic/status/1777170927500787782">the demo!</a>!</li>
-                <li>2024 Apr 3: <a href="https://huggingface.co/spaces/TIGER-Lab/AnyV2V">HuggingFace Demo</a> is available!</li>
-                <li>2024 Apr 2: Added local gradio demo for AnyV2V(i2vgen-xl).</li>
-                <li>2024 Mar 24: Added <a href="https://replicate.com/cjwbw/anyv2v">Replicate demo</a> for AnyV2V(i2vgen-xl). Thanks <a href="https://github.com/chenxwh">@chenxwh</a> for the effort!!</li>
-                <li>2024 Mar 22: Code released.</li>
-                <li>2024 Mar 21: Our paper is featured on <a href="https://huggingface.co/papers/2403.14468">Huggingface Daily Papers</a>!</li>
+                <li>2024 Apr 16: Local Gradio demo now supports edits up to 16 seconds (128 frames). </li>
                 <li>2024 Mar 21: Paper available on <a href="https://arxiv.org/abs/2403.14468">Arxiv</a>. AnyV2V is the first work to leverage I2V models in Video Editing!</li>
                 </ul>
             </p>
@@ -247,8 +241,7 @@
         <h2 class="title is-3">Introduction</h2>
         <div class="content has-text-justified">
                             <p>
-                                Video-to-video editing involves editing a source video along with additional control (such as text prompts, subjects, or styles) to generate a new video that aligns with the source video and the provided control. Traditional methods have been constrained to certain editing types, limiting their ability to meet the wide range of user demands. In this paper, we introduce AnyV2V, a novel training-free framework designed to simplify video editing into two primary steps: (1) employing an off-the-shelf image editing model (e.g. InstructPix2Pix, InstantID, etc) to modify the first frame, (2) utilizing an existing image-to-video generation model (e.g. I2VGen-XL) for DDIM inversion and feature injection.
-In the first stage, AnyV2V can plug in any existing image editing tools to support an extensive array of video editing tasks. Beyond the traditional prompt-based editing methods, AnyV2V also can support novel video editing tasks, including reference-based style transfer, subject-driven editing, and identity manipulation, which were unattainable by previous methods. In the second stage, AnyV2V can plug in any existing image-to-video models to perform DDIM inversion and intermediate feature injection to maintain the appearance and motion consistency with the source video. On the prompt-based editing, we show that AnyV2V can outperform the previous best approach by 35\% on prompt alignment, and 25\% on human preference. On the three novel tasks, we show that AnyV2V also achieves a high success rate. We believe AnyV2V will continue to thrive due to its ability to seamlessly integrate the fast-evolving image editing methods. Such compatibility can help AnyV2V to increase its versatility to cater to diverse user demands.
+                                In the dynamic field of digital content creation using generative models, state-of-the-art video editing models still do not offer the level of quality and control that users desire. Previous works on video editing either extended from image-based generative models in a zero-shot manner or necessitated extensive fine-tuning, which can hinder the production of fluid video edits. Furthermore, these methods frequently rely on textual input as the editing guidance, leading to ambiguities and limiting the types of edits they can perform. Recognizing these challenges, we introduce AnyV2V, a novel tuning-free paradigm designed to simplify video editing into two primary steps: (1) employing an off-the-shelf image editing model to modify the first frame, (2) utilizing an existing image-to-video generation model to generate the edited video through temporal feature injection. AnyV2V can leverage any existing image editing tools to support an extensive array of video editing tasks, including prompt-based editing, reference-based style transfer, subject-driven editing, and identity manipulation, which were unattainable by previous methods. AnyV2V can also support any video length. Our evaluation indicates that AnyV2V significantly outperforms other baseline methods in automatic and human evaluations by significant margin, maintaining visual consistency with the source video while achieving high-quality edits across all the editing tasks.
                             </p>
         </div>
       </div>
@@ -818,7 +811,7 @@ In the first stage, AnyV2V can plug in any existing image editing tools to suppo
             Please kindly cite our paper if you use our code, data, models or results:
             <br><br>
             <pre><code>@article{ku2024anyv2v,
-  title={AnyV2V: A Plug-and-Play Framework For Any Video-to-Video Editing Tasks},
+  title={AnyV2V: A Tuning-Free Framework For Any Video-to-Video Editing Tasks},
   author={Ku, Max and Wei, Cong and Ren, Weiming and Yang, Harry and Chen, Wenhu},
   journal={arXiv preprint arXiv:2403.14468},
   year={2024}
