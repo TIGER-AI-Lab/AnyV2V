@@ -373,7 +373,7 @@ with gr.Blocks() as demo:
                     with advanced_settings_anyv2v:
                         with gr.Column():
                             av_ddim_init_latents_t_idx = gr.Number(label="DDIM Initial Latents t Index", value=0, minimum=0)
-                            av_ddim_inversion_steps = gr.Number(label="DDIM Inversion Steps", value=100, minimum=1)
+                            av_ddim_inversion_steps = gr.Number(label="DDIM Inversion Steps", value=500, minimum=1)
                             av_num_inference_steps = gr.Number(label="Number of Inference Steps", value=50, minimum=1)
                             av_guidance_scale = gr.Number(label="Guidance Scale", value=9, minimum=0)
                             av_seed = gr.Number(label="Seed (-1 means random)", value=42, minimum=-1, maximum=sys.maxsize)
