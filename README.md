@@ -13,7 +13,7 @@
 [![GitHub](https://img.shields.io/github/stars/TIGER-AI-Lab/AnyV2V?style=social)](https://github.com/TIGER-AI-Lab/AnyV2V)
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FTIGER-AI-Lab%2FAnyV2V&count_bg=%23C83DB9&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visitors&edge_flat=false)](https://hits.seeyoufarm.com)
 
-This repo contains the codebase for the paper "[AnyV2V: A Tuning-Free Framework For Any Video-to-Video Editing Tasks](https://arxiv.org/pdf/2403.14468.pdf)"
+This repo contains the codebase for our TMLR 2024 paper "[AnyV2V: A Tuning-Free Framework For Any Video-to-Video Editing Tasks](https://arxiv.org/pdf/2403.14468.pdf)"
 
 ## Introduction
 AnyV2V is a framework to achieve high appearance and temporal consistency in video editing.
