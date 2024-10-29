@@ -29,6 +29,7 @@ AnyV2V is a framework to achieve high appearance and temporal consistency in vid
 
 
 ## 📰 News
+* 2024 Oct 29: Paper accepted to TMLR 2024.
 * 2024 Apr 16: Local Gradio demo now supports edits up to 16 seconds (128 frames).
 * 2024 Apr 11: Added local gradio demo for AnyV2V(i2vgen-xl)+[InstantStyle](https://github.com/InstantStyle/InstantStyle).
 * 2024 Apr 7: Added sections [the showcases](https://github.com/TIGER-AI-Lab/AnyV2V/issues/6). Share your AnyV2V Edits with us! 
